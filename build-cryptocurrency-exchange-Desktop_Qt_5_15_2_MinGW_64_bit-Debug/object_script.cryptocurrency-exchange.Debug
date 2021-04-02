@@ -1,0 +1,11 @@
+debug/cryptoType.o
+debug/cryptocurrency.o
+debug/exchange.o
+debug/main.o
+debug/mainwindow.o
+debug/orderbook.o
+debug/rates.o
+debug/user.o
+debug/userslist.o
+debug/wallet.o
+debug/moc_mainwindow.o

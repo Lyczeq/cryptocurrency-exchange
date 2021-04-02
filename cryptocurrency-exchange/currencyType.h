@@ -1,0 +1,5 @@
+#ifndef CURRENCYTYPE_H
+#define CURRENCYTYPE_H
+
+
+#endif // CURRENCYTYPE_H
