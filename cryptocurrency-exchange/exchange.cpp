@@ -40,3 +40,32 @@ void Exchange::setDate(const tm& dt)
 {
     date = dt;
 }
+
+void Exchange::setDate(const int& day, const int& month, const int& year)
+{
+    date.tm_mday = day;
+    date.tm_mon = month;
+    date.tm_year = year;
+}
+
+User& Exchange::getUser()
+{
+    return loggedUser;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

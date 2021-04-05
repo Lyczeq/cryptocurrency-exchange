@@ -35,7 +35,13 @@ private slots:
 
     void on_LogOutButton_clicked();
 
-    void on_pushButton_clicked();
+    void fillRatesTable();
+
+    void on_changeDateButton_clicked();
+
+    bool isNewDateLower(const int& day, const int& month, const int& year);
+
+    void saveNewDate();
 
 private:
     Ui::MainWindow *ui;

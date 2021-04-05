@@ -9,6 +9,7 @@
 #ifndef UI_MAINWINDOW_H
 #define UI_MAINWINDOW_H
 
+#include <QtCore/QDate>
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDateEdit>
@@ -82,11 +83,11 @@ public:
     QLabel *ethereumLabel;
     QLabel *ethereumCurrentValue;
     QLabel *chilizLabel;
-    QLabel *chilizCurrentValue;
+    QLabel *binanceCoinCurrentValue;
     QLabel *tetherLabel;
     QLabel *tetherCurrentValue;
     QLabel *dogecoinLabel;
-    QLabel *dogecoinCurrentValue;
+    QLabel *rippleCurrentValue;
     QPushButton *LogOutButton;
     QWidget *verticalLayoutWidget_5;
     QVBoxLayout *verticalLayout_6;
@@ -365,11 +366,11 @@ public:
 
         gridLayout_2->addWidget(chilizLabel, 2, 0, 1, 1);
 
-        chilizCurrentValue = new QLabel(layoutWidget1);
-        chilizCurrentValue->setObjectName(QString::fromUtf8("chilizCurrentValue"));
-        chilizCurrentValue->setFont(font2);
+        binanceCoinCurrentValue = new QLabel(layoutWidget1);
+        binanceCoinCurrentValue->setObjectName(QString::fromUtf8("binanceCoinCurrentValue"));
+        binanceCoinCurrentValue->setFont(font2);
 
-        gridLayout_2->addWidget(chilizCurrentValue, 2, 1, 1, 1);
+        gridLayout_2->addWidget(binanceCoinCurrentValue, 2, 1, 1, 1);
 
         tetherLabel = new QLabel(layoutWidget1);
         tetherLabel->setObjectName(QString::fromUtf8("tetherLabel"));
@@ -389,11 +390,11 @@ public:
 
         gridLayout_2->addWidget(dogecoinLabel, 4, 0, 1, 1);
 
-        dogecoinCurrentValue = new QLabel(layoutWidget1);
-        dogecoinCurrentValue->setObjectName(QString::fromUtf8("dogecoinCurrentValue"));
-        dogecoinCurrentValue->setFont(font2);
+        rippleCurrentValue = new QLabel(layoutWidget1);
+        rippleCurrentValue->setObjectName(QString::fromUtf8("rippleCurrentValue"));
+        rippleCurrentValue->setFont(font2);
 
-        gridLayout_2->addWidget(dogecoinCurrentValue, 4, 1, 1, 1);
+        gridLayout_2->addWidget(rippleCurrentValue, 4, 1, 1, 1);
 
         LogOutButton = new QPushButton(mainPage);
         LogOutButton->setObjectName(QString::fromUtf8("LogOutButton"));
@@ -425,6 +426,10 @@ public:
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         dateEdit = new QDateEdit(verticalLayoutWidget_5);
         dateEdit->setObjectName(QString::fromUtf8("dateEdit"));
+        dateEdit->setMaximumDate(QDate(2021, 4, 1));
+        dateEdit->setMinimumDate(QDate(2019, 5, 1));
+        dateEdit->setCalendarPopup(true);
+        dateEdit->setDate(QDate(2019, 5, 1));
 
         verticalLayout_5->addWidget(dateEdit);
 
@@ -494,15 +499,15 @@ public:
         quitButtonFromMainPage->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
         groupBox_3->setTitle(QString());
         bitcoinLabel->setText(QCoreApplication::translate("MainWindow", "Bitcoin", nullptr));
-        bitcoinCurrenValue->setText(QCoreApplication::translate("MainWindow", "bitc", nullptr));
+        bitcoinCurrenValue->setText(QCoreApplication::translate("MainWindow", "BTC", nullptr));
         ethereumLabel->setText(QCoreApplication::translate("MainWindow", "Ethereum", nullptr));
-        ethereumCurrentValue->setText(QCoreApplication::translate("MainWindow", "eth", nullptr));
-        chilizLabel->setText(QCoreApplication::translate("MainWindow", "Chiliz", nullptr));
-        chilizCurrentValue->setText(QCoreApplication::translate("MainWindow", "chz", nullptr));
+        ethereumCurrentValue->setText(QCoreApplication::translate("MainWindow", "ETH", nullptr));
+        chilizLabel->setText(QCoreApplication::translate("MainWindow", "BinanceCoin", nullptr));
+        binanceCoinCurrentValue->setText(QCoreApplication::translate("MainWindow", "BNB", nullptr));
         tetherLabel->setText(QCoreApplication::translate("MainWindow", "Tether", nullptr));
-        tetherCurrentValue->setText(QCoreApplication::translate("MainWindow", "teth", nullptr));
-        dogecoinLabel->setText(QCoreApplication::translate("MainWindow", "Dogecoin", nullptr));
-        dogecoinCurrentValue->setText(QCoreApplication::translate("MainWindow", "doge", nullptr));
+        tetherCurrentValue->setText(QCoreApplication::translate("MainWindow", "USDT", nullptr));
+        dogecoinLabel->setText(QCoreApplication::translate("MainWindow", "Ripple", nullptr));
+        rippleCurrentValue->setText(QCoreApplication::translate("MainWindow", "XRP", nullptr));
         LogOutButton->setText(QCoreApplication::translate("MainWindow", "Log out", nullptr));
         currentDate->setText(QCoreApplication::translate("MainWindow", "Current date:", nullptr));
         date->setText(QCoreApplication::translate("MainWindow", "date", nullptr));

@@ -1,5 +1,4 @@
 #include "rates.h"
-
 Rates::Rates()
 {
     const std::string ratesDirectory = "rates/";
@@ -16,7 +15,6 @@ Rates::Rates()
         //obsługa błędu
     }
     else{
-    std::cout<<line<<std::endl;
         while(std::getline(tetherRatesFile, line))
         {
             if(line=="")
@@ -46,6 +44,112 @@ Rates::Rates()
         }
         tetherRatesFile.close();
     }
-
-
 }
+
+void Rates::setCurrentRatesByDate(tm currentDate)
+{
+    float currentBitcoinRate = getRateValueByDate(currentDate, Bitcoin);
+    float currentEthereumRate = getRateValueByDate(currentDate, Ethereum);
+    float currentBinanceCoinRate = getRateValueByDate(currentDate, BinanceCoin);
+    float currentTetherRate = getRateValueByDate(currentDate, Tether);
+    float currenRippleRate = getRateValueByDate(currentDate, Ripple);
+
+    CurrentRates cr (currentBitcoinRate, currentEthereumRate, currentBinanceCoinRate, currentTetherRate, currenRippleRate);
+    currentRates = cr;
+}
+
+CurrentRates Rates::getCurrentRates()
+{
+    return currentRates;
+}
+
+float Rates::getRateValueByDate(tm date, const cryptoType& whatCrypto)
+{
+    switch (whatCrypto) {
+    case Bitcoin:
+    {
+        for(auto & rate: bitcoinRates)
+        {
+            if(rate.compareDates(date))
+                return rate.getValue();
+        }
+    }
+    case Ethereum:
+    {
+        for(auto & rate: ethereumRates)
+        {
+            if(rate.compareDates(date))
+                return rate.getValue();
+        }
+    }
+    case BinanceCoin:
+    {
+        for(auto & rate: binanceCoinRates)
+        {
+            if(rate.compareDates(date))
+                return rate.getValue();
+        }
+    }
+    case Tether:
+    {
+        for(auto & rate: tetherRates)
+        {
+            if(rate.compareDates(date))
+                return rate.getValue();
+        }
+    }
+    case Ripple:
+    {
+        for(auto & rate: rippleRates)
+        {
+            if(rate.compareDates(date))
+                return rate.getValue();
+        }
+    }
+    default:
+    {
+        //error handler
+    }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

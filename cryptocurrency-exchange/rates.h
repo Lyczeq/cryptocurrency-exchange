@@ -6,6 +6,7 @@
 #include<historicalrate.h>
 #include<sstream>
 #include<algorithm>
+#include<currentrates.h>
 class Rates
 {   private:
     std::vector<HistoricalRate> bitcoinRates;
@@ -13,9 +14,17 @@ class Rates
     std::vector<HistoricalRate> binanceCoinRates;
     std::vector<HistoricalRate> tetherRates;
     std::vector<HistoricalRate> rippleRates;
+    CurrentRates currentRates;
 
 public:
     Rates();
+
+    float getRateValueByDate(tm date, const cryptoType& whatCrypto);
+
+    void setCurrentRatesByDate(tm currentDate);
+
+    CurrentRates getCurrentRates();
+
 };
 
 #endif // RATES_H

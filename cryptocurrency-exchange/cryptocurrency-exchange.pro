@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     cryptoType.cpp \
     cryptocurrency.cpp \
+    currentrates.cpp \
     exchange.cpp \
     historicalrate.cpp \
     main.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 HEADERS += \
     cryptoType.h \
     cryptocurrency.h \
+    currentrates.h \
     exchange.h \
     historicalrate.h \
     mainwindow.h \

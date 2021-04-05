@@ -190,21 +190,21 @@ void UsersList::addUserToList(User &newUser)
     this->usersVector.push_back(newUser);
 }
 
-void UsersList::printAllUsers()
-{
-    for(auto& user:usersVector)
-    {
-        std::cout<<user.getFirstName()<<std::endl;
-        std::cout<<user.getLastName()<<std::endl;
-        std::cout<<user.getEmail()<<std::endl;
-    }
-}
+//void UsersList::printAllUsers()
+//{
+//    for(auto& user:usersVector)
+//    {
+//        std::cout<<user.getFirstName()<<std::endl;
+//        std::cout<<user.getLastName()<<std::endl;
+//        std::cout<<user.getEmail()<<std::endl;
+//    }
+//}
 
-void UsersList::printAllEmails()
-{
-    for(auto& email:emailVector)
-        std::cout<<email<<std::endl;
-}
+//void UsersList::printAllEmails()
+//{
+//    for(auto& email:emailVector)
+//        std::cout<<email<<std::endl;
+//}
 
 
 

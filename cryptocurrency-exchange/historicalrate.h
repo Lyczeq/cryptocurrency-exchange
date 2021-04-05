@@ -11,6 +11,12 @@ class HistoricalRate
 
 public:
     HistoricalRate(const tm& dt, const cryptoType& tCrypto,const float& val);
+
+    tm getDate();
+
+    float getValue();
+
+    bool compareDates(tm& dateToComparise);
 };
 
 #endif // HISTORICALRATE_H
