@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDateEdit>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -64,9 +65,9 @@ public:
     QLineEdit *lastNameLineEdit;
     QLabel *firstNameLabel;
     QLabel *passwordLabel_2;
-    QLineEdit *passwordLineSignUp;
     QLabel *lastNameLabel;
     QLineEdit *emailLineEditSignUp;
+    QLineEdit *passwordLineSignUp;
     QWidget *mainPage;
     QWidget *verticalLayoutWidget_2;
     QVBoxLayout *verticalLayout_4;
@@ -87,6 +88,15 @@ public:
     QLabel *dogecoinLabel;
     QLabel *dogecoinCurrentValue;
     QPushButton *LogOutButton;
+    QWidget *verticalLayoutWidget_5;
+    QVBoxLayout *verticalLayout_6;
+    QVBoxLayout *verticalLayout_7;
+    QLabel *currentDate;
+    QLabel *date;
+    QVBoxLayout *verticalLayout_5;
+    QDateEdit *dateEdit;
+    QPushButton *changeDateButton;
+    QLabel *welcomeUser;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -265,12 +275,6 @@ public:
 
         gridLayout->addWidget(passwordLabel_2, 3, 0, 1, 1);
 
-        passwordLineSignUp = new QLineEdit(layoutWidget_3);
-        passwordLineSignUp->setObjectName(QString::fromUtf8("passwordLineSignUp"));
-        passwordLineSignUp->setEchoMode(QLineEdit::Password);
-
-        gridLayout->addWidget(passwordLineSignUp, 3, 1, 1, 1);
-
         lastNameLabel = new QLabel(layoutWidget_3);
         lastNameLabel->setObjectName(QString::fromUtf8("lastNameLabel"));
         lastNameLabel->setFont(font3);
@@ -279,8 +283,15 @@ public:
 
         emailLineEditSignUp = new QLineEdit(layoutWidget_3);
         emailLineEditSignUp->setObjectName(QString::fromUtf8("emailLineEditSignUp"));
+        emailLineEditSignUp->setEchoMode(QLineEdit::Normal);
 
         gridLayout->addWidget(emailLineEditSignUp, 2, 1, 1, 1);
+
+        passwordLineSignUp = new QLineEdit(layoutWidget_3);
+        passwordLineSignUp->setObjectName(QString::fromUtf8("passwordLineSignUp"));
+        passwordLineSignUp->setEchoMode(QLineEdit::Password);
+
+        gridLayout->addWidget(passwordLineSignUp, 3, 1, 1, 1);
 
 
         verticalLayout_3->addLayout(gridLayout);
@@ -290,7 +301,7 @@ public:
         mainPage->setObjectName(QString::fromUtf8("mainPage"));
         verticalLayoutWidget_2 = new QWidget(mainPage);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(20, 50, 231, 151));
+        verticalLayoutWidget_2->setGeometry(QRect(20, 40, 231, 151));
         verticalLayout_4 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -317,7 +328,7 @@ public:
         quitButtonFromMainPage->setFont(font5);
         groupBox_3 = new QGroupBox(mainPage);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setGeometry(QRect(370, 40, 281, 201));
+        groupBox_3->setGeometry(QRect(320, 110, 281, 201));
         layoutWidget1 = new QWidget(groupBox_3);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
         layoutWidget1->setGeometry(QRect(20, 10, 241, 171));
@@ -388,6 +399,52 @@ public:
         LogOutButton->setObjectName(QString::fromUtf8("LogOutButton"));
         LogOutButton->setGeometry(QRect(130, 310, 93, 28));
         LogOutButton->setFont(font5);
+        verticalLayoutWidget_5 = new QWidget(mainPage);
+        verticalLayoutWidget_5->setObjectName(QString::fromUtf8("verticalLayoutWidget_5"));
+        verticalLayoutWidget_5->setGeometry(QRect(620, 110, 151, 151));
+        verticalLayout_6 = new QVBoxLayout(verticalLayoutWidget_5);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_7 = new QVBoxLayout();
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        currentDate = new QLabel(verticalLayoutWidget_5);
+        currentDate->setObjectName(QString::fromUtf8("currentDate"));
+        currentDate->setFont(font2);
+        currentDate->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_7->addWidget(currentDate);
+
+        date = new QLabel(verticalLayoutWidget_5);
+        date->setObjectName(QString::fromUtf8("date"));
+        date->setFont(font2);
+        date->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_7->addWidget(date);
+
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        dateEdit = new QDateEdit(verticalLayoutWidget_5);
+        dateEdit->setObjectName(QString::fromUtf8("dateEdit"));
+
+        verticalLayout_5->addWidget(dateEdit);
+
+        changeDateButton = new QPushButton(verticalLayoutWidget_5);
+        changeDateButton->setObjectName(QString::fromUtf8("changeDateButton"));
+        changeDateButton->setFont(font2);
+
+        verticalLayout_5->addWidget(changeDateButton);
+
+
+        verticalLayout_7->addLayout(verticalLayout_5);
+
+
+        verticalLayout_6->addLayout(verticalLayout_7);
+
+        welcomeUser = new QLabel(mainPage);
+        welcomeUser->setObjectName(QString::fromUtf8("welcomeUser"));
+        welcomeUser->setGeometry(QRect(290, 10, 331, 71));
+        welcomeUser->setFont(font3);
+        welcomeUser->setAlignment(Qt::AlignCenter);
         stackedWidget->addWidget(mainPage);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -400,7 +457,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -429,8 +486,9 @@ public:
         lastNameLineEdit->setText(QString());
         firstNameLabel->setText(QCoreApplication::translate("MainWindow", "First Name", nullptr));
         passwordLabel_2->setText(QCoreApplication::translate("MainWindow", "password:", nullptr));
-        passwordLineSignUp->setText(QString());
         lastNameLabel->setText(QCoreApplication::translate("MainWindow", "Last Name", nullptr));
+        emailLineEditSignUp->setText(QString());
+        passwordLineSignUp->setText(QString());
         cryptoGraphsButton->setText(QCoreApplication::translate("MainWindow", "Cryptocurrency Graphs", nullptr));
         myWalletButton->setText(QCoreApplication::translate("MainWindow", "My Wallet", nullptr));
         quitButtonFromMainPage->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
@@ -446,6 +504,10 @@ public:
         dogecoinLabel->setText(QCoreApplication::translate("MainWindow", "Dogecoin", nullptr));
         dogecoinCurrentValue->setText(QCoreApplication::translate("MainWindow", "doge", nullptr));
         LogOutButton->setText(QCoreApplication::translate("MainWindow", "Log out", nullptr));
+        currentDate->setText(QCoreApplication::translate("MainWindow", "Current date:", nullptr));
+        date->setText(QCoreApplication::translate("MainWindow", "date", nullptr));
+        changeDateButton->setText(QCoreApplication::translate("MainWindow", "Change date", nullptr));
+        welcomeUser->setText(QCoreApplication::translate("MainWindow", "welcomeUser!", nullptr));
     } // retranslateUi
 
 };

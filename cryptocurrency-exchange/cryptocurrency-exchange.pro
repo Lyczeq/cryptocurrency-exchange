@@ -12,6 +12,7 @@ SOURCES += \
     cryptoType.cpp \
     cryptocurrency.cpp \
     exchange.cpp \
+    historicalrate.cpp \
     main.cpp \
     mainwindow.cpp \
     orderbook.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     cryptoType.h \
     cryptocurrency.h \
     exchange.h \
+    historicalrate.h \
     mainwindow.h \
     orderbook.h \
     rates.h \

@@ -31,6 +31,12 @@ private slots:
 
     void on_signUpButtonCreateAcc_clicked();
 
+    void on_quitButtonFromMainPage_clicked();
+
+    void on_LogOutButton_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Exchange exchange;

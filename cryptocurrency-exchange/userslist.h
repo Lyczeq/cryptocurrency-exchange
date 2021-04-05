@@ -27,14 +27,17 @@ public:
 
     std::vector<User> getUsersVector();
 
-    void addUserToList(User newUser);
-
     bool signIn(const std::string& emailToFind, const std::string& passwordToFind);
 
-    bool signUp (std::string& firstName, std::string& lastName, std::string& email, std::string& password );
+    void signUp (User& newUser, const std::string & password );
 
-    void getEmailsFromFile();
+    User getUserByEmail(const std::string& email);
 
+    void addUserToList (User& newUser);
+
+    void printAllUsers();
+
+    void printAllEmails();
 };
 
 #endif // USERSLIST_H

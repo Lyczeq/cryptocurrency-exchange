@@ -39,7 +39,7 @@ UsersList::UsersList() //pobieranie wszystkich informacji z plików dla users, a
          //TODO zrobić mechanizm niepowodzenia!
      }
      else
-     {  std::string line;
+     {   std::string line;
          std::getline(userInfoFile, line);
 
          std::string moneyBufor;
@@ -80,8 +80,8 @@ UsersList::UsersList() //pobieranie wszystkich informacji z plików dla users, a
              usersCrypto.push_back(newCrypto);
          }
      }
-     userCryptoFile.close();
-     Wallet newWallet  (money, usersCrypto);
+    userCryptoFile.close();
+    Wallet newWallet  (money, usersCrypto);
     User newUser  (usersFirstName, usersLastName, usersEmail, newWallet);
     usersVector.push_back(newUser);
     }
@@ -112,12 +112,10 @@ bool UsersList ::signIn(const std::string& emailToFind, const std::string& passw
    else return false;
 }
 
-bool UsersList:: signUp(std::string& firstName, std::string& lastName, std::string& email, std::string& password)
+void UsersList:: signUp( User& newUser, const std::string & password)
 {
-    if(std::find(emailVector.begin(), emailVector.end(), email)!=emailVector.end())
-        return false;
 
-    const std::string newUserDirectory = "users/"+email;
+    const std::string newUserDirectory = "users/"+newUser.getEmail();
     const char* path = newUserDirectory.c_str();
     _mkdir(path);
 
@@ -129,7 +127,7 @@ bool UsersList:: signUp(std::string& firstName, std::string& lastName, std::stri
     }
     else
     {
-        const std::string infoText = firstName+","+lastName+","+email+",0";
+        const std::string infoText = newUser.getFirstName()+ ","+newUser.getLastName()+","+newUser.getEmail()+",0";
         newUserInfoFile<<infoText;
     }
     newUserInfoFile.close();
@@ -153,7 +151,7 @@ bool UsersList:: signUp(std::string& firstName, std::string& lastName, std::stri
     std::ofstream newUserCFDFile(newUserDirectory+"/CFD.csv");
     newUserCFDFile.close();
 
-    emailVector.push_back(email);
+    this->emailVector.push_back(newUser.getEmail());
 
     std::ofstream emailsFile("emails.txt");
     if(!emailsFile.is_open())
@@ -166,11 +164,6 @@ bool UsersList:: signUp(std::string& firstName, std::string& lastName, std::stri
            emailsFile<<email<<std::endl;
     }
     emailsFile.close();
-
-    Wallet newWallet;
-    User newUser(firstName, lastName, email, newWallet);
-    usersVector.push_back(newUser);
-    return true;
 }
 
 std::vector<User> UsersList:: getUsersVector()
@@ -181,6 +174,36 @@ std::vector<User> UsersList:: getUsersVector()
 std::vector<std::string> UsersList:: getEmailVector()
 {
     return emailVector;
+}
+
+User UsersList::getUserByEmail(const std::string& email)
+{
+    for(auto & user: usersVector)
+    {
+        if(user.getEmail()==email)
+            return user;
+    }
+}
+
+void UsersList::addUserToList(User &newUser)
+{
+    this->usersVector.push_back(newUser);
+}
+
+void UsersList::printAllUsers()
+{
+    for(auto& user:usersVector)
+    {
+        std::cout<<user.getFirstName()<<std::endl;
+        std::cout<<user.getLastName()<<std::endl;
+        std::cout<<user.getEmail()<<std::endl;
+    }
+}
+
+void UsersList::printAllEmails()
+{
+    for(auto& email:emailVector)
+        std::cout<<email<<std::endl;
 }
 
 

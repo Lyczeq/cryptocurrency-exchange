@@ -8,10 +8,11 @@ cryptoType intToCryptoType(const int& value )
     case 1:
         return Ethereum;
     case 2:
-        return Chiliz;
+        return BinanceCoin;
     case 3:
         return Tether;
     case 4:
-        return Dogecoin;
+        return Ripple;
     }
 }
+

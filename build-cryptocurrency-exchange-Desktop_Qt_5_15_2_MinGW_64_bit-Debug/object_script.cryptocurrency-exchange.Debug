@@ -1,6 +1,7 @@
 debug/cryptoType.o
 debug/cryptocurrency.o
 debug/exchange.o
+debug/historicalrate.o
 debug/main.o
 debug/mainwindow.o
 debug/orderbook.o

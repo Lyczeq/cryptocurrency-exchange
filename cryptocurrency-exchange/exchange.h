@@ -12,19 +12,24 @@ class Exchange
     UsersList usersList;
     Orderbook orderbook;
     Rates rates;
+    User loggedUser;
 
 public:
     Exchange();
 
-    Exchange(UsersList uList);
+    Exchange(UsersList& uList, Rates& rt);
 
-    UsersList getUsersList ();
+    UsersList& getUsersList ();
 
-    Orderbook getOrderbook ();
+    Orderbook& getOrderbook ();
 
-    Rates getRates ();
+    Rates& getRates ();
 
     tm getDate ();
+
+    void setLoggedUser(const User& user);
+
+    void setDate(const tm& dt);
 };
 
 #endif // EXCHANGE_H

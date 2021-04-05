@@ -3,9 +3,9 @@
 enum cryptoType{
     Bitcoin = 0,
     Ethereum = 1,
-    Chiliz = 2,
+    BinanceCoin = 2,
     Tether = 3,
-    Dogecoin = 4,
+    Ripple = 4,
 };
 
 cryptoType intToCryptoType(const int& value );

@@ -12,6 +12,8 @@ class User
     Wallet myWallet;
 
 public:
+    User();
+
     User(std::string fn, std::string ln, std::string mail, Wallet wallet);
 
     std::string getFirstName();
@@ -19,12 +21,6 @@ public:
     std::string getLastName();
 
     std::string getEmail();
-
-    bool comparePaswords(std::string passwordToCompare);
-
-    bool compareEmails(std::string mailToCompare);
-
-    void createPassword(std::string password);
 
 };
 

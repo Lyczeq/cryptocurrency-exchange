@@ -1,6 +1,7 @@
 release/cryptoType.o
 release/cryptocurrency.o
 release/exchange.o
+release/historicalrate.o
 release/main.o
 release/mainwindow.o
 release/orderbook.o

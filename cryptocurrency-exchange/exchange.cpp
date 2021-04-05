@@ -1,24 +1,27 @@
 #include "exchange.h"
 
-Exchange::Exchange()
-{
+Exchange::Exchange(){
+    UsersList newUsersList;
+    Rates newRates;
 
+    usersList = newUsersList;
+    rates = newRates;
 }
 
-Exchange::Exchange(UsersList ulist):
-    usersList(ulist){}
+Exchange::Exchange(UsersList &ulist, Rates &rt):
+    usersList(ulist), rates(rt){}
 
-UsersList Exchange::getUsersList()
+UsersList& Exchange::getUsersList()
 {
     return usersList;
 }
 
-Rates Exchange::getRates()
+Rates& Exchange::getRates()
 {
     return rates;
 }
 
-Orderbook Exchange::getOrderbook()
+Orderbook& Exchange::getOrderbook()
 {
     return orderbook;
 }
@@ -26,4 +29,14 @@ Orderbook Exchange::getOrderbook()
 tm Exchange::getDate()
 {
     return date;
+}
+
+void Exchange::setLoggedUser(const User& user)
+{
+   loggedUser = user;
+}
+
+void Exchange::setDate(const tm& dt)
+{
+    date = dt;
 }
