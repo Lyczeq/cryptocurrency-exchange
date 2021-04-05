@@ -1,5 +1,6 @@
 debug/cryptoType.o
 debug/cryptocurrency.o
+debug/currentrates.o
 debug/exchange.o
 debug/historicalrate.o
 debug/main.o

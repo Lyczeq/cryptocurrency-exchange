@@ -521,7 +521,7 @@
            </font>
           </property>
           <property name="text">
-           <string>bitc</string>
+           <string>BTC</string>
           </property>
          </widget>
         </item>
@@ -549,7 +549,7 @@
            </font>
           </property>
           <property name="text">
-           <string>eth</string>
+           <string>ETH</string>
           </property>
          </widget>
         </item>
@@ -564,12 +564,12 @@
            </font>
           </property>
           <property name="text">
-           <string>Chiliz</string>
+           <string>BinanceCoin</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLabel" name="chilizCurrentValue">
+         <widget class="QLabel" name="binanceCoinCurrentValue">
           <property name="font">
            <font>
             <family>Arial</family>
@@ -577,7 +577,7 @@
            </font>
           </property>
           <property name="text">
-           <string>chz</string>
+           <string>BNB</string>
           </property>
          </widget>
         </item>
@@ -605,7 +605,7 @@
            </font>
           </property>
           <property name="text">
-           <string>teth</string>
+           <string>USDT</string>
           </property>
          </widget>
         </item>
@@ -620,12 +620,12 @@
            </font>
           </property>
           <property name="text">
-           <string>Dogecoin</string>
+           <string>Ripple</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLabel" name="dogecoinCurrentValue">
+         <widget class="QLabel" name="rippleCurrentValue">
           <property name="font">
            <font>
             <family>Arial</family>
@@ -633,7 +633,7 @@
            </font>
           </property>
           <property name="text">
-           <string>doge</string>
+           <string>XRP</string>
           </property>
          </widget>
         </item>
@@ -708,7 +708,32 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QDateEdit" name="dateEdit"/>
+            <widget class="QDateEdit" name="dateEdit">
+             <property name="maximumDate">
+              <date>
+               <year>2021</year>
+               <month>4</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>2019</year>
+               <month>5</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+             <property name="date">
+              <date>
+               <year>2019</year>
+               <month>5</month>
+               <day>1</day>
+              </date>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="changeDateButton">

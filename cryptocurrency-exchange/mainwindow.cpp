@@ -66,7 +66,6 @@ void MainWindow::on_signInButtonLog_clicked()
     else
     {    
         const std::string dateDirectory = "users/"+emailString+"/date.txt";
-        std::cout<<dateDirectory<<std::endl;
         std::ifstream dateFile(dateDirectory);
 
         if(!dateFile.is_open())
@@ -94,16 +93,23 @@ void MainWindow::on_signInButtonLog_clicked()
             exchange.setDate(newDate);
             QString qstr = QString::fromStdString(dateLine);
             ui->date->setText(qstr);
+
+            ui->dateEdit->setDate(QDate(newDate.tm_year,newDate.tm_mon+1,newDate.tm_mday)); //tm_mon has range 0-11
+
         }
         dateFile.close();
 
+
         User loggedUser = exchange.getUsersList().getUserByEmail(emailString);
+        exchange.getRates().setCurrentRatesByDate(exchange.getDate());
 
         exchange.setLoggedUser( loggedUser );
 
         std::string welcomeMessageStr = "Welcome "+loggedUser.getFirstName()+" "+loggedUser.getLastName()+"!";
         QString welcomeMessage = QString::fromStdString(welcomeMessageStr);
         ui->welcomeUser->setText(welcomeMessage);
+
+        fillRatesTable();
 
         QMessageBox::information(this,"Sign In", "Logged successfully!" );
         ui->stackedWidget->setCurrentIndex(3);
@@ -131,7 +137,6 @@ void MainWindow::on_signUpButtonCreateAcc_clicked()
         return;
     }
 
-
     QString firstName = ui->firstNameLineEdit->text();
     QString lastName = ui->lastNameLineEdit->text();
     QString password = ui->passwordLineSignUp->text();
@@ -156,19 +161,21 @@ void MainWindow::on_signUpButtonCreateAcc_clicked()
     std::string dateToShow = "01.04.2019";
     QString qstr = QString::fromStdString(dateToShow);
     ui->date->setText(qstr);
+    ui->dateEdit->setDate(QDate(date.tm_year, date.tm_mon+1, date.tm_mday));
+
+
+    exchange.getRates().setCurrentRatesByDate(exchange.getDate());
 
     std::string welcomeMessageStr = "Welcome "+newUser.getFirstName()+" "+newUser.getLastName()+"!";
     QString welcomeMessage = QString::fromStdString(welcomeMessageStr);
     ui->welcomeUser->setText(welcomeMessage);
 
+    fillRatesTable();
+
     QMessageBox::information(this,"Sign Up", "Account was created successfully!" );
 
-    ui->stackedWidget->setCurrentIndex(3);
+    ui->stackedWidget->setCurrentIndex(3);   
 }
-
-
-
-
 
 
 void MainWindow::on_quitButtonFromMainPage_clicked()
@@ -176,10 +183,102 @@ void MainWindow::on_quitButtonFromMainPage_clicked()
     QCoreApplication::quit();
 }
 
-void MainWindow::on_LogOutButton_clicked() //
+void MainWindow::on_LogOutButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
+
+void MainWindow::fillRatesTable()
+{
+    std::string currentBitcoinRate = std::to_string(exchange.getRates().getCurrentRates().getCurrentRate(Bitcoin));
+    std::string currentEthereumRate = std::to_string(exchange.getRates().getCurrentRates().getCurrentRate(Ethereum));
+    std::string currentBinanceCoinRate = std::to_string(exchange.getRates().getCurrentRates().getCurrentRate(BinanceCoin));
+    std::string currentTetherRate = std::to_string(exchange.getRates().getCurrentRates().getCurrentRate(Tether));
+    std::string currentRippleRate = std::to_string(exchange.getRates().getCurrentRates().getCurrentRate(Ripple));
+
+    ui->bitcoinCurrenValue->setText(QString::fromStdString(currentBitcoinRate));
+    ui->ethereumCurrentValue->setText(QString::fromStdString(currentEthereumRate));
+    ui->binanceCoinCurrentValue->setText(QString::fromStdString(currentBinanceCoinRate));
+    ui->tetherCurrentValue->setText(QString::fromStdString(currentTetherRate));
+    ui->rippleCurrentValue->setText(QString::fromStdString(currentRippleRate));
+}
+
+void MainWindow::on_changeDateButton_clicked()
+{
+   std::string date =  ui->dateEdit->text().toStdString();
+
+   int day = std::stoi(date.substr(0,2));
+   int month = std::stoi(date.substr(3,5));
+   int year = std::stoi(date.substr(6,10));
+
+  if(! isNewDateLower(day, month, year))
+  {
+      QMessageBox::warning(this,"Date edit", "The provided date is lower than the present one!" );
+  }
+  else
+  {
+      ui->date->setText(QString::fromStdString(date));
+      exchange.setDate(day, month - 1, year);
+      exchange.getRates().setCurrentRatesByDate(exchange.getDate());
+      fillRatesTable();//tm_mon has range 0-11
+      saveNewDate();
+      QMessageBox::information(this,"Date edit", "Date was changed successfully!" );
+  }
+
+}
+
+bool MainWindow::isNewDateLower(const int& day, const int& month, const int& year)
+{
+    if(exchange.getDate().tm_year > year)
+        return false;
+
+    if(exchange.getDate().tm_year < year)
+        return true;
+
+    if(exchange.getDate().tm_year == year)
+    {
+        if(exchange.getDate().tm_mon + 1 > month)
+            return false;
+
+        if(exchange.getDate().tm_mon + 1 < month)
+            return true;
+
+        if(exchange.getDate().tm_mon + 1 == month)
+        {
+            if(exchange.getDate().tm_mday > day)
+                return false;
+            else
+                return true;
+        }
+    }
+}
+
+void MainWindow::saveNewDate()
+{
+    const std::string dateFileDirectory = "users/"+exchange.getUser().getEmail()+"/date.txt";
+    std::cout<<dateFileDirectory;
+    std::ofstream dateFile(dateFileDirectory);
+
+    if(!dateFile.is_open())
+    {
+        //error_handler
+    }
+    else
+    {   std::cout<<"ok";
+        std::string newDateToFile = std::to_string( exchange.getDate().tm_mday)+'.'+std::to_string(exchange.getDate().tm_mon+1)+'.'+std::to_string(exchange.getDate().tm_year);
+        dateFile<<newDateToFile;
+    }
+    dateFile.close();
+}
+
+
+
+
+
+
+
+
+
 
 
 

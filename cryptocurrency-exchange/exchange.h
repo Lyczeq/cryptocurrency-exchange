@@ -27,9 +27,13 @@ public:
 
     tm getDate ();
 
+    void setDate(const int& day, const int& month, const int& year);
+
     void setLoggedUser(const User& user);
 
     void setDate(const tm& dt);
+
+    User& getUser();
 };
 
 #endif // EXCHANGE_H

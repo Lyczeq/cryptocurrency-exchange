@@ -1,5 +1,6 @@
 release/cryptoType.o
 release/cryptocurrency.o
+release/currentrates.o
 release/exchange.o
 release/historicalrate.o
 release/main.o
