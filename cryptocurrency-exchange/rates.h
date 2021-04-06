@@ -19,11 +19,13 @@ class Rates
 public:
     Rates();
 
-    float getRateValueByDate(tm date, const cryptoType& whatCrypto);
+    double getRateValueByDate(tm date, const cryptoType& whatCrypto);
 
     void setCurrentRatesByDate(tm currentDate);
 
     CurrentRates getCurrentRates();
+
+    void readRatesFromFile(const std::string& cryptoFileName, std::vector<HistoricalRate>& cryptoVector, const cryptoType cType);
 
 };
 

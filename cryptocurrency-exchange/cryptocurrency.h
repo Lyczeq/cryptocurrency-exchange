@@ -7,11 +7,16 @@
 class Cryptocurrency
 {   private:
     cryptoType whatCrypto;
-    float amount;
+    double amount;
 
 public:
-    Cryptocurrency(cryptoType ct, float a);
+    Cryptocurrency(cryptoType ct, double a);
 
+    cryptoType getCryptoType();
+
+    double getAmount();
+
+    void increaseAmount(const double& value);
 };
 
 #endif // CRYPTOCURRENCY_H

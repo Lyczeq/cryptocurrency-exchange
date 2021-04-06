@@ -1,11 +1,11 @@
 #include "currentrates.h"
 
-CurrentRates::CurrentRates(const float& bRate,  const float& eRate,const float& biRate,const float& tRate,const float& rRate):
+CurrentRates::CurrentRates(const double& bRate,  const double& eRate,const double& biRate,const double& tRate,const double& rRate):
     bitcoinRate(bRate), ethereumRate(eRate), binanceCoinRate(biRate), tetherRate(tRate), rippleRate(rRate) {}
 
 CurrentRates::CurrentRates(){}
 
-float CurrentRates::getCurrentRate(const cryptoType& ct)
+double CurrentRates::getCurrentRate(const cryptoType& ct)
 {
     switch (ct) {
     case Bitcoin:

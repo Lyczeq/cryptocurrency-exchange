@@ -4,16 +4,16 @@
 
 class CurrentRates
 {private:
-    float bitcoinRate;
-    float ethereumRate;
-    float binanceCoinRate;
-    float tetherRate;
-    float rippleRate;
+    double bitcoinRate;
+    double ethereumRate;
+    double binanceCoinRate;
+    double tetherRate;
+    double rippleRate;
 public:
     CurrentRates();
-    CurrentRates(const float& bRate,  const float& eRate,const float& biRate,const float& tRate,const float& rRate);
+    CurrentRates(const double& bRate,  const double& eRate,const double& biRate,const double& tRate,const double& rRate);
 
-    float getCurrentRate(const cryptoType& ct);
+    double getCurrentRate(const cryptoType& ct);
 };
 
 #endif // CURRENTRATES_H

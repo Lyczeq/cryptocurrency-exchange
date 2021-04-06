@@ -7,14 +7,14 @@ class HistoricalRate
 {   private:
     cryptoType cryptocurrency;
     tm date;
-    float value;
+    double value;
 
 public:
-    HistoricalRate(const tm& dt, const cryptoType& tCrypto,const float& val);
+    HistoricalRate(const tm& dt, const cryptoType& tCrypto,const double& val);
 
     tm getDate();
 
-    float getValue();
+    double getValue();
 
     bool compareDates(tm& dateToComparise);
 };

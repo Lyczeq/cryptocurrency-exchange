@@ -38,6 +38,8 @@ public:
     void printAllUsers();
 
     void printAllEmails();
+
+    bool checkIfUserExists(const std::string& email);
 };
 
 #endif // USERSLIST_H

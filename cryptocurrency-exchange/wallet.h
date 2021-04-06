@@ -8,15 +8,17 @@
 class Wallet
 {
     private:
-
-    float myMoney=0;
+    double myUSD=0;
     std::vector<Cryptocurrency> myCryptocurrency;
 
     public:
-
     Wallet();
 
-    Wallet(const float& money, const std::vector<Cryptocurrency>& cryptos);
+    Wallet(const double& money, const std::vector<Cryptocurrency>& cryptos);
+
+    double getMyUSD();
+
+    void addUSD(const double& additionalUSD);
 };
 
 #endif // WALLET_H

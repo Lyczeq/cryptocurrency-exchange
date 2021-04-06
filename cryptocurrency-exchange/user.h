@@ -3,7 +3,7 @@
 
 #include<iostream>
 #include<wallet.h>
-
+#include<fstream>
 class User
 {   private:
     std::string firstName;
@@ -21,6 +21,10 @@ public:
     std::string getLastName();
 
     std::string getEmail();
+
+    Wallet& getWallet();
+
+    void saveUSDToFile();
 
 };
 

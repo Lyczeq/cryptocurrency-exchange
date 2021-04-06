@@ -43,6 +43,56 @@ private slots:
 
     void saveNewDate();
 
+    void fillMyBankBalance();
+
+    void on_cryptoGraphsButton_clicked();
+
+    void on_myWalletButton_clicked();
+
+    void on_goBackBtnFromGraphs_clicked();
+
+    void on_goBackBtnFromWalletBtn_clicked();
+
+    void on_myCryptocurrencyBtn_clicked();
+
+    void on_addUSDBtn_clicked();
+
+    void on_goBackBtnFromMyCryptoBtn_clicked();
+
+    void on_goBackBtnFromDepositFundsBtn_clicked();
+
+    void on_myCurrentOrdersBtn_clicked();
+
+    void on_goBackBtnFromMyOrdersBtn_clicked();
+
+    void on_myHistoricalOrdersBtn_clicked();
+
+    void on_goBackBtnFromHistOrdersBtn_clicked();
+
+    void on_seeOrderbookBtn_clicked();
+
+    void on_goBackBtnFromOrderbookBtn_clicked();
+
+    void on_sendTransferBtn_clicked();
+
+    void on_goBackBtnFromSendTransferBtn_clicked();
+
+    void on_goBackFromTransfersHistBtn_clicked();
+
+    void on_historicalTransfersBtn_clicked();
+
+    void on_myCFDBtn_clicked();
+
+    void on_goBackBtnFromCFDBtn_clicked();
+
+    void on_historicalCFDBtn_clicked();
+
+    void on_goBackBtnFromHistCFDBtn_clicked();
+
+    void on_addUSDConfirmBtn_clicked();
+
+    void on_sendTransferConfirmBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     Exchange exchange;

@@ -20,10 +20,10 @@
    <widget class="QLineEdit" name="title">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>190</x>
       <y>10</y>
-      <width>417</width>
-      <height>44</height>
+      <width>420</width>
+      <height>45</height>
      </rect>
     </property>
     <property name="font">
@@ -50,12 +50,18 @@
      <rect>
       <x>10</x>
       <y>80</y>
-      <width>781</width>
-      <height>351</height>
+      <width>790</width>
+      <height>361</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>11</number>
     </property>
     <widget class="QWidget" name="home">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -115,7 +121,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>310</y>
+        <y>325</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -200,11 +206,19 @@
       <widget class="QPushButton" name="signInButtonLog">
        <property name="geometry">
         <rect>
-         <x>80</x>
+         <x>90</x>
          <y>180</y>
-         <width>137</width>
-         <height>28</height>
+         <width>95</width>
+         <height>30</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Sign in</string>
@@ -239,7 +253,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>310</y>
+        <y>325</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -258,9 +272,9 @@
       <property name="geometry">
        <rect>
         <x>260</x>
-        <y>60</y>
+        <y>20</y>
         <width>281</width>
-        <height>271</height>
+        <height>291</height>
        </rect>
       </property>
       <property name="title">
@@ -270,9 +284,9 @@
        <property name="geometry">
         <rect>
          <x>90</x>
-         <y>230</y>
-         <width>93</width>
-         <height>28</height>
+         <y>250</y>
+         <width>95</width>
+         <height>30</height>
         </rect>
        </property>
        <property name="font">
@@ -293,7 +307,7 @@
          <x>20</x>
          <y>10</y>
          <width>250</width>
-         <height>208</height>
+         <height>228</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -415,12 +429,12 @@
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="mainPage">
+    <widget class="QWidget" name="mainPanel">
      <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>40</y>
+        <y>110</y>
         <width>231</width>
         <height>151</height>
        </rect>
@@ -458,7 +472,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>310</y>
+        <y>325</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -475,7 +489,7 @@
        <string>Quit</string>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox_3">
+     <widget class="QGroupBox" name="cryptocurrencyTable">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -610,7 +624,7 @@
          </widget>
         </item>
         <item row="4" column="0">
-         <widget class="QLabel" name="dogecoinLabel">
+         <widget class="QLabel" name="rippleLabel">
           <property name="font">
            <font>
             <family>Arial</family>
@@ -644,7 +658,7 @@
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>310</y>
+        <y>325</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -709,6 +723,16 @@
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
             <widget class="QDateEdit" name="dateEdit">
+             <property name="minimumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2018</year>
+               <month>5</month>
+               <day>1</day>
+              </datetime>
+             </property>
              <property name="maximumDate">
               <date>
                <year>2021</year>
@@ -718,7 +742,7 @@
              </property>
              <property name="minimumDate">
               <date>
-               <year>2019</year>
+               <year>2018</year>
                <month>5</month>
                <day>1</day>
               </date>
@@ -728,7 +752,7 @@
              </property>
              <property name="date">
               <date>
-               <year>2019</year>
+               <year>2018</year>
                <month>5</month>
                <day>1</day>
               </date>
@@ -757,10 +781,10 @@
      <widget class="QLabel" name="welcomeUser">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>10</y>
+        <x>320</x>
+        <y>40</y>
         <width>331</width>
-        <height>71</height>
+        <height>16</height>
        </rect>
       </property>
       <property name="font">
@@ -775,7 +799,1030 @@
        <string>welcomeUser!</string>
       </property>
       <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="bankBalanceLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>115</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Bank balance:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="myBankBalance">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>40</y>
+        <width>135</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>myBankBalance</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="currentCryptoValues">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>80</y>
+        <width>250</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Current cryptocurrency values:</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="graphsPanel">
+     <widget class="QPushButton" name="goBackBtnFromGraphs">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>90</y>
+        <width>451</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>GRAPHS</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="walletPanel">
+     <widget class="QWidget" name="verticalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>161</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QPushButton" name="myCryptocurrencyBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>My Cryptocurrency</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addUSDBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Add USD</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="myCurrentOrdersBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>My Orders</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="myHistoricalOrdersBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Historical orders</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="seeOrderbookBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>See orderbook</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromWalletBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="cryptocurrencyTable_2">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>90</y>
+        <width>281</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QWidget" name="layoutWidget_8">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>241</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QLabel" name="bitcoinLabel2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Bitcoin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="bitcoinCurrenValue2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>BTC</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="ethereumLabel2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Ethereum</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="ethereumCurrentValue2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>ETH</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="chilizLabel2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>BinanceCoin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="binanceCoinCurrentValue2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>BNB</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="tetherLabel2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Tether</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="tetherCurrentValue2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>USDT</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="rippleLabel2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Ripple</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="rippleCurrentValue2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>XRP</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="bankBalanceLabel2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>115</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Bank balance:</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_9">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>90</y>
+        <width>161</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_17">
+       <item>
+        <widget class="QPushButton" name="sendTransferBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Send Transfer</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="historicalTransfersBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Historical Transfers</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="myCFDBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>CFD</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="historicalCFDBtn">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Historical CFD</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="currentCryptoValues2">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>60</y>
+        <width>251</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Current cryptocurrency values:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="myBankBalance2">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>40</y>
+        <width>135</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>myBankBalance</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="myCryptocurrencyPanel">
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>210</y>
+        <width>151</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>mycryptos</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromMyCryptoBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="addUSDPanel">
+     <widget class="QPushButton" name="goBackBtnFromDepositFundsBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="sendTransferTitle_2">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>20</y>
+        <width>290</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>DEPOSIT USD</string>
+      </property>
+      <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_7">
+      <property name="geometry">
+       <rect>
+        <x>272</x>
+        <y>70</y>
+        <width>245</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QDoubleSpinBox" name="addUSDBOX">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>180</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <double>5000.989999999999782</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="USDLabel">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>10</y>
+         <width>35</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>USD</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="addUSDConfirmBtn">
+      <property name="geometry">
+       <rect>
+        <x>345</x>
+        <y>130</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ADD USD</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="myOrdersPanel">
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>180</y>
+        <width>261</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>myOrdersPanel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromMyOrdersBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="historicalOrdersPanel">
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>250</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>historicalOrders</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromHistOrdersBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="seeOrderbookPanel">
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>250</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>seeOrderbookPanel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromOrderbookBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="sendTransferPanel">
+     <widget class="QLabel" name="sendTransferTitle">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>20</y>
+        <width>290</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>SEND TRANSFER</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="sendTransferConfirmBtn">
+      <property name="geometry">
+       <rect>
+        <x>345</x>
+        <y>240</y>
+        <width>100</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Send</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>90</y>
+        <width>290</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_18">
+       <item>
+        <layout class="QFormLayout" name="formLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="transferEmailLabel">
+           <property name="text">
+            <string>E - mail:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="recipentEmail">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>jankowalski@gmail.com</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="transferTitleLabel">
+           <property name="text">
+            <string>Title: </string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="transferTitle">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>The title</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QDoubleSpinBox" name="howMuchToTransfer"/>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="chooseCurrency">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <item>
+            <property name="text">
+             <string>USD</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Bitcoin</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Ethereum</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Binance Coin</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Tether</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Ripple</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromSendTransferBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="historicalTransfersPanel">
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>180</y>
+        <width>241</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>historicalTransfersPanel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="goBackFromTransfersHistBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="transfersHistoryTitle">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>20</y>
+        <width>390</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>TRANSFERS HISTORY</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="CFDPanel">
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>220</y>
+        <width>241</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CFDPanel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromCFDBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="historicalCFDPanel">
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>140</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>historicalCFDPanel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="goBackBtnFromHistCFDBtn">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>325</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Go back</string>
       </property>
      </widget>
     </widget>

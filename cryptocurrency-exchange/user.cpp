@@ -17,3 +17,23 @@ std::string User::getEmail()
     return email;
 }
 
+Wallet& User::getWallet()
+{
+    return myWallet;
+}
+
+void User::saveUSDToFile()
+{
+    std::ofstream userDirectory("users/"+email+"/info.csv");
+
+    if(!userDirectory.is_open())
+    {
+        //error handler
+    }
+    else
+    {
+        userDirectory<<firstName<<","<<lastName<<","<<email<<","<<getWallet().getMyUSD();
+    }
+    userDirectory.close();
+}
+

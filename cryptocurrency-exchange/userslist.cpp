@@ -27,7 +27,7 @@ UsersList::UsersList() //pobieranie wszystkich informacji z plików dla users, a
         std::string usersFirstName;
         std::string usersLastName;
         std::string usersEmail;
-        float money;
+        double money;
 
         std::vector<Cryptocurrency> usersCrypto;
 
@@ -48,7 +48,7 @@ UsersList::UsersList() //pobieranie wszystkich informacji z plików dla users, a
          std::getline(ss,usersLastName, ',');
          std::getline(ss,usersEmail,',');
          std::getline(ss,moneyBufor);
-         money = std::stof(moneyBufor);
+         money = std::stod(moneyBufor);
 
      }
      userInfoFile.close();
@@ -67,14 +67,14 @@ UsersList::UsersList() //pobieranie wszystkich informacji z plików dla users, a
              if(line=="")
                  continue;
 
-             float amount;
+             double amount;
              cryptoType whatCrypto;
              std::stringstream ss(line);
              getline(ss,line,',');
              whatCrypto = intToCryptoType(std::stoi(line));
 
              getline(ss,line);
-             amount = std::stof(line);
+             amount = std::stod(line);
              Cryptocurrency newCrypto (whatCrypto, amount);
 
              usersCrypto.push_back(newCrypto);
@@ -89,8 +89,8 @@ UsersList::UsersList() //pobieranie wszystkich informacji z plików dla users, a
 
 bool UsersList ::signIn(const std::string& emailToFind, const std::string& passwordToFind)
 {
-   if(std::find(emailVector.begin(), emailVector.end(), emailToFind)==emailVector.end())
-       return false;
+    if(!checkIfUserExists(emailToFind))
+        return false;
 
    const std::string userPasswordDirectory = "users/"+emailToFind+"/passw.txt";
 
@@ -206,7 +206,12 @@ void UsersList::addUserToList(User &newUser)
 //        std::cout<<email<<std::endl;
 //}
 
-
+bool UsersList::checkIfUserExists(const std::string& email)
+{
+    if(std::find(emailVector.begin(),emailVector.end(),email)!=emailVector.end())
+        return true;
+    else return false;
+}
 
 
 
