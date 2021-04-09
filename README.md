@@ -17,6 +17,27 @@ The Project is written in the C++ language and uses Qt Creator Environment. I de
 * Ripple
 
 The cryptocurrencies' data are accurate to the within day but a user can freely change the date in the program to bring the results forward. 
+I've already implemanted below features but there will be much more. I am going to add:
+* Order functionality e.g. *Market Orders* and *Stop Loss Limit Orders*.
+* CFD functionality
+* Cryptocurrency graphs
+* Graphs that visualize current state of user's cryptocurrency 
+* Orderbook functionality
 
 ## Features
+1. ### Sign In
 
+
+2. ### Sign Up
+
+
+3. ### Main Panel
+
+
+4. ### Change date
+
+
+5. ### Add money
+
+
+6. ### Send Transfer
