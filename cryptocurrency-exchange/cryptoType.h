@@ -1,5 +1,6 @@
 #ifndef CRYPTOTYPE_H
 #define CRYPTOTYPE_H
+#include<iostream>
 enum cryptoType{
     Bitcoin = 0,
     Ethereum = 1,
@@ -9,5 +10,7 @@ enum cryptoType{
 };
 
 cryptoType intToCryptoType(const int& value );
+
+cryptoType stringToCryptoType(const std::string& crypto);
 
 #endif // CRYPTOTYPE_H

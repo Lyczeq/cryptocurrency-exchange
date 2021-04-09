@@ -248,7 +248,7 @@ public:
         groupBox->setGeometry(QRect(250, 80, 280, 215));
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 110, 245, 61));
+        layoutWidget->setGeometry(QRect(20, 110, 245, 63));
         formLayout = new QFormLayout(layoutWidget);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setContentsMargins(0, 0, 0, 0);
@@ -844,10 +844,10 @@ public:
         chooseCurrency->addItem(QString());
         chooseCurrency->addItem(QString());
         chooseCurrency->addItem(QString());
-        chooseCurrency->addItem(QString());
         chooseCurrency->setObjectName(QString::fromUtf8("chooseCurrency"));
         chooseCurrency->setFont(font9);
         chooseCurrency->setLayoutDirection(Qt::RightToLeft);
+        chooseCurrency->setModelColumn(0);
 
         formLayout_3->setWidget(2, QFormLayout::FieldRole, chooseCurrency);
 
@@ -1005,12 +1005,11 @@ public:
         recipentEmail->setPlaceholderText(QCoreApplication::translate("MainWindow", "jankowalski@gmail.com", nullptr));
         transferTitleLabel->setText(QCoreApplication::translate("MainWindow", "Title: ", nullptr));
         transferTitle->setPlaceholderText(QCoreApplication::translate("MainWindow", "The title", nullptr));
-        chooseCurrency->setItemText(0, QCoreApplication::translate("MainWindow", "USD", nullptr));
-        chooseCurrency->setItemText(1, QCoreApplication::translate("MainWindow", "Bitcoin", nullptr));
-        chooseCurrency->setItemText(2, QCoreApplication::translate("MainWindow", "Ethereum", nullptr));
-        chooseCurrency->setItemText(3, QCoreApplication::translate("MainWindow", "Binance Coin", nullptr));
-        chooseCurrency->setItemText(4, QCoreApplication::translate("MainWindow", "Tether", nullptr));
-        chooseCurrency->setItemText(5, QCoreApplication::translate("MainWindow", "Ripple", nullptr));
+        chooseCurrency->setItemText(0, QCoreApplication::translate("MainWindow", "Bitcoin", nullptr));
+        chooseCurrency->setItemText(1, QCoreApplication::translate("MainWindow", "Ethereum", nullptr));
+        chooseCurrency->setItemText(2, QCoreApplication::translate("MainWindow", "Binance Coin", nullptr));
+        chooseCurrency->setItemText(3, QCoreApplication::translate("MainWindow", "Tether", nullptr));
+        chooseCurrency->setItemText(4, QCoreApplication::translate("MainWindow", "Ripple", nullptr));
 
         goBackBtnFromSendTransferBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "historicalTransfersPanel", nullptr));

@@ -16,3 +16,17 @@ cryptoType intToCryptoType(const int& value )
     }
 }
 
+cryptoType stringToCryptoType(const std::string& crypto)
+{
+    if(crypto == "Bitcoin")
+        return Bitcoin;
+    else if( crypto == "Ethereum")
+        return Ethereum;
+    else if( crypto == "Binance Coin")
+        return BinanceCoin;
+    else if( crypto == "Tether")
+        return Tether;
+    else if( crypto == "Ripple")
+        return Ripple;
+}
+

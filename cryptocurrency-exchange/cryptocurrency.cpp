@@ -13,7 +13,7 @@ double Cryptocurrency::getAmount()
     return amount;
 }
 
-void Cryptocurrency::increaseAmount(const double& value)
+void Cryptocurrency::changeAmount(const double &value, const bool& increase)
 {
-    amount += value;
+    increase? amount += value : amount -= value;
 }

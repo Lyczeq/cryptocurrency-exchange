@@ -16,7 +16,7 @@ public:
 
     double getAmount();
 
-    void increaseAmount(const double& value);
+    void changeAmount(const double &value, const bool& increase);
 };
 
 #endif // CRYPTOCURRENCY_H

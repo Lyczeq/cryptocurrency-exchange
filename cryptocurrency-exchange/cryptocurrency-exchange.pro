@@ -18,6 +18,7 @@ SOURCES += \
     mainwindow.cpp \
     orderbook.cpp \
     rates.cpp \
+    transfer.cpp \
     user.cpp \
     userslist.cpp \
     wallet.cpp
@@ -31,6 +32,7 @@ HEADERS += \
     mainwindow.h \
     orderbook.h \
     rates.h \
+    transfer.h \
     user.h \
     userslist.h \
     wallet.h

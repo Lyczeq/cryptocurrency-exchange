@@ -378,9 +378,9 @@ void MainWindow::on_sendTransferBtn_clicked()
 //TODO
 void MainWindow::on_sendTransferConfirmBtn_clicked()
 {
-    std::string email = ui->recipentEmail->text().toStdString();
+    std::string recipentEmail = ui->recipentEmail->text().toStdString();
 
-    if(!exchange.getUsersList().checkIfUserExists(email))
+    if(!exchange.getUsersList().checkIfUserExists(recipentEmail))
     {
         QMessageBox::warning(this,"Send Transfer", "There is no user with a provided email!" );
         return;
@@ -402,11 +402,24 @@ void MainWindow::on_sendTransferConfirmBtn_clicked()
         return;
     }
 
-    std::string currency = ui->chooseCurrency->currentText().toStdString();
+    std::string currency = ui->chooseCurrency->currentText().toStdString(); //zamiana na enuma
+    cryptoType chosenCrypto = stringToCryptoType(currency);
 
+     if(!exchange.getUser().getWallet().realizeTransfer(chosenCrypto, moneyToTransfer))
+     {
+         QMessageBox::warning(this,"Send Transfer", "You do not have enough cryptocurrency to send a transfer." );
+         return;
+     }
 
+     User loggedUser = exchange.getUser();
+     Transfer newTransfer (exchange.getDate(), chosenCrypto, recipentEmail, loggedUser.getEmail(), moneyToTransfer);
+     loggedUser.getWallet().addTransferToTransfers(newTransfer);
 
+     std::shared_ptr<Transfer> transferPointer =std::make_shared<Transfer> (newTransfer);
+     exchange.getUsersList().getUserByEmail(recipentEmail).getWallet().receiveTransfer(transferPointer);
 }
+
+
 
 void MainWindow::on_goBackBtnFromSendTransferBtn_clicked()
 {

@@ -7,6 +7,7 @@ debug/main.o
 debug/mainwindow.o
 debug/orderbook.o
 debug/rates.o
+debug/transfer.o
 debug/user.o
 debug/userslist.o
 debug/wallet.o

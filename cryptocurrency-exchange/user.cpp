@@ -37,3 +37,41 @@ void User::saveUSDToFile()
     userDirectory.close();
 }
 
+void User::saveTransfersToFiles()
+{
+    std::ofstream sentTransfersDirectory("users/"+email+"/sentTransfers.csv");
+
+    if(!sentTransfersDirectory.is_open())
+    {
+        //error handler
+    }
+    else
+    {
+        for(auto& transfer: myWallet.getReceivedTransfers())
+        {   std::string date = transfer->getDate().tm_mday+"."+(transfer->getDate().tm_mon+1)+'.'+transfer->getDate().tm_year;
+            sentTransfersDirectory<<date+','+
+        }
+    }
+    sentTransfersDirectory.close();
+
+    std::ofstream receivedTransfersDirectory("users/"+email+"/sentTransfers.csv");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

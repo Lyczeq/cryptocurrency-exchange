@@ -26,6 +26,8 @@ public:
 
     void saveUSDToFile();
 
+    void saveTransfersToFiles();
+
 };
 
 #endif // USER_H
