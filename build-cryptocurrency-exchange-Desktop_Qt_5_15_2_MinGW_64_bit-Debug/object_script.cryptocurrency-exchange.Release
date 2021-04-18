@@ -1,0 +1,14 @@
+release/cryptoType.o
+release/cryptocurrency.o
+release/currentrates.o
+release/exchange.o
+release/historicalrate.o
+release/main.o
+release/mainwindow.o
+release/orderbook.o
+release/rates.o
+release/transfer.o
+release/user.o
+release/userslist.o
+release/wallet.o
+release/moc_mainwindow.o
