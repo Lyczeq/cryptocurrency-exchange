@@ -91,7 +91,7 @@ void MainWindow::on_signInButtonLog_clicked()
         }
         dateFile.close();
 
-        User loggedUser = exchange.getUsersList().getUserByEmail(emailString);
+        User& loggedUser = exchange.getUsersList().getUserByEmail(emailString);
         exchange.getRates().setCurrentRatesByDate(exchange.getDate());
 
         exchange.setLoggedUser( loggedUser );
@@ -381,7 +381,13 @@ void MainWindow::on_sendTransferConfirmBtn_clicked()
 
     if(!exchange.getUsersList().checkIfUserExists(recipientEmail))
     {
-        QMessageBox::warning(this,"Send Transfer", "There is no user with a provided email!" );
+        QMessageBox::warning(this,"Send Transfer", "There is no user with a provided email." );
+        return;
+    }
+
+    if(exchange.getUser().getEmail() == recipientEmail)
+    {
+        QMessageBox::warning(this,"Send Transfer", "You cannot send transfer to yourself." );
         return;
     }
 
@@ -389,7 +395,7 @@ void MainWindow::on_sendTransferConfirmBtn_clicked()
 
     if(transferTitle=="")
     {
-        QMessageBox::warning(this,"Send Transfer", "Title cannot be empty!" );
+        QMessageBox::warning(this,"Send Transfer", "Title cannot be empty." );
         return;
     }
 
@@ -410,7 +416,7 @@ void MainWindow::on_sendTransferConfirmBtn_clicked()
          return;
      }
 
-     User loggedUser = exchange.getUser();
+     User& loggedUser = exchange.getUser();
      Transfer newTransfer (exchange.getDate(), chosenCrypto, recipientEmail, loggedUser.getEmail(), moneyToTransfer, transferTitle);
      loggedUser.getWallet().getSentTransfers().push_back(newTransfer);
 
@@ -418,21 +424,12 @@ void MainWindow::on_sendTransferConfirmBtn_clicked()
      exchange.getUsersList().getUserByEmail(recipientEmail).getWallet().receiveTransfer(transferPointer); // przesylam wskaznik na transfer do usera, ktory otrzymal transfer
 
      loggedUser.saveSentTransfersToFile();
-     exchange.getUsersList().getUserByEmail(recipientEmail).saveReceivedTransfersToFile();
+//     exchange.getUsersList().getUserByEmail(recipientEmail).saveReceivedTransfersToFile();
 
-
-     std::cout<<loggedUser.getWallet().getSentTransfers().size()<<std::endl;
-
-     for(auto &d: loggedUser.getWallet().getSentTransfers())
-     {
-         std::cout<<"Transfer sender"<<d.getDate().tm_mday<<'.'<<d.getDate().tm_mon<<","<<d.getAmount()<<","<<d.getTitle()<<std::endl;
-     }
-     std::cout<<"-------------"<<std::endl;
 //     for(auto &d: exchange.getUsersList().getUserByEmail(recipientEmail).getWallet().getReceivedTransfers())
 //     {
 //         std::cout<<"Transfer recipient"<<d->getDate().tm_mday<<'.'<<d->getDate().tm_mon<<","<<d->getAmount()<<","<<d->getTitle()<<std::endl;
 //     }
-
 
      QMessageBox::information(this,"Send Transfer", "Transfer was sent successfully!" );
 }

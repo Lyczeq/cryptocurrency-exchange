@@ -1,11 +1,11 @@
 #include "exchange.h"
 
 Exchange::Exchange(){
-    UsersList newUsersList;
-    Rates newRates;
+//    UsersList newUsersList;
+//    Rates newRates;
 
-    usersList = newUsersList;
-    rates = newRates;
+//    usersList = newUsersList;
+//    rates = newRates;
 
     usersList.loadEverything();
 }

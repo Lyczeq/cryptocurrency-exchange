@@ -37,35 +37,35 @@ void User::saveUSDToFile()
     userDirectory.close();
 }
 
-void User::saveReceivedTransfersToFile()
-{
-    saveCryptoFile();
+//void User::saveReceivedTransfersToFile()
+//{
+//    saveCryptoFile();
 
-    std::ofstream receivedTransfersDirectory("users/"+email+"/receivedTransfers.csv");
+//    std::ofstream receivedTransfersDirectory("users/"+email+"/receivedTransfers.csv");
 
-    if(!receivedTransfersDirectory.is_open())
-    {
-        //error handler
-    }
-    else
-    {
-        for(auto& transfer: myWallet.getReceivedTransfers())
-        {
+//    if(!receivedTransfersDirectory.is_open())
+//    {
+//        //error handler
+//    }
+//    else
+//    {
+//        for(auto& transfer: myWallet.getReceivedTransfers())
+//        {
 
-//            std::shared_ptr<tm> datePtr = std::make_shared<tm> (transfer->getDate());
-//            std::string day = std::to_string(datePtr->tm_mday);
-//            std::string month = std::to_string(datePtr->tm_mon+1);
-//            std::string year = std::to_string(datePtr->tm_year);
+////            std::shared_ptr<tm> datePtr = std::make_shared<tm> (transfer->getDate());
+////            std::string day = std::to_string(datePtr->tm_mday);
+////            std::string month = std::to_string(datePtr->tm_mon+1);
+////            std::string year = std::to_string(datePtr->tm_year);
 
-            std::string day = std::to_string(transfer->getDate().tm_mday);
-            std::string month = std::to_string(transfer->getDate().tm_mon+1);
-            std::string year = std::to_string(transfer->getDate().tm_year);
-//            std::cout<<"Rec Transfer"<<day<<'.'<<month<<'.'<<year<<','<<transfer->getRecipient()<<','<<transfer->getSender()<<','<<transfer->getCryptoType()<<','<<transfer->getAmount()<<','<<transfer->getTitle()<<std::endl;
-            receivedTransfersDirectory<<day<<'.'<<month<<'.'<<year<<','<<transfer->getRecipient()<<','<<transfer->getSender()<<','<<transfer->getCryptoType()<<','<<transfer->getAmount()<<','<<transfer->getTitle()<<std::endl;
-        }
-    }
-    receivedTransfersDirectory.close();
-}
+//            std::string day = std::to_string(transfer->getDate().tm_mday);
+//            std::string month = std::to_string(transfer->getDate().tm_mon+1);
+//            std::string year = std::to_string(transfer->getDate().tm_year);
+////            std::cout<<"Rec Transfer"<<day<<'.'<<month<<'.'<<year<<','<<transfer->getRecipient()<<','<<transfer->getSender()<<','<<transfer->getCryptoType()<<','<<transfer->getAmount()<<','<<transfer->getTitle()<<std::endl;
+//            receivedTransfersDirectory<<day<<'.'<<month<<'.'<<year<<','<<transfer->getRecipient()<<','<<transfer->getSender()<<','<<transfer->getCryptoType()<<','<<transfer->getAmount()<<','<<transfer->getTitle()<<std::endl;
+//        }
+//    }
+//    receivedTransfersDirectory.close();
+//}
 
 void User::saveSentTransfersToFile()
 {

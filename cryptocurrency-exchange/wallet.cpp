@@ -135,6 +135,9 @@ void Wallet::loadSentTransfersFromFile(const std::string& email)
 
      std::ifstream transfersFile(transfersFileDictionary);
 
+     std::vector<Transfer> newvecTransfer;
+     sentTransfers = newvecTransfer;
+
      if(!transfersFile.is_open())
      {
          //error handler
@@ -157,7 +160,7 @@ void Wallet::loadSentTransfersFromFile(const std::string& email)
              date.tm_mday = std::stoi(line);
 
              getline(ss,line,'.');
-             date.tm_mon = std::stoi(line);
+             date.tm_mon = std::stoi(line)-1; // tm mon has range 0-11
 
              getline(ss,line,',');
              date.tm_year = std::stoi(line);

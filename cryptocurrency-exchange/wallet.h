@@ -20,7 +20,7 @@ class Wallet
     public:
     Wallet();
 
-    Wallet(const double& money, const std::vector<std::shared_ptr<Transfer>>& recTransfers);
+    Wallet(const double& money, const std::vector<std::shared_ptr<Transfer>>& recTransfers );
 
     double getMyUSD();
 

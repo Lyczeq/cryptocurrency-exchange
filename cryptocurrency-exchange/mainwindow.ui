@@ -48,7 +48,7 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>0</x>
       <y>80</y>
       <width>790</width>
       <height>361</height>
@@ -61,7 +61,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>12</number>
     </property>
     <widget class="QWidget" name="home">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -1712,19 +1712,6 @@
      </widget>
     </widget>
     <widget class="QWidget" name="historicalTransfersPanel">
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>180</y>
-        <width>241</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>historicalTransfersPanel</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="goBackFromTransfersHistBtn">
       <property name="geometry">
        <rect>
@@ -1749,7 +1736,7 @@
        <rect>
         <x>200</x>
         <y>20</y>
-        <width>390</width>
+        <width>400</width>
         <height>31</height>
        </rect>
       </property>
@@ -1767,6 +1754,68 @@
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>70</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>341</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>339</width>
+         <height>189</height>
+        </rect>
+       </property>
+       <widget class="QScrollBar" name="verticalScrollBar">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>0</y>
+          <width>17</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="CFDPanel">

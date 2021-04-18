@@ -23,6 +23,8 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
@@ -171,9 +173,13 @@ public:
     QPushButton *goBackBtnFromSendTransferBtn;
     QPushButton *pushButton;
     QWidget *historicalTransfersPanel;
-    QLabel *label_9;
     QPushButton *goBackFromTransfersHistBtn;
     QLabel *transfersHistoryTitle;
+    QLabel *label_2;
+    QLabel *label_4;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QScrollBar *verticalScrollBar;
     QWidget *CFDPanel;
     QLabel *label_10;
     QPushButton *goBackBtnFromCFDBtn;
@@ -865,18 +871,33 @@ public:
         stackedWidget->addWidget(sendTransferPanel);
         historicalTransfersPanel = new QWidget();
         historicalTransfersPanel->setObjectName(QString::fromUtf8("historicalTransfersPanel"));
-        label_9 = new QLabel(historicalTransfersPanel);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setGeometry(QRect(300, 180, 241, 16));
         goBackFromTransfersHistBtn = new QPushButton(historicalTransfersPanel);
         goBackFromTransfersHistBtn->setObjectName(QString::fromUtf8("goBackFromTransfersHistBtn"));
         goBackFromTransfersHistBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackFromTransfersHistBtn->setFont(font1);
         transfersHistoryTitle = new QLabel(historicalTransfersPanel);
         transfersHistoryTitle->setObjectName(QString::fromUtf8("transfersHistoryTitle"));
-        transfersHistoryTitle->setGeometry(QRect(200, 20, 390, 31));
+        transfersHistoryTitle->setGeometry(QRect(200, 20, 400, 31));
         transfersHistoryTitle->setFont(font7);
         transfersHistoryTitle->setAlignment(Qt::AlignCenter);
+        label_2 = new QLabel(historicalTransfersPanel);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(20, 70, 55, 16));
+        label_4 = new QLabel(historicalTransfersPanel);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(620, 70, 55, 16));
+        scrollArea = new QScrollArea(historicalTransfersPanel);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setGeometry(QRect(190, 140, 120, 85));
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 118, 83));
+        verticalScrollBar = new QScrollBar(scrollAreaWidgetContents);
+        verticalScrollBar->setObjectName(QString::fromUtf8("verticalScrollBar"));
+        verticalScrollBar->setGeometry(QRect(100, 0, 20, 81));
+        verticalScrollBar->setOrientation(Qt::Vertical);
+        scrollArea->setWidget(scrollAreaWidgetContents);
         stackedWidget->addWidget(historicalTransfersPanel);
         CFDPanel = new QWidget();
         CFDPanel->setObjectName(QString::fromUtf8("CFDPanel"));
@@ -909,7 +930,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(12);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1017,9 +1038,10 @@ public:
         transferTitleLabel->setText(QCoreApplication::translate("MainWindow", "Title: ", nullptr));
         goBackBtnFromSendTransferBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-        label_9->setText(QCoreApplication::translate("MainWindow", "historicalTransfersPanel", nullptr));
         goBackFromTransfersHistBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         transfersHistoryTitle->setText(QCoreApplication::translate("MainWindow", "TRANSFERS HISTORY", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "CFDPanel", nullptr));
         goBackBtnFromCFDBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", "historicalCFDPanel", nullptr));
