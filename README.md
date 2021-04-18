@@ -1,6 +1,7 @@
 <h1 align="center">
   Cryptocurrency exchange:money_with_wings:
  </h1>
+ 
 ## Table of contents
 * [About the project](#about-the-project)
 * [Features](#features)
@@ -26,6 +27,7 @@ Sign in panel enables the user to log in to the exchange. If the user doesn't ex
 <img src="images/signUp.png" width=450px>
 
 Sign up panel enables the user to create an account. If the user enters incorrect data, he will see a proper message. I am going to implement regular expression in that section.
+
 3. ### Main Panel
 
 <img src="images/mainPanel.png" width=450px>
