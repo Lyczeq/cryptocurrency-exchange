@@ -19,6 +19,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void dodo(const cryptoType ct);
+
     void on_signInButton_clicked();
 
     void on_signUpButton_clicked();

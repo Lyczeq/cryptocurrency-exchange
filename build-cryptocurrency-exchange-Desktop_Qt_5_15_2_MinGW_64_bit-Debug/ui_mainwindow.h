@@ -580,11 +580,13 @@ public:
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         binanceCoinGraphBtn = new QPushButton(groupBox_4);
         binanceCoinGraphBtn->setObjectName(QString::fromUtf8("binanceCoinGraphBtn"));
+        binanceCoinGraphBtn->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_6->addWidget(binanceCoinGraphBtn, 2, 0, 1, 1);
 
         tetherGraphBtn = new QPushButton(groupBox_4);
         tetherGraphBtn->setObjectName(QString::fromUtf8("tetherGraphBtn"));
+        tetherGraphBtn->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_6->addWidget(tetherGraphBtn, 3, 0, 1, 1);
 
@@ -595,11 +597,14 @@ public:
 
         ethereumGraphBtn = new QPushButton(groupBox_4);
         ethereumGraphBtn->setObjectName(QString::fromUtf8("ethereumGraphBtn"));
+        ethereumGraphBtn->setAutoFillBackground(false);
+        ethereumGraphBtn->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_6->addWidget(ethereumGraphBtn, 1, 0, 1, 1);
 
         rippleGraphBtn = new QPushButton(groupBox_4);
         rippleGraphBtn->setObjectName(QString::fromUtf8("rippleGraphBtn"));
+        rippleGraphBtn->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_6->addWidget(rippleGraphBtn, 4, 0, 1, 1);
 

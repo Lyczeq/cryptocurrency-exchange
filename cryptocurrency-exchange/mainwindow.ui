@@ -911,6 +911,9 @@
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="2" column="0">
         <widget class="QPushButton" name="binanceCoinGraphBtn">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Binance Coin</string>
          </property>
@@ -918,6 +921,9 @@
        </item>
        <item row="3" column="0">
         <widget class="QPushButton" name="tetherGraphBtn">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Tether</string>
          </property>
@@ -932,6 +938,12 @@
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="ethereumGraphBtn">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Ethereum</string>
          </property>
@@ -939,6 +951,9 @@
        </item>
        <item row="4" column="0">
         <widget class="QPushButton" name="rippleGraphBtn">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Ripple</string>
          </property>

@@ -20,37 +20,80 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::makePlot(cryptoType ct)
 {
     std::vector<HistoricalRate>::iterator finalRate = exchange.getRates().getTodayHistoricalRate(ct, exchange.getDate());
+    std::vector<HistoricalRate>::iterator startRate = prev(finalRate,28);
+    std::vector<HistoricalRate>::iterator iter;
+
+    std::cout<<finalRate->getDate().tm_mday<<std::endl;
+    std::cout<<startRate->getDate().tm_mday<<std::endl;
+    ui->customPlot->setLocale(QLocale(QLocale::English, QLocale::UnitedKingdom));
+
+    ui->customPlot->xAxis->setLabel("Date");
+    ui->customPlot->yAxis->setLabel("Value");
+
+       int i=0;
+       ui->customPlot->addGraph();
+
+      QVector<QCPGraphData> timeData(29);
+      QVector<double> buforVec;
+
+      for (iter=startRate; iter<=finalRate; iter++)
+      {
+//           QString bufor = QString::fromStdString(std::to_string(iter->getDate().tm_mday)+"/"+std::to_string(iter->getDate().tm_mon+1)+"/"+std::to_string(iter->getDate().tm_year));
+           QDateTime timeBufor (QDate(iter->getDate().tm_year, iter->getDate().tm_mon+1, iter->getDate().tm_mday ));
+
+            long double dBufor = timeBufor.toTime_t();
+
+        timeData[i].key = dBufor;
+        buforVec.push_back(iter->getValue());
+          timeData[i].value = iter->getValue();
+        i++;
+      }
+       ui->customPlot->graph()->data()->set(timeData);
+
+    // configure bottom axis to show date instead of number:
+    QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
+    dateTicker->setDateTimeFormat("d.MM\nyyyy");
+     ui->customPlot->xAxis->setTicker(dateTicker);
+
+     double maxValue = *std::max_element(buforVec.begin(), buforVec.end());
+     double minValue = *std::min_element(buforVec.begin(),  buforVec.end());
+
+    ui->customPlot->xAxis->setRange(timeData[0].key,timeData[28].key);
+    ui->customPlot->yAxis->setRange(minValue*9/10,maxValue*11/10);
+    ui->customPlot->replot();
+}
+void MainWindow::dodo(const cryptoType ct)
+{
+    std::vector<HistoricalRate>::iterator finalRate = exchange.getRates().getTodayHistoricalRate(ct, exchange.getDate());
     std::vector<HistoricalRate>::iterator startRate = prev(finalRate,30);
     std::vector<HistoricalRate>::iterator iter;
 
     QVector<tm> qVecDate ;
     QVector<double> qVecValue;
-
+    QVector<double> x;
+    int i=0;
     for (iter=startRate; iter<=finalRate;iter++)
     {
      qVecDate.push_back(iter->getDate());
      qVecValue.push_back((iter->getValue()));
+     x.push_back(i);
+     i++;
     }
 
     double max = *std::max_element(qVecValue.begin(), qVecValue.end());
     double min = *std::min_element(qVecValue.begin(), qVecValue.end());
 
-    QVector<double> x;
-    for(int i=0;i<31;i++)
-    {
-        x.push_back(i);
-    }
     ui->customPlot->addGraph();
     ui->customPlot->graph(0)->setData(x,qVecValue);
 
-    // give the axes some labels:
     ui->customPlot->xAxis->setLabel("Date");
     ui->customPlot->yAxis->setLabel("Value");
-    // set axes ranges, so we see all data:
-    ui->customPlot->xAxis->setRange(1,30);
+
+    ui->customPlot->xAxis->setRange(x.first(),x.last());
     ui->customPlot->yAxis->setRange(min*9/10,max*11/10);
     ui->customPlot->replot();
 }
+
 
 MainWindow::~MainWindow()
 {
