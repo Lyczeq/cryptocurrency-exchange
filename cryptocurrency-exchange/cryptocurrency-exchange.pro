@@ -1,6 +1,6 @@
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 CONFIG += c++11
 
@@ -17,6 +17,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     orderbook.cpp \
+    qcustomplot.cpp \
     rates.cpp \
     transfer.cpp \
     user.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     historicalrate.h \
     mainwindow.h \
     orderbook.h \
+    qcustomplot.h \
     rates.h \
     transfer.h \
     user.h \

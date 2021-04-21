@@ -27,6 +27,8 @@ public:
 
     void readRatesFromFile(const std::string& cryptoFileName, std::vector<HistoricalRate>& cryptoVector, const cryptoType cType);
 
+    std::vector<HistoricalRate>::iterator getTodayHistoricalRate(cryptoType ct, tm date);
+
 };
 
 #endif // RATES_H

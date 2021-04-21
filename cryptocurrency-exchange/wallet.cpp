@@ -166,10 +166,10 @@ void Wallet::loadSentTransfersFromFile(const std::string& email)
              date.tm_year = std::stoi(line);
 
              getline(ss,line,',');
-             sender = line;
+             recipient = line;
 
              getline(ss,line,',');
-             recipient = line;
+             sender = line;
 
              getline(ss,line,',');
              ct = intToCryptoType(std::stoi(line));

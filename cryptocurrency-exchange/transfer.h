@@ -27,7 +27,6 @@ public:
 
     std::string getTitle();
 
-
 };
 
 #endif // TRANSFER_H

@@ -6,9 +6,11 @@ release/historicalrate.o
 release/main.o
 release/mainwindow.o
 release/orderbook.o
+release/qcustomplot.o
 release/rates.o
 release/transfer.o
 release/user.o
 release/userslist.o
 release/wallet.o
 release/moc_mainwindow.o
+release/moc_qcustomplot.o

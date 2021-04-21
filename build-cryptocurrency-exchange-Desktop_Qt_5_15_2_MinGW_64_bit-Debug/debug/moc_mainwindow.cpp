@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[44];
-    char stringdata0[1168];
+    QByteArrayData data[58];
+    char stringdata0[1394];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -75,7 +75,21 @@ QT_MOC_LITERAL(39, 1021, 27), // "on_historicalCFDBtn_clicked"
 QT_MOC_LITERAL(40, 1049, 34), // "on_goBackBtnFromHistCFDBtn_cl..."
 QT_MOC_LITERAL(41, 1084, 27), // "on_addUSDConfirmBtn_clicked"
 QT_MOC_LITERAL(42, 1112, 33), // "on_sendTransferConfirmBtn_cli..."
-QT_MOC_LITERAL(43, 1146, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(43, 1146, 21), // "on_pushButton_clicked"
+QT_MOC_LITERAL(44, 1168, 12), // "createQLabel"
+QT_MOC_LITERAL(45, 1181, 7), // "QLabel*"
+QT_MOC_LITERAL(46, 1189, 6), // "height"
+QT_MOC_LITERAL(47, 1196, 5), // "width"
+QT_MOC_LITERAL(48, 1202, 18), // "cryptoTypeToString"
+QT_MOC_LITERAL(49, 1221, 11), // "std::string"
+QT_MOC_LITERAL(50, 1233, 10), // "cryptoType"
+QT_MOC_LITERAL(51, 1244, 2), // "ct"
+QT_MOC_LITERAL(52, 1247, 8), // "makePlot"
+QT_MOC_LITERAL(53, 1256, 26), // "on_bitcoinGraphBtn_clicked"
+QT_MOC_LITERAL(54, 1283, 27), // "on_ethereumGraphBtn_clicked"
+QT_MOC_LITERAL(55, 1311, 30), // "on_binanceCoinGraphBtn_clicked"
+QT_MOC_LITERAL(56, 1342, 25), // "on_tetherGraphBtn_clicked"
+QT_MOC_LITERAL(57, 1368, 25) // "on_rippleGraphBtn_clicked"
 
     },
     "MainWindow\0on_signInButton_clicked\0\0"
@@ -111,7 +125,14 @@ QT_MOC_LITERAL(43, 1146, 21) // "on_pushButton_clicked"
     "on_goBackBtnFromHistCFDBtn_clicked\0"
     "on_addUSDConfirmBtn_clicked\0"
     "on_sendTransferConfirmBtn_clicked\0"
-    "on_pushButton_clicked"
+    "on_pushButton_clicked\0createQLabel\0"
+    "QLabel*\0height\0width\0cryptoTypeToString\0"
+    "std::string\0cryptoType\0ct\0makePlot\0"
+    "on_bitcoinGraphBtn_clicked\0"
+    "on_ethereumGraphBtn_clicked\0"
+    "on_binanceCoinGraphBtn_clicked\0"
+    "on_tetherGraphBtn_clicked\0"
+    "on_rippleGraphBtn_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -121,7 +142,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      47,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -129,45 +150,53 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  209,    2, 0x08 /* Private */,
-       3,    0,  210,    2, 0x08 /* Private */,
-       4,    0,  211,    2, 0x08 /* Private */,
-       5,    0,  212,    2, 0x08 /* Private */,
-       6,    0,  213,    2, 0x08 /* Private */,
-       7,    0,  214,    2, 0x08 /* Private */,
-       8,    0,  215,    2, 0x08 /* Private */,
-       9,    0,  216,    2, 0x08 /* Private */,
-      10,    0,  217,    2, 0x08 /* Private */,
-      11,    0,  218,    2, 0x08 /* Private */,
-      12,    0,  219,    2, 0x08 /* Private */,
-      13,    3,  220,    2, 0x08 /* Private */,
-      17,    0,  227,    2, 0x08 /* Private */,
-      18,    0,  228,    2, 0x08 /* Private */,
-      19,    0,  229,    2, 0x08 /* Private */,
-      20,    0,  230,    2, 0x08 /* Private */,
-      21,    0,  231,    2, 0x08 /* Private */,
-      22,    0,  232,    2, 0x08 /* Private */,
-      23,    0,  233,    2, 0x08 /* Private */,
-      24,    0,  234,    2, 0x08 /* Private */,
-      25,    0,  235,    2, 0x08 /* Private */,
-      26,    0,  236,    2, 0x08 /* Private */,
-      27,    0,  237,    2, 0x08 /* Private */,
-      28,    0,  238,    2, 0x08 /* Private */,
-      29,    0,  239,    2, 0x08 /* Private */,
-      30,    0,  240,    2, 0x08 /* Private */,
-      31,    0,  241,    2, 0x08 /* Private */,
-      32,    0,  242,    2, 0x08 /* Private */,
-      33,    0,  243,    2, 0x08 /* Private */,
-      34,    0,  244,    2, 0x08 /* Private */,
-      35,    0,  245,    2, 0x08 /* Private */,
-      36,    0,  246,    2, 0x08 /* Private */,
-      37,    0,  247,    2, 0x08 /* Private */,
-      38,    0,  248,    2, 0x08 /* Private */,
-      39,    0,  249,    2, 0x08 /* Private */,
-      40,    0,  250,    2, 0x08 /* Private */,
-      41,    0,  251,    2, 0x08 /* Private */,
-      42,    0,  252,    2, 0x08 /* Private */,
-      43,    0,  253,    2, 0x08 /* Private */,
+       1,    0,  249,    2, 0x08 /* Private */,
+       3,    0,  250,    2, 0x08 /* Private */,
+       4,    0,  251,    2, 0x08 /* Private */,
+       5,    0,  252,    2, 0x08 /* Private */,
+       6,    0,  253,    2, 0x08 /* Private */,
+       7,    0,  254,    2, 0x08 /* Private */,
+       8,    0,  255,    2, 0x08 /* Private */,
+       9,    0,  256,    2, 0x08 /* Private */,
+      10,    0,  257,    2, 0x08 /* Private */,
+      11,    0,  258,    2, 0x08 /* Private */,
+      12,    0,  259,    2, 0x08 /* Private */,
+      13,    3,  260,    2, 0x08 /* Private */,
+      17,    0,  267,    2, 0x08 /* Private */,
+      18,    0,  268,    2, 0x08 /* Private */,
+      19,    0,  269,    2, 0x08 /* Private */,
+      20,    0,  270,    2, 0x08 /* Private */,
+      21,    0,  271,    2, 0x08 /* Private */,
+      22,    0,  272,    2, 0x08 /* Private */,
+      23,    0,  273,    2, 0x08 /* Private */,
+      24,    0,  274,    2, 0x08 /* Private */,
+      25,    0,  275,    2, 0x08 /* Private */,
+      26,    0,  276,    2, 0x08 /* Private */,
+      27,    0,  277,    2, 0x08 /* Private */,
+      28,    0,  278,    2, 0x08 /* Private */,
+      29,    0,  279,    2, 0x08 /* Private */,
+      30,    0,  280,    2, 0x08 /* Private */,
+      31,    0,  281,    2, 0x08 /* Private */,
+      32,    0,  282,    2, 0x08 /* Private */,
+      33,    0,  283,    2, 0x08 /* Private */,
+      34,    0,  284,    2, 0x08 /* Private */,
+      35,    0,  285,    2, 0x08 /* Private */,
+      36,    0,  286,    2, 0x08 /* Private */,
+      37,    0,  287,    2, 0x08 /* Private */,
+      38,    0,  288,    2, 0x08 /* Private */,
+      39,    0,  289,    2, 0x08 /* Private */,
+      40,    0,  290,    2, 0x08 /* Private */,
+      41,    0,  291,    2, 0x08 /* Private */,
+      42,    0,  292,    2, 0x08 /* Private */,
+      43,    0,  293,    2, 0x08 /* Private */,
+      44,    2,  294,    2, 0x08 /* Private */,
+      48,    1,  299,    2, 0x08 /* Private */,
+      52,    1,  302,    2, 0x08 /* Private */,
+      53,    0,  305,    2, 0x08 /* Private */,
+      54,    0,  306,    2, 0x08 /* Private */,
+      55,    0,  307,    2, 0x08 /* Private */,
+      56,    0,  308,    2, 0x08 /* Private */,
+      57,    0,  309,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -204,6 +233,14 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    0x80000000 | 45, QMetaType::Int, QMetaType::Int,   46,   47,
+    0x80000000 | 49, 0x80000000 | 50,   51,
+    QMetaType::Void, 0x80000000 | 50,   51,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -259,6 +296,16 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 36: _t->on_addUSDConfirmBtn_clicked(); break;
         case 37: _t->on_sendTransferConfirmBtn_clicked(); break;
         case 38: _t->on_pushButton_clicked(); break;
+        case 39: { QLabel* _r = _t->createQLabel((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< QLabel**>(_a[0]) = std::move(_r); }  break;
+        case 40: { std::string _r = _t->cryptoTypeToString((*reinterpret_cast< const cryptoType(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< std::string*>(_a[0]) = std::move(_r); }  break;
+        case 41: _t->makePlot((*reinterpret_cast< cryptoType(*)>(_a[1]))); break;
+        case 42: _t->on_bitcoinGraphBtn_clicked(); break;
+        case 43: _t->on_ethereumGraphBtn_clicked(); break;
+        case 44: _t->on_binanceCoinGraphBtn_clicked(); break;
+        case 45: _t->on_tetherGraphBtn_clicked(); break;
+        case 46: _t->on_rippleGraphBtn_clicked(); break;
         default: ;
         }
     }
@@ -293,13 +340,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 39)
+        if (_id < 47)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 47;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 39)
+        if (_id < 47)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 39;
+        _id -= 47;
     }
     return _id;
 }

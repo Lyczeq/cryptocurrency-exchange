@@ -248,6 +248,7 @@ Makefile: ../cryptocurrency-exchange/cryptocurrency-exchange.pro D:/qt/5.15.2/mi
 		D:/qt/5.15.2/mingw81_64/mkspecs/features/yacc.prf \
 		D:/qt/5.15.2/mingw81_64/mkspecs/features/lex.prf \
 		../cryptocurrency-exchange/cryptocurrency-exchange.pro \
+		D:/qt/5.15.2/mingw81_64/lib/Qt5PrintSupport.prl \
 		D:/qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		D:/qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
 		D:/qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
@@ -432,6 +433,7 @@ D:/qt/5.15.2/mingw81_64/mkspecs/features/exceptions.prf:
 D:/qt/5.15.2/mingw81_64/mkspecs/features/yacc.prf:
 D:/qt/5.15.2/mingw81_64/mkspecs/features/lex.prf:
 ../cryptocurrency-exchange/cryptocurrency-exchange.pro:
+D:/qt/5.15.2/mingw81_64/lib/Qt5PrintSupport.prl:
 D:/qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 D:/qt/5.15.2/mingw81_64/lib/Qt5Gui.prl:
 D:/qt/5.15.2/mingw81_64/lib/Qt5Core.prl:

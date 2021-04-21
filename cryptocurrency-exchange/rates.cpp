@@ -177,6 +177,59 @@ double Rates::getRateValueByDate(tm date, const cryptoType& whatCrypto)
     }
 }
 
+std::vector<HistoricalRate>::iterator Rates::getTodayHistoricalRate(cryptoType ct, tm date)
+{
+    switch (ct) {
+    case Bitcoin:
+    {
+        std::vector<HistoricalRate>::iterator iter ;
+        for(iter = bitcoinRates.begin(); iter < bitcoinRates.end();iter++)
+        {
+            if(iter->getDate().tm_mday == date.tm_mday && iter->getDate().tm_mon == date.tm_mon && iter->getDate().tm_year == date.tm_year)
+               return iter;
+
+        }
+    }
+    case Ethereum:
+    {
+        std::vector<HistoricalRate>::iterator iter ;
+        for(iter = ethereumRates.begin(); iter < ethereumRates.end();iter++)
+        {
+            if(iter->getDate().tm_mday == date.tm_mday && iter->getDate().tm_mon == date.tm_mon && iter->getDate().tm_year == date.tm_year)
+               return iter;
+        }
+    }
+    case BinanceCoin:
+    {
+        std::vector<HistoricalRate>::iterator iter ;
+        for(iter = binanceCoinRates.begin(); iter < binanceCoinRates.end();iter++)
+        {
+            if(iter->getDate().tm_mday == date.tm_mday && iter->getDate().tm_mon == date.tm_mon && iter->getDate().tm_year == date.tm_year)
+               return iter;
+        }
+    }
+    case Tether:
+    {
+        std::vector<HistoricalRate>::iterator iter ;
+        for(iter = tetherRates.begin(); iter < tetherRates.end();iter++)
+        {
+            if(iter->getDate().tm_mday == date.tm_mday && iter->getDate().tm_mon == date.tm_mon && iter->getDate().tm_year == date.tm_year)
+               return iter;
+        }
+    }
+    case Ripple:
+    {
+        std::vector<HistoricalRate>::iterator iter ;
+        for(iter = rippleRates.begin(); iter < rippleRates.end();iter++)
+        {
+            if(iter->getDate().tm_mday == date.tm_mday && iter->getDate().tm_mon == date.tm_mon && iter->getDate().tm_year == date.tm_year)
+               return iter;
+        }
+    }
+    }
+
+}
+
 
 
 

@@ -24,11 +24,11 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
-#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -107,7 +107,14 @@ public:
     QLabel *currentCryptoValues;
     QWidget *graphsPanel;
     QPushButton *goBackBtnFromGraphs;
-    QLabel *label;
+    QCustomPlot *customPlot;
+    QGroupBox *groupBox_4;
+    QGridLayout *gridLayout_6;
+    QPushButton *binanceCoinGraphBtn;
+    QPushButton *tetherGraphBtn;
+    QPushButton *bitcoinGraphBtn;
+    QPushButton *ethereumGraphBtn;
+    QPushButton *rippleGraphBtn;
     QWidget *walletPanel;
     QWidget *verticalLayoutWidget_3;
     QVBoxLayout *verticalLayout_8;
@@ -165,7 +172,7 @@ public:
     QVBoxLayout *verticalLayout_18;
     QFormLayout *formLayout_3;
     QLabel *transferEmailLabel;
-    QLineEdit *recipentEmail;
+    QLineEdit *recipientEmail;
     QDoubleSpinBox *howMuchToTransfer;
     QComboBox *chooseCurrency;
     QLineEdit *transferTitle;
@@ -175,11 +182,14 @@ public:
     QWidget *historicalTransfersPanel;
     QPushButton *goBackFromTransfersHistBtn;
     QLabel *transfersHistoryTitle;
-    QLabel *label_2;
-    QLabel *label_4;
-    QScrollArea *scrollArea;
+    QLabel *sentTransfersLabel;
+    QLabel *receivedTransfersLabel;
+    QScrollArea *sentTransfersArea;
     QWidget *scrollAreaWidgetContents;
-    QScrollBar *verticalScrollBar;
+    QGridLayout *gridLayout_3;
+    QScrollArea *receivedTransfersArea;
+    QWidget *scrollAreaWidgetContents_2;
+    QGridLayout *gridLayout_4;
     QWidget *CFDPanel;
     QLabel *label_10;
     QPushButton *goBackBtnFromCFDBtn;
@@ -209,7 +219,7 @@ public:
         title->setReadOnly(true);
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        stackedWidget->setGeometry(QRect(10, 80, 790, 361));
+        stackedWidget->setGeometry(QRect(0, 80, 790, 361));
         QFont font1;
         font1.setFamily(QString::fromUtf8("Arial"));
         font1.setPointSize(10);
@@ -560,13 +570,39 @@ public:
         goBackBtnFromGraphs->setObjectName(QString::fromUtf8("goBackBtnFromGraphs"));
         goBackBtnFromGraphs->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromGraphs->setFont(font1);
-        label = new QLabel(graphsPanel);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(240, 90, 451, 131));
-        QFont font6;
-        font6.setFamily(QString::fromUtf8("Arial"));
-        font6.setPointSize(28);
-        label->setFont(font6);
+        customPlot = new QCustomPlot(graphsPanel);
+        customPlot->setObjectName(QString::fromUtf8("customPlot"));
+        customPlot->setGeometry(QRect(170, 30, 601, 271));
+        groupBox_4 = new QGroupBox(graphsPanel);
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        groupBox_4->setGeometry(QRect(10, 30, 141, 271));
+        gridLayout_6 = new QGridLayout(groupBox_4);
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        binanceCoinGraphBtn = new QPushButton(groupBox_4);
+        binanceCoinGraphBtn->setObjectName(QString::fromUtf8("binanceCoinGraphBtn"));
+
+        gridLayout_6->addWidget(binanceCoinGraphBtn, 2, 0, 1, 1);
+
+        tetherGraphBtn = new QPushButton(groupBox_4);
+        tetherGraphBtn->setObjectName(QString::fromUtf8("tetherGraphBtn"));
+
+        gridLayout_6->addWidget(tetherGraphBtn, 3, 0, 1, 1);
+
+        bitcoinGraphBtn = new QPushButton(groupBox_4);
+        bitcoinGraphBtn->setObjectName(QString::fromUtf8("bitcoinGraphBtn"));
+
+        gridLayout_6->addWidget(bitcoinGraphBtn, 0, 0, 1, 1);
+
+        ethereumGraphBtn = new QPushButton(groupBox_4);
+        ethereumGraphBtn->setObjectName(QString::fromUtf8("ethereumGraphBtn"));
+
+        gridLayout_6->addWidget(ethereumGraphBtn, 1, 0, 1, 1);
+
+        rippleGraphBtn = new QPushButton(groupBox_4);
+        rippleGraphBtn->setObjectName(QString::fromUtf8("rippleGraphBtn"));
+
+        gridLayout_6->addWidget(rippleGraphBtn, 4, 0, 1, 1);
+
         stackedWidget->addWidget(graphsPanel);
         walletPanel = new QWidget();
         walletPanel->setObjectName(QString::fromUtf8("walletPanel"));
@@ -741,12 +777,12 @@ public:
         sendTransferTitle_2 = new QLabel(addUSDPanel);
         sendTransferTitle_2->setObjectName(QString::fromUtf8("sendTransferTitle_2"));
         sendTransferTitle_2->setGeometry(QRect(250, 20, 290, 35));
-        QFont font7;
-        font7.setFamily(QString::fromUtf8("Arial"));
-        font7.setPointSize(20);
-        font7.setBold(true);
-        font7.setWeight(75);
-        sendTransferTitle_2->setFont(font7);
+        QFont font6;
+        font6.setFamily(QString::fromUtf8("Arial"));
+        font6.setPointSize(20);
+        font6.setBold(true);
+        font6.setWeight(75);
+        sendTransferTitle_2->setFont(font6);
         sendTransferTitle_2->setAlignment(Qt::AlignCenter);
         groupBox_7 = new QGroupBox(addUSDPanel);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
@@ -797,17 +833,17 @@ public:
         sendTransferTitle = new QLabel(sendTransferPanel);
         sendTransferTitle->setObjectName(QString::fromUtf8("sendTransferTitle"));
         sendTransferTitle->setGeometry(QRect(250, 20, 290, 35));
-        sendTransferTitle->setFont(font7);
+        sendTransferTitle->setFont(font6);
         sendTransferTitle->setAlignment(Qt::AlignCenter);
         sendTransferConfirmBtn = new QPushButton(sendTransferPanel);
         sendTransferConfirmBtn->setObjectName(QString::fromUtf8("sendTransferConfirmBtn"));
         sendTransferConfirmBtn->setGeometry(QRect(345, 240, 100, 35));
-        QFont font8;
-        font8.setFamily(QString::fromUtf8("Arial"));
-        font8.setPointSize(11);
-        font8.setBold(true);
-        font8.setWeight(75);
-        sendTransferConfirmBtn->setFont(font8);
+        QFont font7;
+        font7.setFamily(QString::fromUtf8("Arial"));
+        font7.setPointSize(11);
+        font7.setBold(true);
+        font7.setWeight(75);
+        sendTransferConfirmBtn->setFont(font7);
         groupBox_3 = new QGroupBox(sendTransferPanel);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         groupBox_3->setGeometry(QRect(250, 90, 290, 131));
@@ -820,14 +856,14 @@ public:
 
         formLayout_3->setWidget(0, QFormLayout::LabelRole, transferEmailLabel);
 
-        recipentEmail = new QLineEdit(groupBox_3);
-        recipentEmail->setObjectName(QString::fromUtf8("recipentEmail"));
-        QFont font9;
-        font9.setFamily(QString::fromUtf8("Arial"));
-        font9.setPointSize(8);
-        recipentEmail->setFont(font9);
+        recipientEmail = new QLineEdit(groupBox_3);
+        recipientEmail->setObjectName(QString::fromUtf8("recipientEmail"));
+        QFont font8;
+        font8.setFamily(QString::fromUtf8("Arial"));
+        font8.setPointSize(8);
+        recipientEmail->setFont(font8);
 
-        formLayout_3->setWidget(0, QFormLayout::FieldRole, recipentEmail);
+        formLayout_3->setWidget(0, QFormLayout::FieldRole, recipientEmail);
 
         howMuchToTransfer = new QDoubleSpinBox(groupBox_3);
         howMuchToTransfer->setObjectName(QString::fromUtf8("howMuchToTransfer"));
@@ -841,7 +877,7 @@ public:
         chooseCurrency->addItem(QString());
         chooseCurrency->addItem(QString());
         chooseCurrency->setObjectName(QString::fromUtf8("chooseCurrency"));
-        chooseCurrency->setFont(font9);
+        chooseCurrency->setFont(font8);
         chooseCurrency->setLayoutDirection(Qt::RightToLeft);
         chooseCurrency->setModelColumn(0);
 
@@ -849,7 +885,7 @@ public:
 
         transferTitle = new QLineEdit(groupBox_3);
         transferTitle->setObjectName(QString::fromUtf8("transferTitle"));
-        transferTitle->setFont(font9);
+        transferTitle->setFont(font8);
 
         formLayout_3->setWidget(1, QFormLayout::FieldRole, transferTitle);
 
@@ -878,26 +914,34 @@ public:
         transfersHistoryTitle = new QLabel(historicalTransfersPanel);
         transfersHistoryTitle->setObjectName(QString::fromUtf8("transfersHistoryTitle"));
         transfersHistoryTitle->setGeometry(QRect(200, 20, 400, 31));
-        transfersHistoryTitle->setFont(font7);
+        transfersHistoryTitle->setFont(font6);
         transfersHistoryTitle->setAlignment(Qt::AlignCenter);
-        label_2 = new QLabel(historicalTransfersPanel);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(20, 70, 55, 16));
-        label_4 = new QLabel(historicalTransfersPanel);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(620, 70, 55, 16));
-        scrollArea = new QScrollArea(historicalTransfersPanel);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setGeometry(QRect(190, 140, 120, 85));
-        scrollArea->setWidgetResizable(true);
+        sentTransfersLabel = new QLabel(historicalTransfersPanel);
+        sentTransfersLabel->setObjectName(QString::fromUtf8("sentTransfersLabel"));
+        sentTransfersLabel->setGeometry(QRect(20, 70, 240, 16));
+        receivedTransfersLabel = new QLabel(historicalTransfersPanel);
+        receivedTransfersLabel->setObjectName(QString::fromUtf8("receivedTransfersLabel"));
+        receivedTransfersLabel->setGeometry(QRect(430, 70, 240, 20));
+        sentTransfersArea = new QScrollArea(historicalTransfersPanel);
+        sentTransfersArea->setObjectName(QString::fromUtf8("sentTransfersArea"));
+        sentTransfersArea->setGeometry(QRect(20, 110, 330, 200));
+        sentTransfersArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 118, 83));
-        verticalScrollBar = new QScrollBar(scrollAreaWidgetContents);
-        verticalScrollBar->setObjectName(QString::fromUtf8("verticalScrollBar"));
-        verticalScrollBar->setGeometry(QRect(100, 0, 20, 81));
-        verticalScrollBar->setOrientation(Qt::Vertical);
-        scrollArea->setWidget(scrollAreaWidgetContents);
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 328, 198));
+        gridLayout_3 = new QGridLayout(scrollAreaWidgetContents);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        sentTransfersArea->setWidget(scrollAreaWidgetContents);
+        receivedTransfersArea = new QScrollArea(historicalTransfersPanel);
+        receivedTransfersArea->setObjectName(QString::fromUtf8("receivedTransfersArea"));
+        receivedTransfersArea->setGeometry(QRect(430, 110, 330, 200));
+        receivedTransfersArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 328, 198));
+        gridLayout_4 = new QGridLayout(scrollAreaWidgetContents_2);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        receivedTransfersArea->setWidget(scrollAreaWidgetContents_2);
         stackedWidget->addWidget(historicalTransfersPanel);
         CFDPanel = new QWidget();
         CFDPanel->setObjectName(QString::fromUtf8("CFDPanel"));
@@ -930,7 +974,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(12);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -985,7 +1029,12 @@ public:
         myBankBalance->setText(QCoreApplication::translate("MainWindow", "myBankBalance", nullptr));
         currentCryptoValues->setText(QCoreApplication::translate("MainWindow", "Current cryptocurrency values:", nullptr));
         goBackBtnFromGraphs->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "GRAPHS", nullptr));
+        groupBox_4->setTitle(QString());
+        binanceCoinGraphBtn->setText(QCoreApplication::translate("MainWindow", "Binance Coin", nullptr));
+        tetherGraphBtn->setText(QCoreApplication::translate("MainWindow", "Tether", nullptr));
+        bitcoinGraphBtn->setText(QCoreApplication::translate("MainWindow", "Bitcoin", nullptr));
+        ethereumGraphBtn->setText(QCoreApplication::translate("MainWindow", "Ethereum", nullptr));
+        rippleGraphBtn->setText(QCoreApplication::translate("MainWindow", "Ripple", nullptr));
         myCryptocurrencyBtn->setText(QCoreApplication::translate("MainWindow", "My Cryptocurrency", nullptr));
         addUSDBtn->setText(QCoreApplication::translate("MainWindow", "Add USD", nullptr));
         myCurrentOrdersBtn->setText(QCoreApplication::translate("MainWindow", "My Orders", nullptr));
@@ -1027,7 +1076,7 @@ public:
         sendTransferConfirmBtn->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
         groupBox_3->setTitle(QString());
         transferEmailLabel->setText(QCoreApplication::translate("MainWindow", "E - mail:", nullptr));
-        recipentEmail->setPlaceholderText(QCoreApplication::translate("MainWindow", "jankowalski@gmail.com", nullptr));
+        recipientEmail->setPlaceholderText(QCoreApplication::translate("MainWindow", "jankowalski@gmail.com", nullptr));
         chooseCurrency->setItemText(0, QCoreApplication::translate("MainWindow", "Bitcoin", nullptr));
         chooseCurrency->setItemText(1, QCoreApplication::translate("MainWindow", "Ethereum", nullptr));
         chooseCurrency->setItemText(2, QCoreApplication::translate("MainWindow", "Binance Coin", nullptr));
@@ -1040,8 +1089,8 @@ public:
         pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
         goBackFromTransfersHistBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         transfersHistoryTitle->setText(QCoreApplication::translate("MainWindow", "TRANSFERS HISTORY", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        sentTransfersLabel->setText(QCoreApplication::translate("MainWindow", "History of sent transfers", nullptr));
+        receivedTransfersLabel->setText(QCoreApplication::translate("MainWindow", "History of received transfers", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "CFDPanel", nullptr));
         goBackBtnFromCFDBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", "historicalCFDPanel", nullptr));

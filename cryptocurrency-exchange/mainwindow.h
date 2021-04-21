@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include<exchange.h>
 #include<QDebug>
+#include<QDate>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -95,6 +96,22 @@ private slots:
     void on_sendTransferConfirmBtn_clicked();
 
     void on_pushButton_clicked();
+
+    QLabel* createQLabel(const int& height, const int& width);
+
+    std::string cryptoTypeToString(const cryptoType ct);
+
+    void makePlot(cryptoType ct);
+
+    void on_bitcoinGraphBtn_clicked();
+
+    void on_ethereumGraphBtn_clicked();
+
+    void on_binanceCoinGraphBtn_clicked();
+
+    void on_tetherGraphBtn_clicked();
+
+    void on_rippleGraphBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

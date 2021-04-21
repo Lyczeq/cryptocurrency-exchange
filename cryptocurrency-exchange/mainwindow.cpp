@@ -17,6 +17,41 @@ MainWindow::MainWindow(QWidget *parent)
 //        ui->setupUi(this);
 //    }
 
+void MainWindow::makePlot(cryptoType ct)
+{
+    std::vector<HistoricalRate>::iterator finalRate = exchange.getRates().getTodayHistoricalRate(ct, exchange.getDate());
+    std::vector<HistoricalRate>::iterator startRate = prev(finalRate,30);
+    std::vector<HistoricalRate>::iterator iter;
+
+    QVector<tm> qVecDate ;
+    QVector<double> qVecValue;
+
+    for (iter=startRate; iter<=finalRate;iter++)
+    {
+     qVecDate.push_back(iter->getDate());
+     qVecValue.push_back((iter->getValue()));
+    }
+
+    double max = *std::max_element(qVecValue.begin(), qVecValue.end());
+    double min = *std::min_element(qVecValue.begin(), qVecValue.end());
+
+    QVector<double> x;
+    for(int i=0;i<31;i++)
+    {
+        x.push_back(i);
+    }
+    ui->customPlot->addGraph();
+    ui->customPlot->graph(0)->setData(x,qVecValue);
+
+    // give the axes some labels:
+    ui->customPlot->xAxis->setLabel("Date");
+    ui->customPlot->yAxis->setLabel("Value");
+    // set axes ranges, so we see all data:
+    ui->customPlot->xAxis->setRange(1,30);
+    ui->customPlot->yAxis->setRange(min*9/10,max*11/10);
+    ui->customPlot->replot();
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -271,6 +306,7 @@ void MainWindow::saveNewDate()
 void MainWindow::on_cryptoGraphsButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
+    makePlot(Bitcoin);
 }
 //TODO
 
@@ -328,6 +364,7 @@ void MainWindow::on_addUSDConfirmBtn_clicked()
 void MainWindow::on_goBackBtnFromDepositFundsBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+    ui->addUSDBOX->clear();
 }
 
 
@@ -377,7 +414,7 @@ void MainWindow::on_sendTransferBtn_clicked()
 //TODO
 void MainWindow::on_sendTransferConfirmBtn_clicked()
 {
-    std::string recipientEmail = ui->recipentEmail->text().toStdString();
+    std::string recipientEmail = ui->recipientEmail->text().toStdString();
 
     if(!exchange.getUsersList().checkIfUserExists(recipientEmail))
     {
@@ -437,12 +474,71 @@ void MainWindow::on_sendTransferConfirmBtn_clicked()
 void MainWindow::on_goBackBtnFromSendTransferBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+    ui->recipientEmail->clear();
+    ui->transferTitle->clear();
+    ui->howMuchToTransfer->setValue(0);
+    ui->chooseCurrency->setCurrentText("Bitcoin");
 }
 
 //HISTORICAL TRANSFERS
 void MainWindow::on_historicalTransfersBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(12);
+
+
+    for(auto &transfer: exchange.getUser().getWallet().getSentTransfers())
+    {
+        QLabel* transferLabel = createQLabel(100, 280);
+        const std::string date = std::to_string(transfer.getDate().tm_mday)+"."+std::to_string(transfer.getDate().tm_mon+1)+"."+std::to_string(transfer.getDate().tm_year);
+        const std::string recipient = transfer.getRecipient();
+        const std::string amount = std::to_string(transfer.getAmount()) +" "+ cryptoTypeToString(transfer.getCryptoType());
+        transferLabel->setText(QString::fromStdString("Date: "+date+"\n"+"Recipient: "+recipient+"\n"+"Amount: "+amount+"\n"+"Title: "+transfer.getTitle()));
+        ui->sentTransfersArea->widget()->layout()->addWidget(transferLabel);
+    }
+
+    for(auto &transfer: exchange.getUser().getWallet().getReceivedTransfers())
+    {
+        QLabel* transferLabel = createQLabel(100, 280);
+        const std::string date = std::to_string(transfer->getDate().tm_mday)+"."+std::to_string(transfer->getDate().tm_mon+1)+"."+std::to_string(transfer->getDate().tm_year);
+        const std::string sender = transfer->getSender();
+        const std::string amount = std::to_string(transfer->getAmount()) +" "+ cryptoTypeToString(transfer->getCryptoType());
+        transferLabel->setText(QString::fromStdString("Date: "+date+"\n"+"Sender: "+sender+"\n"+"Amount: "+amount+"\n"+"Title: "+transfer->getTitle()));
+        ui->receivedTransfersArea->widget()->layout()->addWidget(transferLabel);
+    }
+
+}
+
+std::string MainWindow::cryptoTypeToString(const cryptoType ct)
+{
+    switch(ct)
+    {
+    case Bitcoin:
+        return "Bitcoin";
+    case Ethereum:
+        return "Ethereum";
+    case BinanceCoin:
+        return "Binance Coin";
+    case Tether:
+        return "Tether";
+    case Ripple:
+        return "Ripple";
+    }
+}
+
+QLabel * MainWindow::createQLabel(const int& height, const int& width)
+{
+    QLabel * newLabel = new QLabel();
+    newLabel->setStyleSheet("border: 1px solid black; padding: 10px;");
+
+    newLabel->setAlignment(Qt::AlignLeft);
+
+    newLabel->setMinimumHeight(height);
+    newLabel->setMaximumHeight(height);
+
+    newLabel->setMinimumWidth(width);
+    newLabel->setMaximumWidth(width);
+
+    return newLabel;
 }
 
 //TODO
@@ -450,6 +546,15 @@ void MainWindow::on_historicalTransfersBtn_clicked()
 void MainWindow::on_goBackFromTransfersHistBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+    foreach(QLabel* le, ui->sentTransfersArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
+
+    foreach(QLabel* le, ui->receivedTransfersArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
 }
 
 //HISTORICAL TRANSFERS
@@ -485,4 +590,29 @@ void MainWindow::on_pushButton_clicked()
     {
         std::cout<<"Tytul"<<d.getTitle()<<std::endl;
     }
+}
+
+void MainWindow::on_bitcoinGraphBtn_clicked()
+{
+    makePlot(Bitcoin);
+}
+
+void MainWindow::on_ethereumGraphBtn_clicked()
+{
+    makePlot(Ethereum);
+}
+
+void MainWindow::on_binanceCoinGraphBtn_clicked()
+{
+    makePlot(BinanceCoin);
+}
+
+void MainWindow::on_tetherGraphBtn_clicked()
+{
+    makePlot(Tether);
+}
+
+void MainWindow::on_rippleGraphBtn_clicked()
+{
+    makePlot(Ripple);
 }
