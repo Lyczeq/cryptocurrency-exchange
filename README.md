@@ -57,7 +57,7 @@ After choosing that option a user can add any amount of money to the account.
 
 6. ### Send Transfer
 
-<img src="images/addUSD.png" width=450px>
+<img src="images/sendTransfer.png" width=450px>
 
 When a user wants to send a transfer, he has to enter the following information: recipent's email, the title, cryptocurrency and the amount of money.
 If he doesn't have enough money or the recipent doesn't exist, he will get a proper message.
