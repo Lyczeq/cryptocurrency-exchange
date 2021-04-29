@@ -5,9 +5,14 @@ debug/exchange.o
 debug/historicalrate.o
 debug/main.o
 debug/mainwindow.o
+debug/marketorderbuy.o
+debug/marketordersell.o
+debug/order.o
 debug/orderbook.o
 debug/qcustomplot.o
 debug/rates.o
+debug/stoplimitorder.o
+debug/stopmarketorder.o
 debug/transfer.o
 debug/user.o
 debug/userslist.o

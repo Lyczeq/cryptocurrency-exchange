@@ -17,13 +17,11 @@
 class UsersList
 {
 private:
-    std::vector<User> usersVector;
     std::vector<std::string> emailVector;
+    std::vector<User> usersVector;
 
 public:
     UsersList();
-
-    void loadEverything();
 
     std::vector<std::string> getEmailVector();
 

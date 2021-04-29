@@ -5,6 +5,7 @@
 #include<exchange.h>
 #include<QDebug>
 #include<QDate>
+#include<QtCharts>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -15,12 +16,9 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-//    MainWindow(Exchange exch,QWidget *parent=nullptr);
     ~MainWindow();
 
 private slots:
-    void dodo(const cryptoType ct);
-
     void on_signInButton_clicked();
 
     void on_signUpButton_clicked();
@@ -97,8 +95,6 @@ private slots:
 
     void on_sendTransferConfirmBtn_clicked();
 
-    void on_pushButton_clicked();
-
     QLabel* createQLabel(const int& height, const int& width);
 
     std::string cryptoTypeToString(const cryptoType ct);
@@ -114,6 +110,14 @@ private slots:
     void on_tetherGraphBtn_clicked();
 
     void on_rippleGraphBtn_clicked();
+
+    void on_submitOrderBtn_clicked();
+
+    void on_chooseOrderType_activated(const QString &arg1);
+
+    void validateUSD(const double& usd);
+
+    void validateCrypto(const cryptoType& type, const double& cryptoAmount);
 
 private:
     Ui::MainWindow *ui;

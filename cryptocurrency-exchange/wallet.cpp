@@ -1,8 +1,6 @@
 #include "wallet.h"
 
-Wallet::Wallet()
-{    
-}
+Wallet::Wallet(){}
 
 Wallet::Wallet(const double& money, const std::vector<std::shared_ptr<Transfer>>& recTransfers):
     myUSD(money), receivedTransfers(recTransfers){}
@@ -135,9 +133,6 @@ void Wallet::loadSentTransfersFromFile(const std::string& email)
 
      std::ifstream transfersFile(transfersFileDictionary);
 
-     std::vector<Transfer> newvecTransfer;
-     sentTransfers = newvecTransfer;
-
      if(!transfersFile.is_open())
      {
          //error handler
@@ -186,6 +181,27 @@ void Wallet::loadSentTransfersFromFile(const std::string& email)
      }
      transfersFile.close();
  }
+
+double Wallet::getAmountOfCryptocurrency(const cryptoType& type){
+
+    for(auto &crypto: myCryptocurrency)
+    {
+        if(crypto.getCryptoType() == type)
+            return crypto.getAmount();
+    }
+    return 0;
+}
+
+
+std::vector<std::shared_ptr<Order>> Wallet::getCurrentOrders()
+{
+ return currentOrders;
+}
+
+std::vector<std::shared_ptr<Order>> Wallet::getHistoricalOrders()
+{
+    return historicalOrders;
+}
 
 
 

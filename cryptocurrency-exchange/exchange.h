@@ -10,14 +10,12 @@ class Exchange
 {   private:
     tm date;
     UsersList usersList;
-    Orderbook orderbook;
     Rates rates;
+    Orderbook orderbook;
     User loggedUser;
 
 public:
     Exchange();
-
-    Exchange(UsersList& uList, Rates& rt);
 
     UsersList& getUsersList ();
 

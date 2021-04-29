@@ -8,6 +8,7 @@
 #include<fstream>
 #include<memory>
 #include<sstream>
+#include<order.h>
 
 class Wallet
 {
@@ -16,6 +17,8 @@ class Wallet
     std::vector<Cryptocurrency> myCryptocurrency;
     std::vector<Transfer> sentTransfers;
     std::vector<std::shared_ptr<Transfer>> receivedTransfers;
+    std::vector<std::shared_ptr<Order>> currentOrders;
+    std::vector<std::shared_ptr<Order>> historicalOrders;
 
     public:
     Wallet();
@@ -49,6 +52,12 @@ class Wallet
     void loadCryptoFromFile(const std::string& email);
 
     void loadSentTransfersFromFile(const std::string& email);
+
+    double getAmountOfCryptocurrency(const cryptoType& type);
+
+    std::vector<std::shared_ptr<Order>> getCurrentOrders();
+
+    std::vector<std::shared_ptr<Order>> getHistoricalOrders();
 };
 
 #endif // WALLET_H

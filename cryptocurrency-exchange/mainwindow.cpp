@@ -4,96 +4,50 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-{/* Exchange newExch;
-    exchange = newExch;*/
+{
     ui->setupUi(this);
 }
 
-//MainWindow::MainWindow(Exchange exch,QWidget *parent):
-//    exchange(exch),
-//    QMainWindow(parent)
-//        , ui(new Ui::MainWindow)
-//    {
-//        ui->setupUi(this);
-//    }
-
 void MainWindow::makePlot(cryptoType ct)
 {
+
     std::vector<HistoricalRate>::iterator finalRate = exchange.getRates().getTodayHistoricalRate(ct, exchange.getDate());
     std::vector<HistoricalRate>::iterator startRate = prev(finalRate,28);
     std::vector<HistoricalRate>::iterator iter;
-
-    std::cout<<finalRate->getDate().tm_mday<<std::endl;
-    std::cout<<startRate->getDate().tm_mday<<std::endl;
     ui->customPlot->setLocale(QLocale(QLocale::English, QLocale::UnitedKingdom));
 
     ui->customPlot->xAxis->setLabel("Date");
     ui->customPlot->yAxis->setLabel("Value");
 
-       int i=0;
-       ui->customPlot->addGraph();
+    int i=0;
+    ui->customPlot->addGraph();
 
-      QVector<QCPGraphData> timeData(29);
-      QVector<double> buforVec;
+    QVector<QCPGraphData> timeData(29);
+    QVector<double> buforVec;
 
-      for (iter=startRate; iter<=finalRate; iter++)
-      {
-//           QString bufor = QString::fromStdString(std::to_string(iter->getDate().tm_mday)+"/"+std::to_string(iter->getDate().tm_mon+1)+"/"+std::to_string(iter->getDate().tm_year));
-           QDateTime timeBufor (QDate(iter->getDate().tm_year, iter->getDate().tm_mon+1, iter->getDate().tm_mday ));
-
-            long double dBufor = timeBufor.toTime_t();
+    for (iter=startRate; iter<=finalRate; iter++)
+    {
+        QDateTime timeBufor (QDate(iter->getDate().tm_year, iter->getDate().tm_mon+1, iter->getDate().tm_mday ));
+        long double dBufor = timeBufor.toTime_t();
 
         timeData[i].key = dBufor;
         buforVec.push_back(iter->getValue());
-          timeData[i].value = iter->getValue();
+        timeData[i].value = iter->getValue();
         i++;
-      }
-       ui->customPlot->graph()->data()->set(timeData);
+    }
+    ui->customPlot->graph()->data()->set(timeData);
 
-    // configure bottom axis to show date instead of number:
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
     dateTicker->setDateTimeFormat("d.MM\nyyyy");
-     ui->customPlot->xAxis->setTicker(dateTicker);
+    ui->customPlot->xAxis->setTicker(dateTicker);
 
-     double maxValue = *std::max_element(buforVec.begin(), buforVec.end());
-     double minValue = *std::min_element(buforVec.begin(),  buforVec.end());
+    double maxValue = *std::max_element(buforVec.begin(), buforVec.end());
+    double minValue = *std::min_element(buforVec.begin(),  buforVec.end());
 
     ui->customPlot->xAxis->setRange(timeData[0].key,timeData[28].key);
     ui->customPlot->yAxis->setRange(minValue*9/10,maxValue*11/10);
     ui->customPlot->replot();
 }
-void MainWindow::dodo(const cryptoType ct)
-{
-    std::vector<HistoricalRate>::iterator finalRate = exchange.getRates().getTodayHistoricalRate(ct, exchange.getDate());
-    std::vector<HistoricalRate>::iterator startRate = prev(finalRate,30);
-    std::vector<HistoricalRate>::iterator iter;
-
-    QVector<tm> qVecDate ;
-    QVector<double> qVecValue;
-    QVector<double> x;
-    int i=0;
-    for (iter=startRate; iter<=finalRate;iter++)
-    {
-     qVecDate.push_back(iter->getDate());
-     qVecValue.push_back((iter->getValue()));
-     x.push_back(i);
-     i++;
-    }
-
-    double max = *std::max_element(qVecValue.begin(), qVecValue.end());
-    double min = *std::min_element(qVecValue.begin(), qVecValue.end());
-
-    ui->customPlot->addGraph();
-    ui->customPlot->graph(0)->setData(x,qVecValue);
-
-    ui->customPlot->xAxis->setLabel("Date");
-    ui->customPlot->yAxis->setLabel("Value");
-
-    ui->customPlot->xAxis->setRange(x.first(),x.last());
-    ui->customPlot->yAxis->setRange(min*9/10,max*11/10);
-    ui->customPlot->replot();
-}
-
 
 MainWindow::~MainWindow()
 {
@@ -132,15 +86,15 @@ void MainWindow::on_signInButtonLog_clicked()
     bool loggedSuccessfully =  exchange.getUsersList().signIn(emailString, passwordString);
 
     if(!loggedSuccessfully)
-        QMessageBox::warning(this,"Sign In", "Email or password is not correct. Try again." );  
+        QMessageBox::warning(this,"Sign In", "Email or password is not correct. Try again." );
     else
-    {    
+    {
         const std::string dateDirectory = "users/"+emailString+"/date.txt";
         std::ifstream dateFile(dateDirectory);
 
         if(!dateFile.is_open())
         {
-            //obsługa błędu
+            //error handler
         }
         else
         {
@@ -243,7 +197,7 @@ void MainWindow::on_signUpButtonCreateAcc_clicked()
 
     QMessageBox::information(this,"Sign Up", "Account was created successfully!" );
 
-    ui->stackedWidget->setCurrentIndex(3);   
+    ui->stackedWidget->setCurrentIndex(3);
 }
 
 void MainWindow::fillRatesTable()
@@ -281,25 +235,25 @@ void MainWindow::on_quitButtonFromMainPage_clicked()
 //DATE CHANGE
 void MainWindow::on_changeDateButton_clicked()
 {
-   std::string date =  ui->dateEdit->text().toStdString();
+    std::string date =  ui->dateEdit->text().toStdString();
 
-   int day = std::stoi(date.substr(0,2));
-   int month = std::stoi(date.substr(3,5));
-   int year = std::stoi(date.substr(6,10));
+    int day = std::stoi(date.substr(0,2));
+    int month = std::stoi(date.substr(3,5));
+    int year = std::stoi(date.substr(6,10));
 
-  if(! isNewDateLower(day, month, year))
-  {
-      QMessageBox::warning(this,"Date edit", "The provided date is lower than the present one!" );
-  }
-  else
-  {
-      ui->date->setText(QString::fromStdString(date));
-      exchange.setDate(day, month - 1, year);
-      exchange.getRates().setCurrentRatesByDate(exchange.getDate());
-      fillRatesTable();//tm_mon has range 0-11
-      saveNewDate();
-      QMessageBox::information(this,"Date edit", "Date was changed successfully!" );
-  }
+    if(! isNewDateLower(day, month, year))
+    {
+        QMessageBox::warning(this,"Date edit", "The provided date is lower than the present one!" );
+    }
+    else
+    {
+        ui->date->setText(QString::fromStdString(date));
+        exchange.setDate(day, month - 1, year);
+        exchange.getRates().setCurrentRatesByDate(exchange.getDate());
+        fillRatesTable();//tm_mon has range 0-11
+        saveNewDate();
+        QMessageBox::information(this,"Date edit", "Date was changed successfully!" );
+    }
 }
 
 bool MainWindow::isNewDateLower(const int& day, const int& month, const int& year)
@@ -351,7 +305,31 @@ void MainWindow::on_cryptoGraphsButton_clicked()
     ui->stackedWidget->setCurrentIndex(4);
     makePlot(Bitcoin);
 }
-//TODO
+
+void MainWindow::on_bitcoinGraphBtn_clicked()
+{
+    makePlot(Bitcoin);
+}
+
+void MainWindow::on_ethereumGraphBtn_clicked()
+{
+    makePlot(Ethereum);
+}
+
+void MainWindow::on_binanceCoinGraphBtn_clicked()
+{
+    makePlot(BinanceCoin);
+}
+
+void MainWindow::on_tetherGraphBtn_clicked()
+{
+    makePlot(Tether);
+}
+
+void MainWindow::on_rippleGraphBtn_clicked()
+{
+    makePlot(Ripple);
+}
 
 void MainWindow::on_goBackBtnFromGraphs_clicked()
 {
@@ -372,7 +350,47 @@ void MainWindow::on_goBackBtnFromWalletBtn_clicked()
 //MY CRYPTO
 void MainWindow::on_myCryptocurrencyBtn_clicked()
 {
+    QPieSeries * series = new QPieSeries();
+
+    double totalValue =0;
+    QString myCryptosText="";
+    for(auto &crypto: exchange.getUser().getWallet().getMyCryptocurrency())
+    {
+       totalValue += crypto.getAmount()*exchange.getRates().getCurrentRates().getCurrentRate(crypto.getCryptoType());
+
+       myCryptosText += QString::fromStdString(cryptoTypeToString(crypto.getCryptoType())+": ")+QString::number(crypto.getAmount())+"\n";
+    }
+
+    for(auto &crypto: exchange.getUser().getWallet().getMyCryptocurrency())
+    {
+        QString cryptoInChart = QString::fromStdString(cryptoTypeToString(crypto.getCryptoType()));
+
+        double amountInPercent =crypto.getAmount()*exchange.getRates().getCurrentRates().getCurrentRate(crypto.getCryptoType())/totalValue*100;
+
+        series->append(cryptoInChart+" "+QString::fromStdString(std::to_string(amountInPercent))+"%" , amountInPercent);
+    }
+
+    ui->myCryptocurrencyBox->setText(myCryptosText);
+    QChart *chart = new QChart();
+    chart->setMaximumWidth(530);
+    chart->setMinimumWidth(530);
+    chart->setMaximumHeight(300);
+    chart->setMinimumHeight(300);
+    chart->setTitle("My cryptocurrency");
+
+    chart->addSeries(series);
+
+    QChartView *chartView = new QChartView(chart);
+
+    chartView->setParent(ui->pieChartPlace);
+
     ui->stackedWidget->setCurrentIndex(6);
+
+    if(totalValue == 0)
+    {
+        QMessageBox::information(this,"My Cryptocurrency", "You don't have any cryptocurrencies.");
+    }
+
 }
 
 //TODO
@@ -410,18 +428,154 @@ void MainWindow::on_goBackBtnFromDepositFundsBtn_clicked()
     ui->addUSDBOX->clear();
 }
 
-
 //MY ORDERS
 void MainWindow::on_myCurrentOrdersBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(8);
+
+    ui->howMuchOrder->setEnabled(false);
+    ui->howMuchUSD->setEnabled(true);
+    ui->chooseOrderType->setCurrentText("Market Buy");
+
+    // printing user's current orders
+}
+//TODO adding new order
+void MainWindow::on_submitOrderBtn_clicked()
+{
+
+    switch(ui->chooseCurrencyOrder->currentIndex())
+    {
+        case 0: //Market Buy
+        {
+            double usdAmount = ui->howMuchOrder->value();
+            const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
+            cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
+
+            validateUSD(usdAmount);
+
+            std::shared_ptr<MarketOrderBuy> marketBuy = std::make_shared<MarketOrderBuy>(cryptocurrency, usdAmount, false, exchange.getDate());
+
+            exchange.getOrderbook().getOrders().push_back(marketBuy);
+        }
+        case 1: // Market Sell
+        {
+            double cryptoAmount = ui->howMuchOrder->value();
+            const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
+            cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
+
+            validateCrypto(cryptocurrency, cryptoAmount);
+
+            std::shared_ptr<MarketOrderSell> marketSell = std::make_shared<MarketOrderSell>(cryptocurrency, cryptoAmount, false, exchange.getDate());
+
+            exchange.getOrderbook().getOrders().push_back(marketSell);
+
+        }
+        case 2: //Stop Limit Sell
+        {
+            double usdAmount = ui->howMuchOrder->value();
+            double cryptoAmount = ui->howMuchOrder->value();
+            const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
+            cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
+
+            validateUSD(usdAmount);
+            validateCrypto(cryptocurrency, cryptoAmount);
+
+             std::shared_ptr<StopLimitOrder> stopLimitSell = std::make_shared<StopLimitOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), true);
+
+              exchange.getOrderbook().getOrders().push_back(stopLimitSell);
+
+        }
+        case 3: //Stop Limit Buy
+        {
+            double usdAmount = ui->howMuchOrder->value();
+            double cryptoAmount = ui->howMuchOrder->value();
+            const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
+            cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
+
+            validateUSD(usdAmount);
+            validateCrypto(cryptocurrency, cryptoAmount);
+
+             std::shared_ptr<StopLimitOrder> stopLimitBuy = std::make_shared<StopLimitOrder>(cryptocurrency, usdAmount, cryptoAmount,false, exchange.getDate(), false);
+        }
+        case 4: //Stop Market Sell
+        {
+            double usdAmount = ui->howMuchOrder->value();
+            double cryptoAmount = ui->howMuchOrder->value();
+            const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
+            cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
+
+            validateUSD(usdAmount);
+            validateCrypto(cryptocurrency, cryptoAmount);
+
+             std::shared_ptr<StopMarketOrder> stopMarketSell = std::make_shared<StopMarketOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), true);
+
+             exchange.getOrderbook().getOrders().push_back(stopMarketSell);
+        }
+        case 5: //Stop Market Buy
+        {
+            double usdAmount = ui->howMuchOrder->value();
+            double cryptoAmount = ui->howMuchOrder->value();
+            const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
+            cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
+
+            validateUSD(usdAmount);
+            validateCrypto(cryptocurrency, cryptoAmount);
+
+             std::shared_ptr<StopMarketOrder> stopMarketBuy = std::make_shared<StopMarketOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), false);
+
+             exchange.getOrderbook().getOrders().push_back(stopMarketBuy);
+        }
+    }
+
 }
 
-//TODO
+void MainWindow::validateCrypto(const cryptoType& type, const double& cryptoAmount)
+{
+    if(cryptoAmount == 0)
+    {
+        QMessageBox::warning(this,"My Orders", "Value of selected cryptocurrency cannot be equal 0." );
+        return;
+    }
+
+    if(cryptoAmount >= exchange.getUser().getWallet().getAmountOfCryptocurrency(type) )
+    {
+        QMessageBox::warning(this,"My Orders", "You don't have enough cryptocurrency to realize Order." );
+        return;
+    }
+}
+
+void MainWindow::validateUSD(const double& usd)
+{
+    if(usd == 0)
+    {
+        QMessageBox::warning(this,"My Orders", "Value of USD cannot be equal 0." );
+        return;
+    }
+
+    if( usd >= exchange.getUser().getWallet().getMyUSD())
+    {
+        QMessageBox::warning(this,"My Orders", "You don't have enough USD to realize Order." );
+        return;
+    }
+}
+
+void MainWindow::on_chooseOrderType_activated(const QString &arg1)
+{
+    if(arg1 == "Market Buy")
+        ui->howMuchOrder->setEnabled(false);
+    else
+        ui->howMuchOrder->setEnabled(true);
+
+    if(arg1 == "Market Sell")
+        ui->howMuchUSD->setEnabled(false);
+    else
+        ui->howMuchUSD->setEnabled(true);
+}
 
 void MainWindow::on_goBackBtnFromMyOrdersBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+    //removing them from area
 }
 
 //HISTORICAL ORDERS
@@ -454,7 +608,6 @@ void MainWindow::on_sendTransferBtn_clicked()
     ui->stackedWidget->setCurrentIndex(11);
 }
 
-//TODO
 void MainWindow::on_sendTransferConfirmBtn_clicked()
 {
     std::string recipientEmail = ui->recipientEmail->text().toStdString();
@@ -490,28 +643,22 @@ void MainWindow::on_sendTransferConfirmBtn_clicked()
     std::string currency = ui->chooseCurrency->currentText().toStdString();
     cryptoType chosenCrypto = stringToCryptoType(currency); //zamiana na enuma
 
-     if(!exchange.getUser().getWallet().realizeTransfer(chosenCrypto, moneyToTransfer))
-     {
-         QMessageBox::warning(this,"Send Transfer", "You do not have enough cryptocurrency to send a transfer." );
-         return;
-     }
+    if(!exchange.getUser().getWallet().realizeTransfer(chosenCrypto, moneyToTransfer))
+    {
+        QMessageBox::warning(this,"Send Transfer", "You do not have enough cryptocurrency to send a transfer." );
+        return;
+    }
 
-     User& loggedUser = exchange.getUser();
-     Transfer newTransfer (exchange.getDate(), chosenCrypto, recipientEmail, loggedUser.getEmail(), moneyToTransfer, transferTitle);
-     loggedUser.getWallet().getSentTransfers().push_back(newTransfer);
+    User& loggedUser = exchange.getUser();
+    Transfer newTransfer (exchange.getDate(), chosenCrypto, recipientEmail, loggedUser.getEmail(), moneyToTransfer, transferTitle);
+    loggedUser.getWallet().getSentTransfers().push_back(newTransfer);
 
-     std::shared_ptr<Transfer> transferPointer =std::make_shared<Transfer> (newTransfer); // wskaznik na transfer
-     exchange.getUsersList().getUserByEmail(recipientEmail).getWallet().receiveTransfer(transferPointer); // przesylam wskaznik na transfer do usera, ktory otrzymal transfer
+    std::shared_ptr<Transfer> transferPointer =std::make_shared<Transfer> (newTransfer); // wskaznik na transfer
+    exchange.getUsersList().getUserByEmail(recipientEmail).getWallet().receiveTransfer(transferPointer); // przesylam wskaznik na transfer do usera, ktory otrzymal transfer
 
-     loggedUser.saveSentTransfersToFile();
-//     exchange.getUsersList().getUserByEmail(recipientEmail).saveReceivedTransfersToFile();
+    loggedUser.saveSentTransfersToFile();
 
-//     for(auto &d: exchange.getUsersList().getUserByEmail(recipientEmail).getWallet().getReceivedTransfers())
-//     {
-//         std::cout<<"Transfer recipient"<<d->getDate().tm_mday<<'.'<<d->getDate().tm_mon<<","<<d->getAmount()<<","<<d->getTitle()<<std::endl;
-//     }
-
-     QMessageBox::information(this,"Send Transfer", "Transfer was sent successfully!" );
+    QMessageBox::information(this,"Send Transfer", "Transfer was sent successfully!" );
 }
 
 void MainWindow::on_goBackBtnFromSendTransferBtn_clicked()
@@ -528,24 +675,35 @@ void MainWindow::on_historicalTransfersBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(12);
 
+    auto sentTransfers = exchange.getUser().getWallet().getSentTransfers();
+    std::reverse(sentTransfers.begin(), sentTransfers.end());
 
-    for(auto &transfer: exchange.getUser().getWallet().getSentTransfers())
+    for(auto &transfer: sentTransfers)
     {
         QLabel* transferLabel = createQLabel(100, 280);
         const std::string date = std::to_string(transfer.getDate().tm_mday)+"."+std::to_string(transfer.getDate().tm_mon+1)+"."+std::to_string(transfer.getDate().tm_year);
         const std::string recipient = transfer.getRecipient();
-        const std::string amount = std::to_string(transfer.getAmount()) +" "+ cryptoTypeToString(transfer.getCryptoType());
-        transferLabel->setText(QString::fromStdString("Date: "+date+"\n"+"Recipient: "+recipient+"\n"+"Amount: "+amount+"\n"+"Title: "+transfer.getTitle()));
+
+        QString firstPhrase = QString::fromStdString("Date: "+date+"\n"+"Sender: "+recipient+"\n"+"Amount: ");
+        QString secondPhrase = QString::number(transfer.getAmount(), 'G', 3);
+        QString thirdPhrase = QString::fromStdString("\nTitle: "+transfer.getTitle());
+        transferLabel->setText(firstPhrase+secondPhrase+thirdPhrase);
         ui->sentTransfersArea->widget()->layout()->addWidget(transferLabel);
     }
 
-    for(auto &transfer: exchange.getUser().getWallet().getReceivedTransfers())
+    auto receivedTransfers = exchange.getUser().getWallet().getReceivedTransfers();
+    std::reverse(receivedTransfers.begin(), receivedTransfers.end());
+
+    for(auto &transfer: receivedTransfers)
     {
         QLabel* transferLabel = createQLabel(100, 280);
         const std::string date = std::to_string(transfer->getDate().tm_mday)+"."+std::to_string(transfer->getDate().tm_mon+1)+"."+std::to_string(transfer->getDate().tm_year);
         const std::string sender = transfer->getSender();
-        const std::string amount = std::to_string(transfer->getAmount()) +" "+ cryptoTypeToString(transfer->getCryptoType());
-        transferLabel->setText(QString::fromStdString("Date: "+date+"\n"+"Sender: "+sender+"\n"+"Amount: "+amount+"\n"+"Title: "+transfer->getTitle()));
+
+        QString firstPhrase = QString::fromStdString("Date: "+date+"\n"+"Sender: "+sender+"\n"+"Amount: ");
+        QString secondPhrase = QString::number(transfer->getAmount(),'G', 3);
+        QString thirdPhrase = QString::fromStdString("\nTitle: "+transfer->getTitle());
+        transferLabel->setText(firstPhrase+secondPhrase+thirdPhrase);
         ui->receivedTransfersArea->widget()->layout()->addWidget(transferLabel);
     }
 
@@ -600,7 +758,7 @@ void MainWindow::on_goBackFromTransfersHistBtn_clicked()
     }
 }
 
-//HISTORICAL TRANSFERS
+//MY CFD
 void MainWindow::on_myCFDBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(13);
@@ -627,35 +785,7 @@ void MainWindow::on_goBackBtnFromHistCFDBtn_clicked()
 }
 
 
-void MainWindow::on_pushButton_clicked()
-{std::cout<<"Tytuly"<<std::endl;
-    for(auto &d: exchange.getUser().getWallet().getSentTransfers())
-    {
-        std::cout<<"Tytul"<<d.getTitle()<<std::endl;
-    }
-}
 
-void MainWindow::on_bitcoinGraphBtn_clicked()
-{
-    makePlot(Bitcoin);
-}
 
-void MainWindow::on_ethereumGraphBtn_clicked()
-{
-    makePlot(Ethereum);
-}
 
-void MainWindow::on_binanceCoinGraphBtn_clicked()
-{
-    makePlot(BinanceCoin);
-}
 
-void MainWindow::on_tetherGraphBtn_clicked()
-{
-    makePlot(Tether);
-}
-
-void MainWindow::on_rippleGraphBtn_clicked()
-{
-    makePlot(Ripple);
-}

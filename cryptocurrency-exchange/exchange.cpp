@@ -1,17 +1,7 @@
 #include "exchange.h"
 
 Exchange::Exchange(){
-//    UsersList newUsersList;
-//    Rates newRates;
-
-//    usersList = newUsersList;
-//    rates = newRates;
-
-    usersList.loadEverything();
 }
-
-//Exchange::Exchange(UsersList &ulist, Rates &rt):
-//    usersList(ulist), rates(rt){}
 
 UsersList& Exchange::getUsersList()
 {

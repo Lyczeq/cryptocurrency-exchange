@@ -1,5 +1,5 @@
 QT       += core gui
-
+QT       += core gui charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 CONFIG += c++11
@@ -16,9 +16,14 @@ SOURCES += \
     historicalrate.cpp \
     main.cpp \
     mainwindow.cpp \
+    marketorderbuy.cpp \
+    marketordersell.cpp \
+    order.cpp \
     orderbook.cpp \
     qcustomplot.cpp \
     rates.cpp \
+    stoplimitorder.cpp \
+    stopmarketorder.cpp \
     transfer.cpp \
     user.cpp \
     userslist.cpp \
@@ -31,9 +36,14 @@ HEADERS += \
     exchange.h \
     historicalrate.h \
     mainwindow.h \
+    marketorderbuy.h \
+    marketordersell.h \
+    order.h \
     orderbook.h \
     qcustomplot.h \
     rates.h \
+    stoplimitorder.h \
+    stopmarketorder.h \
     transfer.h \
     user.h \
     userslist.h \

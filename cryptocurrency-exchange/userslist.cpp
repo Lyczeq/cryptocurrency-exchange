@@ -2,9 +2,6 @@
 
 UsersList::UsersList()
 {
-}
-void UsersList::loadEverything()
-{
     loadUsersEmails();
 
     for(auto& mail : emailVector)
@@ -19,7 +16,7 @@ void UsersList::loadEverything()
      std::ifstream userInfoFile(userInfoDirectory);
      if(!userInfoFile.is_open())
      {
-         //TODO zrobić mechanizm niepowodzenia!
+         //error handler
      }
      else
      {   std::string line;
@@ -51,7 +48,6 @@ void UsersList::fulfillUsersReceivedTransfers()
     {
         for(auto &sentTransfer: user.getWallet().getSentTransfers())
         {
-            std::cout<<"fulfillTransfer"<<sentTransfer.getDate().tm_mday<<"."<<sentTransfer.getDate().tm_mon<<"."<<sentTransfer.getDate().tm_year<<","<<sentTransfer.getAmount()<<"."<<sentTransfer.getTitle()<<std::endl;
             std::shared_ptr<Transfer> transferPointer =std::make_shared<Transfer> (sentTransfer);
             getUserByEmail(sentTransfer.getRecipient()).getWallet().pushReceivedTransfer(transferPointer);
         }
@@ -92,7 +88,7 @@ bool UsersList ::signIn(const std::string& emailToFind, const std::string& passw
    std::string foundPasword;
    if(!passwordFile.is_open())
    {
-       //walidacja
+       //error handler
        return false;
    }
    else
@@ -117,7 +113,7 @@ void UsersList:: signUp( User& newUser, const std::string & password)
 
     if(!newUserInfoFile.is_open())
     {
-        //walidacja
+        //error handlr
     }
     else
     {
@@ -129,7 +125,7 @@ void UsersList:: signUp( User& newUser, const std::string & password)
 
     if(!newUserPasswordFile.is_open())
     {
-        //walidacja
+        //error handler
     }
     else
     {
@@ -154,7 +150,7 @@ void UsersList:: signUp( User& newUser, const std::string & password)
     std::ofstream emailsFile("emails.txt");
     if(!emailsFile.is_open())
     {
-        //walidacja
+        //error handler
     }
     else
     {
@@ -187,22 +183,6 @@ void UsersList::addUserToList(User &newUser)
 {
     this->usersVector.push_back(newUser);
 }
-
-//void UsersList::printAllUsers()
-//{
-//    for(auto& user:usersVector)
-//    {
-//        std::cout<<user.getFirstName()<<std::endl;
-//        std::cout<<user.getLastName()<<std::endl;
-//        std::cout<<user.getEmail()<<std::endl;
-//    }
-//}
-
-//void UsersList::printAllEmails()
-//{
-//    for(auto& email:emailVector)
-//        std::cout<<email<<std::endl;
-//}
 
 bool UsersList::checkIfUserExists(const std::string& email)
 {

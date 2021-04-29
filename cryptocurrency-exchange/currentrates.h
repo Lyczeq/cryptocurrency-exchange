@@ -14,6 +14,8 @@ public:
     CurrentRates(const double& bRate,  const double& eRate,const double& biRate,const double& tRate,const double& rRate);
 
     double getCurrentRate(const cryptoType& ct);
+
+
 };
 
 #endif // CURRENTRATES_H

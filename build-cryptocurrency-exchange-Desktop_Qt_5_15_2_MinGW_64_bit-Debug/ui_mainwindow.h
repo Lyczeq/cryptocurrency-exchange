@@ -16,8 +16,10 @@
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -147,8 +149,10 @@ public:
     QLabel *currentCryptoValues2;
     QLabel *myBankBalance2;
     QWidget *myCryptocurrencyPanel;
-    QLabel *label_3;
     QPushButton *goBackBtnFromMyCryptoBtn;
+    QFrame *pieChartPlace;
+    QHBoxLayout *horizontalLayout;
+    QLabel *myCryptocurrencyBox;
     QWidget *addUSDPanel;
     QPushButton *goBackBtnFromDepositFundsBtn;
     QLabel *sendTransferTitle_2;
@@ -157,14 +161,34 @@ public:
     QLabel *USDLabel;
     QPushButton *addUSDConfirmBtn;
     QWidget *myOrdersPanel;
-    QLabel *label_5;
+    QLabel *myOrdersLabel;
     QPushButton *goBackBtnFromMyOrdersBtn;
+    QScrollArea *myOrdersArea;
+    QWidget *scrollAreaWidgetContents_3;
+    QGridLayout *gridLayout_7;
+    QLabel *myOrdersLabel_2;
+    QGroupBox *groupBox_5;
+    QVBoxLayout *verticalLayout_19;
+    QFormLayout *formLayout_4;
+    QLabel *cryptoAmountLabel;
+    QComboBox *chooseCurrencyOrder;
+    QDoubleSpinBox *howMuchOrder;
+    QLabel *orderTypeLabel;
+    QComboBox *chooseOrderType;
+    QLabel *howMuchCryptoOrderLabel;
+    QLabel *usdAmountLabel;
+    QDoubleSpinBox *howMuchUSD;
+    QPushButton *submitOrderBtn;
     QWidget *historicalOrdersPanel;
-    QLabel *label_6;
     QPushButton *goBackBtnFromHistOrdersBtn;
+    QLabel *orderbookTitle_2;
+    QScrollArea *orderbookArea_2;
+    QWidget *scrollAreaWidgetContents_5;
     QWidget *seeOrderbookPanel;
-    QLabel *label_7;
+    QLabel *orderbookTitle;
     QPushButton *goBackBtnFromOrderbookBtn;
+    QScrollArea *orderbookArea;
+    QWidget *scrollAreaWidgetContents_4;
     QWidget *sendTransferPanel;
     QLabel *sendTransferTitle;
     QPushButton *sendTransferConfirmBtn;
@@ -178,7 +202,6 @@ public:
     QLineEdit *transferTitle;
     QLabel *transferTitleLabel;
     QPushButton *goBackBtnFromSendTransferBtn;
-    QPushButton *pushButton;
     QWidget *historicalTransfersPanel;
     QPushButton *goBackFromTransfersHistBtn;
     QLabel *transfersHistoryTitle;
@@ -765,13 +788,24 @@ public:
         stackedWidget->addWidget(walletPanel);
         myCryptocurrencyPanel = new QWidget();
         myCryptocurrencyPanel->setObjectName(QString::fromUtf8("myCryptocurrencyPanel"));
-        label_3 = new QLabel(myCryptocurrencyPanel);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(360, 210, 151, 16));
         goBackBtnFromMyCryptoBtn = new QPushButton(myCryptocurrencyPanel);
         goBackBtnFromMyCryptoBtn->setObjectName(QString::fromUtf8("goBackBtnFromMyCryptoBtn"));
         goBackBtnFromMyCryptoBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromMyCryptoBtn->setFont(font1);
+        pieChartPlace = new QFrame(myCryptocurrencyPanel);
+        pieChartPlace->setObjectName(QString::fromUtf8("pieChartPlace"));
+        pieChartPlace->setGeometry(QRect(20, 17, 530, 300));
+        horizontalLayout = new QHBoxLayout(pieChartPlace);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        myCryptocurrencyBox = new QLabel(myCryptocurrencyPanel);
+        myCryptocurrencyBox->setObjectName(QString::fromUtf8("myCryptocurrencyBox"));
+        myCryptocurrencyBox->setGeometry(QRect(570, 17, 200, 201));
+        myCryptocurrencyBox->setFont(font4);
+        myCryptocurrencyBox->setStyleSheet(QString::fromUtf8("border: 1px solid black;\n"
+"padding: 10px;\n"
+"color: black;\n"
+""));
+        myCryptocurrencyBox->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         stackedWidget->addWidget(myCryptocurrencyPanel);
         addUSDPanel = new QWidget();
         addUSDPanel->setObjectName(QString::fromUtf8("addUSDPanel"));
@@ -805,33 +839,150 @@ public:
         stackedWidget->addWidget(addUSDPanel);
         myOrdersPanel = new QWidget();
         myOrdersPanel->setObjectName(QString::fromUtf8("myOrdersPanel"));
-        label_5 = new QLabel(myOrdersPanel);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(290, 180, 261, 16));
+        myOrdersLabel = new QLabel(myOrdersPanel);
+        myOrdersLabel->setObjectName(QString::fromUtf8("myOrdersLabel"));
+        myOrdersLabel->setGeometry(QRect(120, 40, 130, 45));
+        QFont font7;
+        font7.setFamily(QString::fromUtf8("Arial"));
+        font7.setPointSize(16);
+        myOrdersLabel->setFont(font7);
         goBackBtnFromMyOrdersBtn = new QPushButton(myOrdersPanel);
         goBackBtnFromMyOrdersBtn->setObjectName(QString::fromUtf8("goBackBtnFromMyOrdersBtn"));
         goBackBtnFromMyOrdersBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromMyOrdersBtn->setFont(font1);
+        myOrdersArea = new QScrollArea(myOrdersPanel);
+        myOrdersArea->setObjectName(QString::fromUtf8("myOrdersArea"));
+        myOrdersArea->setGeometry(QRect(20, 100, 330, 200));
+        myOrdersArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_3 = new QWidget();
+        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 328, 198));
+        gridLayout_7 = new QGridLayout(scrollAreaWidgetContents_3);
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        myOrdersArea->setWidget(scrollAreaWidgetContents_3);
+        myOrdersLabel_2 = new QLabel(myOrdersPanel);
+        myOrdersLabel_2->setObjectName(QString::fromUtf8("myOrdersLabel_2"));
+        myOrdersLabel_2->setGeometry(QRect(510, 40, 210, 45));
+        myOrdersLabel_2->setFont(font7);
+        groupBox_5 = new QGroupBox(myOrdersPanel);
+        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
+        groupBox_5->setGeometry(QRect(440, 100, 300, 161));
+        verticalLayout_19 = new QVBoxLayout(groupBox_5);
+        verticalLayout_19->setObjectName(QString::fromUtf8("verticalLayout_19"));
+        formLayout_4 = new QFormLayout();
+        formLayout_4->setObjectName(QString::fromUtf8("formLayout_4"));
+        cryptoAmountLabel = new QLabel(groupBox_5);
+        cryptoAmountLabel->setObjectName(QString::fromUtf8("cryptoAmountLabel"));
+        cryptoAmountLabel->setAlignment(Qt::AlignCenter);
+
+        formLayout_4->setWidget(1, QFormLayout::LabelRole, cryptoAmountLabel);
+
+        chooseCurrencyOrder = new QComboBox(groupBox_5);
+        chooseCurrencyOrder->addItem(QString());
+        chooseCurrencyOrder->addItem(QString());
+        chooseCurrencyOrder->addItem(QString());
+        chooseCurrencyOrder->addItem(QString());
+        chooseCurrencyOrder->addItem(QString());
+        chooseCurrencyOrder->setObjectName(QString::fromUtf8("chooseCurrencyOrder"));
+        QFont font8;
+        font8.setFamily(QString::fromUtf8("Arial"));
+        font8.setPointSize(8);
+        chooseCurrencyOrder->setFont(font8);
+        chooseCurrencyOrder->setLayoutDirection(Qt::RightToLeft);
+        chooseCurrencyOrder->setModelColumn(0);
+
+        formLayout_4->setWidget(1, QFormLayout::FieldRole, chooseCurrencyOrder);
+
+        howMuchOrder = new QDoubleSpinBox(groupBox_5);
+        howMuchOrder->setObjectName(QString::fromUtf8("howMuchOrder"));
+        howMuchOrder->setEnabled(true);
+
+        formLayout_4->setWidget(2, QFormLayout::FieldRole, howMuchOrder);
+
+        orderTypeLabel = new QLabel(groupBox_5);
+        orderTypeLabel->setObjectName(QString::fromUtf8("orderTypeLabel"));
+
+        formLayout_4->setWidget(3, QFormLayout::LabelRole, orderTypeLabel);
+
+        chooseOrderType = new QComboBox(groupBox_5);
+        chooseOrderType->addItem(QString());
+        chooseOrderType->addItem(QString());
+        chooseOrderType->addItem(QString());
+        chooseOrderType->addItem(QString());
+        chooseOrderType->addItem(QString());
+        chooseOrderType->addItem(QString());
+        chooseOrderType->setObjectName(QString::fromUtf8("chooseOrderType"));
+        chooseOrderType->setEnabled(true);
+        chooseOrderType->setFont(font8);
+        chooseOrderType->setLayoutDirection(Qt::RightToLeft);
+        chooseOrderType->setModelColumn(0);
+
+        formLayout_4->setWidget(3, QFormLayout::FieldRole, chooseOrderType);
+
+        howMuchCryptoOrderLabel = new QLabel(groupBox_5);
+        howMuchCryptoOrderLabel->setObjectName(QString::fromUtf8("howMuchCryptoOrderLabel"));
+        howMuchCryptoOrderLabel->setAlignment(Qt::AlignCenter);
+
+        formLayout_4->setWidget(2, QFormLayout::LabelRole, howMuchCryptoOrderLabel);
+
+        usdAmountLabel = new QLabel(groupBox_5);
+        usdAmountLabel->setObjectName(QString::fromUtf8("usdAmountLabel"));
+        usdAmountLabel->setAlignment(Qt::AlignCenter);
+
+        formLayout_4->setWidget(0, QFormLayout::LabelRole, usdAmountLabel);
+
+        howMuchUSD = new QDoubleSpinBox(groupBox_5);
+        howMuchUSD->setObjectName(QString::fromUtf8("howMuchUSD"));
+
+        formLayout_4->setWidget(0, QFormLayout::FieldRole, howMuchUSD);
+
+
+        verticalLayout_19->addLayout(formLayout_4);
+
+        submitOrderBtn = new QPushButton(myOrdersPanel);
+        submitOrderBtn->setObjectName(QString::fromUtf8("submitOrderBtn"));
+        submitOrderBtn->setGeometry(QRect(550, 270, 80, 25));
         stackedWidget->addWidget(myOrdersPanel);
         historicalOrdersPanel = new QWidget();
         historicalOrdersPanel->setObjectName(QString::fromUtf8("historicalOrdersPanel"));
-        label_6 = new QLabel(historicalOrdersPanel);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(330, 250, 141, 16));
         goBackBtnFromHistOrdersBtn = new QPushButton(historicalOrdersPanel);
         goBackBtnFromHistOrdersBtn->setObjectName(QString::fromUtf8("goBackBtnFromHistOrdersBtn"));
         goBackBtnFromHistOrdersBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromHistOrdersBtn->setFont(font1);
+        orderbookTitle_2 = new QLabel(historicalOrdersPanel);
+        orderbookTitle_2->setObjectName(QString::fromUtf8("orderbookTitle_2"));
+        orderbookTitle_2->setGeometry(QRect(300, 20, 220, 45));
+        QFont font9;
+        font9.setFamily(QString::fromUtf8("Arial"));
+        font9.setPointSize(18);
+        orderbookTitle_2->setFont(font9);
+        orderbookArea_2 = new QScrollArea(historicalOrdersPanel);
+        orderbookArea_2->setObjectName(QString::fromUtf8("orderbookArea_2"));
+        orderbookArea_2->setGeometry(QRect(170, 80, 450, 230));
+        orderbookArea_2->setWidgetResizable(true);
+        scrollAreaWidgetContents_5 = new QWidget();
+        scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 448, 228));
+        orderbookArea_2->setWidget(scrollAreaWidgetContents_5);
         stackedWidget->addWidget(historicalOrdersPanel);
         seeOrderbookPanel = new QWidget();
         seeOrderbookPanel->setObjectName(QString::fromUtf8("seeOrderbookPanel"));
-        label_7 = new QLabel(seeOrderbookPanel);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setGeometry(QRect(270, 250, 181, 16));
+        orderbookTitle = new QLabel(seeOrderbookPanel);
+        orderbookTitle->setObjectName(QString::fromUtf8("orderbookTitle"));
+        orderbookTitle->setGeometry(QRect(320, 10, 150, 45));
+        orderbookTitle->setFont(font9);
         goBackBtnFromOrderbookBtn = new QPushButton(seeOrderbookPanel);
         goBackBtnFromOrderbookBtn->setObjectName(QString::fromUtf8("goBackBtnFromOrderbookBtn"));
         goBackBtnFromOrderbookBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromOrderbookBtn->setFont(font1);
+        orderbookArea = new QScrollArea(seeOrderbookPanel);
+        orderbookArea->setObjectName(QString::fromUtf8("orderbookArea"));
+        orderbookArea->setGeometry(QRect(170, 80, 450, 230));
+        orderbookArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_4 = new QWidget();
+        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 448, 228));
+        orderbookArea->setWidget(scrollAreaWidgetContents_4);
         stackedWidget->addWidget(seeOrderbookPanel);
         sendTransferPanel = new QWidget();
         sendTransferPanel->setObjectName(QString::fromUtf8("sendTransferPanel"));
@@ -843,12 +994,12 @@ public:
         sendTransferConfirmBtn = new QPushButton(sendTransferPanel);
         sendTransferConfirmBtn->setObjectName(QString::fromUtf8("sendTransferConfirmBtn"));
         sendTransferConfirmBtn->setGeometry(QRect(345, 240, 100, 35));
-        QFont font7;
-        font7.setFamily(QString::fromUtf8("Arial"));
-        font7.setPointSize(11);
-        font7.setBold(true);
-        font7.setWeight(75);
-        sendTransferConfirmBtn->setFont(font7);
+        QFont font10;
+        font10.setFamily(QString::fromUtf8("Arial"));
+        font10.setPointSize(11);
+        font10.setBold(true);
+        font10.setWeight(75);
+        sendTransferConfirmBtn->setFont(font10);
         groupBox_3 = new QGroupBox(sendTransferPanel);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         groupBox_3->setGeometry(QRect(250, 90, 290, 131));
@@ -863,9 +1014,6 @@ public:
 
         recipientEmail = new QLineEdit(groupBox_3);
         recipientEmail->setObjectName(QString::fromUtf8("recipientEmail"));
-        QFont font8;
-        font8.setFamily(QString::fromUtf8("Arial"));
-        font8.setPointSize(8);
         recipientEmail->setFont(font8);
 
         formLayout_3->setWidget(0, QFormLayout::FieldRole, recipientEmail);
@@ -906,9 +1054,6 @@ public:
         goBackBtnFromSendTransferBtn->setObjectName(QString::fromUtf8("goBackBtnFromSendTransferBtn"));
         goBackBtnFromSendTransferBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromSendTransferBtn->setFont(font1);
-        pushButton = new QPushButton(sendTransferPanel);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(590, 270, 80, 25));
         stackedWidget->addWidget(sendTransferPanel);
         historicalTransfersPanel = new QWidget();
         historicalTransfersPanel->setObjectName(QString::fromUtf8("historicalTransfersPanel"));
@@ -1064,18 +1209,38 @@ public:
         historicalCFDBtn->setText(QCoreApplication::translate("MainWindow", "Historical CFD", nullptr));
         currentCryptoValues2->setText(QCoreApplication::translate("MainWindow", "Current cryptocurrency values:", nullptr));
         myBankBalance2->setText(QCoreApplication::translate("MainWindow", "myBankBalance", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "mycryptos", nullptr));
         goBackBtnFromMyCryptoBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
+        myCryptocurrencyBox->setText(QString());
         goBackBtnFromDepositFundsBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         sendTransferTitle_2->setText(QCoreApplication::translate("MainWindow", "DEPOSIT USD", nullptr));
         groupBox_7->setTitle(QString());
         USDLabel->setText(QCoreApplication::translate("MainWindow", "USD", nullptr));
         addUSDConfirmBtn->setText(QCoreApplication::translate("MainWindow", "ADD USD", nullptr));
-        label_5->setText(QCoreApplication::translate("MainWindow", "myOrdersPanel", nullptr));
+        myOrdersLabel->setText(QCoreApplication::translate("MainWindow", "My Orders", nullptr));
         goBackBtnFromMyOrdersBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindow", "historicalOrders", nullptr));
+        myOrdersLabel_2->setText(QCoreApplication::translate("MainWindow", "Add a new order", nullptr));
+        groupBox_5->setTitle(QString());
+        cryptoAmountLabel->setText(QCoreApplication::translate("MainWindow", "Cryptocurrency: ", nullptr));
+        chooseCurrencyOrder->setItemText(0, QCoreApplication::translate("MainWindow", "Bitcoin", nullptr));
+        chooseCurrencyOrder->setItemText(1, QCoreApplication::translate("MainWindow", "Ethereum", nullptr));
+        chooseCurrencyOrder->setItemText(2, QCoreApplication::translate("MainWindow", "Binance Coin", nullptr));
+        chooseCurrencyOrder->setItemText(3, QCoreApplication::translate("MainWindow", "Tether", nullptr));
+        chooseCurrencyOrder->setItemText(4, QCoreApplication::translate("MainWindow", "Ripple", nullptr));
+
+        orderTypeLabel->setText(QCoreApplication::translate("MainWindow", "Order type: ", nullptr));
+        chooseOrderType->setItemText(0, QCoreApplication::translate("MainWindow", "Market Buy", nullptr));
+        chooseOrderType->setItemText(1, QCoreApplication::translate("MainWindow", "Market Sell", nullptr));
+        chooseOrderType->setItemText(2, QCoreApplication::translate("MainWindow", "Stop Limit Sell", nullptr));
+        chooseOrderType->setItemText(3, QCoreApplication::translate("MainWindow", "Stop Limit Buy", nullptr));
+        chooseOrderType->setItemText(4, QCoreApplication::translate("MainWindow", "Stop Market Sell", nullptr));
+        chooseOrderType->setItemText(5, QCoreApplication::translate("MainWindow", "Stop Market Buy", nullptr));
+
+        howMuchCryptoOrderLabel->setText(QCoreApplication::translate("MainWindow", "Amount in crypto: ", nullptr));
+        usdAmountLabel->setText(QCoreApplication::translate("MainWindow", "Amount in USD: ", nullptr));
+        submitOrderBtn->setText(QCoreApplication::translate("MainWindow", "Submit", nullptr));
         goBackBtnFromHistOrdersBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
-        label_7->setText(QCoreApplication::translate("MainWindow", "seeOrderbookPanel", nullptr));
+        orderbookTitle_2->setText(QCoreApplication::translate("MainWindow", "History of orders", nullptr));
+        orderbookTitle->setText(QCoreApplication::translate("MainWindow", "Orderbook", nullptr));
         goBackBtnFromOrderbookBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         sendTransferTitle->setText(QCoreApplication::translate("MainWindow", "SEND TRANSFER", nullptr));
         sendTransferConfirmBtn->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
@@ -1091,7 +1256,6 @@ public:
         transferTitle->setPlaceholderText(QCoreApplication::translate("MainWindow", "The title", nullptr));
         transferTitleLabel->setText(QCoreApplication::translate("MainWindow", "Title: ", nullptr));
         goBackBtnFromSendTransferBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
         goBackFromTransfersHistBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         transfersHistoryTitle->setText(QCoreApplication::translate("MainWindow", "TRANSFERS HISTORY", nullptr));
         sentTransfersLabel->setText(QCoreApplication::translate("MainWindow", "History of sent transfers", nullptr));

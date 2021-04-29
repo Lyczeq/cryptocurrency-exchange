@@ -116,6 +116,8 @@ Makefile: ../cryptocurrency-exchange/cryptocurrency-exchange.pro D:/qt/5.15.2/mi
 		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_bluetooth.pri \
 		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_bluetooth_private.pri \
 		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_charts.pri \
+		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_charts_private.pri \
 		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_concurrent.pri \
 		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_concurrent_private.pri \
 		D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_core.pri \
@@ -248,6 +250,7 @@ Makefile: ../cryptocurrency-exchange/cryptocurrency-exchange.pro D:/qt/5.15.2/mi
 		D:/qt/5.15.2/mingw81_64/mkspecs/features/yacc.prf \
 		D:/qt/5.15.2/mingw81_64/mkspecs/features/lex.prf \
 		../cryptocurrency-exchange/cryptocurrency-exchange.pro \
+		D:/qt/5.15.2/mingw81_64/lib/Qt5Charts.prl \
 		D:/qt/5.15.2/mingw81_64/lib/Qt5PrintSupport.prl \
 		D:/qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		D:/qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
@@ -301,6 +304,8 @@ D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_axserver_private.pri:
 D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_bluetooth.pri:
 D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_bluetooth_private.pri:
 D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_bootstrap_private.pri:
+D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_charts.pri:
+D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_charts_private.pri:
 D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_concurrent.pri:
 D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_concurrent_private.pri:
 D:/qt/5.15.2/mingw81_64/mkspecs/modules/qt_lib_core.pri:
@@ -433,6 +438,7 @@ D:/qt/5.15.2/mingw81_64/mkspecs/features/exceptions.prf:
 D:/qt/5.15.2/mingw81_64/mkspecs/features/yacc.prf:
 D:/qt/5.15.2/mingw81_64/mkspecs/features/lex.prf:
 ../cryptocurrency-exchange/cryptocurrency-exchange.pro:
+D:/qt/5.15.2/mingw81_64/lib/Qt5Charts.prl:
 D:/qt/5.15.2/mingw81_64/lib/Qt5PrintSupport.prl:
 D:/qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 D:/qt/5.15.2/mingw81_64/lib/Qt5Gui.prl:
