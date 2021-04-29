@@ -14,7 +14,12 @@ The Project is written in the C++ language and uses Qt Creator Environment. It's
 * Bitcoin 
 * Ethereum
 * Binance Coin
+* Tether
+* Ripple 
 
+In addition, I am currently working on below features:
+- Order and Orderbook mechanics that allow user to add several different orders known from popular exchanges. It also makes enables you to view the orders placed by the other users.
+- CFD Mechanics. CFD is a shortcut of Contract from Difference. This option is quite risky, because a user can earn a lot of money but also lost everything. This mechanics allows user to bet if the cryptocurrency increses or not.
 ## Features
 1. ### Sign In
 
