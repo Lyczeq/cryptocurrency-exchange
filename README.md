@@ -52,7 +52,7 @@ After choosing date to change and clicking correct button the date is changed. I
 
 The user can see graphs showing the rate for the last 30 days from the current date in program. This one shows Bitcoin rate.
 
-6. ### My Wallt Panel
+6. ### My Wallet Panel
 
 <img src="images/myWalletPanel.png" width=450px>
 
