@@ -1,3 +1,4 @@
+release/cfd.o
 release/cryptoType.o
 release/cryptocurrency.o
 release/currentrates.o

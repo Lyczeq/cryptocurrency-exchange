@@ -119,6 +119,14 @@ private slots:
 
     void validateCrypto(const cryptoType& type, const double& cryptoAmount);
 
+    void on_submitCFDBtn_clicked();
+
+    void realizeCFD();
+
+    void printCFDs();
+
+    void on_deleteCFDBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     Exchange exchange;

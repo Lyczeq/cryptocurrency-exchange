@@ -27,8 +27,6 @@ public:
 
     void saveUSDToFile();
 
-    void saveReceivedTransfersToFile();
-
     void saveSentTransfersToFile();
 
     void fulfillWallet();
@@ -38,6 +36,14 @@ public:
     std::vector<Transfer> loadSentTransfersFromFile();
 
     void saveCryptoFile();
+
+    void saveOpenedCFDsToFile();
+
+    void saveClosedCFDsToFile();
+
+    void saveCurrentOrders();
+
+    void saveHistoricalOrders();
 };
 
 #endif // USER_H

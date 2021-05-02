@@ -9,6 +9,7 @@
 #include<memory>
 #include<sstream>
 #include<order.h>
+#include<cfd.h>
 
 class Wallet
 {
@@ -19,13 +20,15 @@ class Wallet
     std::vector<std::shared_ptr<Transfer>> receivedTransfers;
     std::vector<std::shared_ptr<Order>> currentOrders;
     std::vector<std::shared_ptr<Order>> historicalOrders;
+    std::vector<CFD> openedCFDs;
+    std::vector<CFD> closedCFDs;
 
     public:
     Wallet();
 
     Wallet(const double& money, const std::vector<std::shared_ptr<Transfer>>& recTransfers );
 
-    double getMyUSD();
+    double& getMyUSD();
 
     void addUSD(const double& additionalUSD);
 
@@ -55,9 +58,18 @@ class Wallet
 
     double getAmountOfCryptocurrency(const cryptoType& type);
 
-    std::vector<std::shared_ptr<Order>> getCurrentOrders();
+    std::vector<std::shared_ptr<Order>>& getCurrentOrders();
 
-    std::vector<std::shared_ptr<Order>> getHistoricalOrders();
+    std::vector<std::shared_ptr<Order>>& getHistoricalOrders();
+
+    std::vector<CFD>& getOpenedCFDs();
+
+    std::vector<CFD>& getClosedCFDs();
+
+    void loadCLosedCFDs(const std::string& email);
+
+    void loadOpenedCFDs(const std::string& email);
+
 };
 
 #endif // WALLET_H

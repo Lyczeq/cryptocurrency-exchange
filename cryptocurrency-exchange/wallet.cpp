@@ -5,7 +5,7 @@ Wallet::Wallet(){}
 Wallet::Wallet(const double& money, const std::vector<std::shared_ptr<Transfer>>& recTransfers):
     myUSD(money), receivedTransfers(recTransfers){}
 
-double Wallet::getMyUSD()
+double& Wallet::getMyUSD()
 {
     return myUSD;
 }
@@ -92,6 +92,119 @@ void Wallet::pushReceivedTransfer(std::shared_ptr<Transfer> recTransfer)
  {
      loadCryptoFromFile(email);
      loadSentTransfersFromFile(email);
+     loadOpenedCFDs(email);
+     loadCLosedCFDs(email);
+ }
+
+ void Wallet::loadCLosedCFDs(const std::string& email)
+ {
+     const std::string closedCFDsFileName = "users/"+email+"/ClosedCFDs.csv";
+
+     std::ifstream closedCFDsFile(closedCFDsFileName);
+
+     if(!closedCFDsFile.is_open())
+     {
+         //error_handler
+     }
+     else
+     {
+      std::string line;
+
+      while(std::getline(closedCFDsFile,line))
+      {
+          if(line == "")
+              continue;
+
+          std::stringstream ss(line);
+          double unitsAmount;
+          double currentCryptoValue;
+          cryptoType whatCrypto;
+          std::string sellBufor;
+          bool sell;
+          tm date;
+          getline(ss,line,'.');
+          date.tm_mday = std::stoi(line);
+
+          getline(ss,line,'.');
+          date.tm_mon = std::stoi(line);
+
+          getline(ss,line,',');
+          date.tm_year = std::stoi(line);
+
+          getline(ss,line,',');
+          unitsAmount = std::stod(line);
+
+          getline(ss,line,',');
+          currentCryptoValue = std::stod(line);
+
+          getline(ss,line,',');
+          whatCrypto = intToCryptoType(std::stoi(line));
+
+          getline(ss,line);
+          line == "sell" ? sell = true : sell = false;
+
+          CFD newCFD (unitsAmount,currentCryptoValue,date,whatCrypto,sell);
+
+          closedCFDs.push_back(newCFD);
+      }
+     }
+     closedCFDsFile.close();
+ }
+
+ void Wallet::loadOpenedCFDs(const std::string& email)
+ {
+     const std::string openedCFDsFileName("users/"+email+"/OpenedCFDs.csv");
+
+     std::ifstream openedCFDsFile(openedCFDsFileName);
+
+     if(!openedCFDsFile.is_open())
+     {
+         //error_handler
+     }
+     else
+     {
+      std::string line;
+
+      while(std::getline(openedCFDsFile,line))
+      {
+          if(line == "")
+              continue;
+
+          std::stringstream ss(line);
+          double unitsAmount;
+          double currentCryptoValue;
+          cryptoType whatCrypto;
+          std::string sellBufor;
+          bool sell;
+          tm date;
+
+          getline(ss,line,'.');
+          date.tm_mday = std::stoi(line);
+
+          getline(ss,line,'.');
+          date.tm_mon = std::stoi(line);
+
+          getline(ss,line,',');
+          date.tm_year = std::stoi(line);
+
+          getline(ss,line,',');
+          unitsAmount = std::stod(line);
+
+          getline(ss,line,',');
+          currentCryptoValue = std::stod(line);
+
+          getline(ss,line,',');
+          whatCrypto = intToCryptoType(std::stoi(line));
+
+          getline(ss,line);
+          line == "sell" ? sell = true : sell = false;
+
+          CFD newCFD (unitsAmount,currentCryptoValue,date,whatCrypto,sell);
+
+          openedCFDs.push_back(newCFD);
+      }
+     }
+     openedCFDsFile.close();
  }
 
 void Wallet::loadCryptoFromFile(const std::string& email)
@@ -193,14 +306,24 @@ double Wallet::getAmountOfCryptocurrency(const cryptoType& type){
 }
 
 
-std::vector<std::shared_ptr<Order>> Wallet::getCurrentOrders()
+std::vector<std::shared_ptr<Order>>& Wallet::getCurrentOrders()
 {
  return currentOrders;
 }
 
-std::vector<std::shared_ptr<Order>> Wallet::getHistoricalOrders()
+std::vector<std::shared_ptr<Order>>& Wallet::getHistoricalOrders()
 {
     return historicalOrders;
+}
+
+std::vector<CFD>& Wallet::getOpenedCFDs()
+{
+    return openedCFDs;
+}
+
+std::vector<CFD>& Wallet::getClosedCFDs()
+{
+    return closedCFDs;
 }
 
 

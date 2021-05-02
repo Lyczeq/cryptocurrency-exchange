@@ -8,46 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
-void MainWindow::makePlot(cryptoType ct)
-{
 
-    std::vector<HistoricalRate>::iterator finalRate = exchange.getRates().getTodayHistoricalRate(ct, exchange.getDate());
-    std::vector<HistoricalRate>::iterator startRate = prev(finalRate,28);
-    std::vector<HistoricalRate>::iterator iter;
-    ui->customPlot->setLocale(QLocale(QLocale::English, QLocale::UnitedKingdom));
-
-    ui->customPlot->xAxis->setLabel("Date");
-    ui->customPlot->yAxis->setLabel("Value");
-
-    int i=0;
-    ui->customPlot->addGraph();
-
-    QVector<QCPGraphData> timeData(29);
-    QVector<double> buforVec;
-
-    for (iter=startRate; iter<=finalRate; iter++)
-    {
-        QDateTime timeBufor (QDate(iter->getDate().tm_year, iter->getDate().tm_mon+1, iter->getDate().tm_mday ));
-        long double dBufor = timeBufor.toTime_t();
-
-        timeData[i].key = dBufor;
-        buforVec.push_back(iter->getValue());
-        timeData[i].value = iter->getValue();
-        i++;
-    }
-    ui->customPlot->graph()->data()->set(timeData);
-
-    QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat("d.MM\nyyyy");
-    ui->customPlot->xAxis->setTicker(dateTicker);
-
-    double maxValue = *std::max_element(buforVec.begin(), buforVec.end());
-    double minValue = *std::min_element(buforVec.begin(),  buforVec.end());
-
-    ui->customPlot->xAxis->setRange(timeData[0].key,timeData[28].key);
-    ui->customPlot->yAxis->setRange(minValue*9/10,maxValue*11/10);
-    ui->customPlot->replot();
-}
 
 MainWindow::~MainWindow()
 {
@@ -243,7 +204,7 @@ void MainWindow::on_changeDateButton_clicked()
 
     if(! isNewDateLower(day, month, year))
     {
-        QMessageBox::warning(this,"Date edit", "The provided date is lower than the present one!" );
+        QMessageBox::warning(this,"Date edit", "The provided date is lower or equal to the present one!" );
     }
     else
     {
@@ -252,6 +213,9 @@ void MainWindow::on_changeDateButton_clicked()
         exchange.getRates().setCurrentRatesByDate(exchange.getDate());
         fillRatesTable();//tm_mon has range 0-11
         saveNewDate();
+        realizeCFD();
+        fillMyBankBalance();
+        exchange.getUser().saveUSDToFile();
         QMessageBox::information(this,"Date edit", "Date was changed successfully!" );
     }
 }
@@ -274,7 +238,7 @@ bool MainWindow::isNewDateLower(const int& day, const int& month, const int& yea
 
         if(exchange.getDate().tm_mon + 1 == month)
         {
-            if(exchange.getDate().tm_mday > day)
+            if(exchange.getDate().tm_mday >= day)
                 return false;
             else
                 return true;
@@ -304,6 +268,46 @@ void MainWindow::on_cryptoGraphsButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
     makePlot(Bitcoin);
+}
+
+void MainWindow::makePlot(cryptoType ct)
+{
+    std::vector<HistoricalRate>::iterator finalRate = exchange.getRates().getTodayHistoricalRate(ct, exchange.getDate());
+    std::vector<HistoricalRate>::iterator startRate = prev(finalRate,28);
+    std::vector<HistoricalRate>::iterator iter;
+    ui->customPlot->setLocale(QLocale(QLocale::English, QLocale::UnitedKingdom));
+
+    ui->customPlot->xAxis->setLabel("Date");
+    ui->customPlot->yAxis->setLabel("Value");
+
+    int i=0;
+    ui->customPlot->addGraph();
+
+    QVector<QCPGraphData> timeData(29);
+    QVector<double> buforVec;
+
+    for (iter=startRate; iter<=finalRate; iter++)
+    {
+        QDateTime timeBufor (QDate(iter->getDate().tm_year, iter->getDate().tm_mon+1, iter->getDate().tm_mday ));
+        long double dBufor = timeBufor.toTime_t();
+
+        timeData[i].key = dBufor;
+        buforVec.push_back(iter->getValue());
+        timeData[i].value = iter->getValue();
+        i++;
+    }
+    ui->customPlot->graph()->data()->set(timeData);
+
+    QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
+    dateTicker->setDateTimeFormat("d.MM\nyyyy");
+    ui->customPlot->xAxis->setTicker(dateTicker);
+
+    double maxValue = *std::max_element(buforVec.begin(), buforVec.end());
+    double minValue = *std::min_element(buforVec.begin(),  buforVec.end());
+
+    ui->customPlot->xAxis->setRange(timeData[0].key,timeData[28].key);
+    ui->customPlot->yAxis->setRange(minValue*9/10,maxValue*11/10);
+    ui->customPlot->replot();
 }
 
 void MainWindow::on_bitcoinGraphBtn_clicked()
@@ -686,8 +690,9 @@ void MainWindow::on_historicalTransfersBtn_clicked()
 
         QString firstPhrase = QString::fromStdString("Date: "+date+"\n"+"Sender: "+recipient+"\n"+"Amount: ");
         QString secondPhrase = QString::number(transfer.getAmount(), 'G', 3);
-        QString thirdPhrase = QString::fromStdString("\nTitle: "+transfer.getTitle());
-        transferLabel->setText(firstPhrase+secondPhrase+thirdPhrase);
+        QString thirdPhrase = QString::fromStdString(" "+cryptoTypeToString(transfer.getCryptoType()));
+        QString fourthPhrase = QString::fromStdString("\nTitle: "+transfer.getTitle());
+        transferLabel->setText(firstPhrase+secondPhrase+thirdPhrase+fourthPhrase);
         ui->sentTransfersArea->widget()->layout()->addWidget(transferLabel);
     }
 
@@ -702,8 +707,9 @@ void MainWindow::on_historicalTransfersBtn_clicked()
 
         QString firstPhrase = QString::fromStdString("Date: "+date+"\n"+"Sender: "+sender+"\n"+"Amount: ");
         QString secondPhrase = QString::number(transfer->getAmount(),'G', 3);
-        QString thirdPhrase = QString::fromStdString("\nTitle: "+transfer->getTitle());
-        transferLabel->setText(firstPhrase+secondPhrase+thirdPhrase);
+        QString thirdPhrase = QString::fromStdString(" "+cryptoTypeToString(transfer->getCryptoType()));
+        QString fourthPhrase = QString::fromStdString("\nTitle: "+transfer->getTitle());
+        transferLabel->setText(firstPhrase+secondPhrase+thirdPhrase+fourthPhrase);
         ui->receivedTransfersArea->widget()->layout()->addWidget(transferLabel);
     }
 
@@ -742,8 +748,6 @@ QLabel * MainWindow::createQLabel(const int& height, const int& width)
     return newLabel;
 }
 
-//TODO
-
 void MainWindow::on_goBackFromTransfersHistBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
@@ -762,19 +766,215 @@ void MainWindow::on_goBackFromTransfersHistBtn_clicked()
 void MainWindow::on_myCFDBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(13);
+
+    printCFDs();
+}
+
+void MainWindow::printCFDs()
+{
+    int i=1;
+
+    for(auto &cfd: exchange.getUser().getWallet().getOpenedCFDs())
+    {
+        QLabel* CFDLabel = createQLabel(50, 300);
+
+
+        std::string CFDtype;
+        cfd.isSelling() == true ? CFDtype = "Sell(Short)" : CFDtype = "Buy(Long)";
+
+        QString qCFDInfo = QString::fromStdString(CFDtype+", "+cryptoTypeToString(cfd.getChosenCrypto())+", "+"Units Amount: ");
+        QString qUnitsAmount = QString::number(cfd.getUnitsAmount(),'G', 3);
+        QString labelInfo =qCFDInfo+qUnitsAmount;
+
+        CFDLabel->setText(labelInfo);
+        ui->myCFDScrollArea->widget()->layout()->addWidget(CFDLabel);
+
+        ui->chooseCFDToDelete->addItem(QString::number(i));
+        i++;
+    }
 }
 
 //TODO
+void MainWindow::on_submitCFDBtn_clicked()
+{
+
+
+    double unitsAmount = ui->chooseUnitsAmount->value();
+
+    if(unitsAmount == 0)
+    {
+        QMessageBox::warning(this,"CFD", "Units amount cannot equal 0" );
+        return;
+    }
+
+
+
+    std::string CFDtype = ui->chooseTypeCFD->currentText().toStdString();
+    std::string chosenCrypto = ui->cryptoCFD->currentText().toStdString();
+    cryptoType crypto = stringToCryptoType(chosenCrypto);
+
+    double currentCryptoValue = exchange.getRates().getRateValueByDate(exchange.getDate(), crypto);
+
+    bool sell;
+    CFDtype =="Sell(Short)" ? sell = true: sell = false;
+
+    CFD newCFD(unitsAmount,currentCryptoValue,exchange.getDate(),crypto,sell);
+
+    exchange.getUser().getWallet().getOpenedCFDs().push_back(newCFD);
+    exchange.getUser().saveOpenedCFDsToFile();
+
+    foreach(QLabel* le, ui->myCFDScrollArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
+    ui->chooseCFDToDelete->clear();
+
+   printCFDs();
+
+    QMessageBox::information(this,"CFD", "Contract was made correctly!" );
+}
+
+void MainWindow::realizeCFD()
+{
+    User& user = exchange.getUser();
+    std::vector<CFD>& openedCFDs = user.getWallet().getOpenedCFDs();
+    std::vector<CFD>& closedCFDs = user.getWallet().getClosedCFDs();
+    double& userAccount = user.getWallet().getMyUSD();
+    bool bankrupt = false;
+
+    for(auto &cfd : openedCFDs)
+    {
+        if(bankrupt == true)
+            break;
+
+        std::vector<HistoricalRate>::iterator previousDateIter = exchange.getRates().getTodayHistoricalRate(cfd.getChosenCrypto(), cfd.getCreationDate());
+        std::vector<HistoricalRate>::iterator todayDateIter = exchange.getRates().getTodayHistoricalRate(cfd.getChosenCrypto(), exchange.getDate());
+        std::vector<HistoricalRate>::iterator iter;
+
+        std::cout<<"Previous Date Iter day: "<<previousDateIter->getDate().tm_mday<<std::endl;
+        std::cout<<"todayDateIter day: "<<todayDateIter->getDate().tm_mday<<std::endl;
+
+        double CFDUnits = cfd.getUnitsAmount();
+        double CFDAmount = cfd.getCurrentCryptoValue();
+
+        bool sell = cfd.isSelling();
+
+        double previousDayAmount = CFDAmount;
+
+        if(sell == true) //sell(short)
+        {
+            for(iter = previousDateIter; iter<=todayDateIter; iter++)
+            {
+                double cfdProfit = ( previousDayAmount - iter->getValue()) * CFDUnits;
+
+                userAccount += cfdProfit;
+                previousDayAmount = iter->getValue();
+
+                if(userAccount <=0)
+                {
+                    userAccount = 0;
+                    bankrupt = true;
+                    break;
+                }
+            }
+        }
+        else //buy(long)
+        {
+            for(iter = previousDateIter; iter<=todayDateIter; iter++)
+            {
+
+                double cfdProfit = (-1) * ( previousDayAmount - iter->getValue()) * CFDUnits;
+                userAccount += cfdProfit;
+                previousDayAmount = iter->getValue();
+
+                if(userAccount <=0)
+                {
+                    userAccount = 0;
+                    bankrupt = true;
+                    break;
+                }
+            }
+        }
+        cfd.setDate(exchange.getDate());
+        cfd.setCurrentCryptoValue(todayDateIter->getValue());
+    }
+
+    if(bankrupt == true)
+    {
+
+
+        for(auto &cfd : openedCFDs)
+           closedCFDs.push_back(cfd);
+
+        while( openedCFDs.size() != 0 )
+           openedCFDs.erase(openedCFDs.begin());
+        QMessageBox::information(this,"CFD Management", "You are bankrupt, all contracts have been deleted." );
+    }
+
+    user.saveOpenedCFDsToFile();
+    user.saveClosedCFDsToFile();
+}
+
+void MainWindow::on_deleteCFDBtn_clicked()
+{
+    int chosenCFD = ui->chooseCFDToDelete->currentText().toInt() -1;
+
+    exchange.getUser().getWallet().getOpenedCFDs()[chosenCFD];
+
+    std::vector<CFD>& openedCFDs = exchange.getUser().getWallet().getOpenedCFDs();
+
+    std::vector<CFD>& closedCFDs = exchange.getUser().getWallet().getClosedCFDs();
+
+    closedCFDs.push_back(openedCFDs[chosenCFD]);
+
+    openedCFDs.erase(openedCFDs.begin() + chosenCFD);
+
+    exchange.getUser().saveClosedCFDsToFile();
+    exchange.getUser().saveOpenedCFDsToFile();
+
+    foreach(QLabel* le, ui->myCFDScrollArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
+
+    ui->chooseCFDToDelete->clear();
+
+    printCFDs();
+
+    QMessageBox::information(this,"CFD", "The Contract was deleted successfully!" );
+}
 
 void MainWindow::on_goBackBtnFromCFDBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+
+    foreach(QLabel* le, ui->myCFDScrollArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
+    ui->chooseCFDToDelete->clear();
+
 }
 
 //HISTORICAL CFD
 void MainWindow::on_historicalCFDBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(14);
+
+    for(auto &cfd: exchange.getUser().getWallet().getClosedCFDs())
+    {   std::cout<<std::endl;
+        QLabel* CFDLabel = createQLabel(50, 300);
+
+        std::string CFDtype;
+        cfd.isSelling() == true ? CFDtype = "Sell(Short)" : CFDtype = "Buy(Long)";
+
+        QString qCFDInfo = QString::fromStdString(CFDtype+", "+cryptoTypeToString(cfd.getChosenCrypto())+", "+"Units Amount: ");
+        QString qUnitsAmount = QString::number(cfd.getUnitsAmount(),'G', 3);
+        QString labelInfo =qCFDInfo+qUnitsAmount;
+
+        CFDLabel->setText(labelInfo);
+        ui->closedCFDScrollAera->widget()->layout()->addWidget(CFDLabel);
+    }
 }
 
 //TODO
@@ -782,8 +982,12 @@ void MainWindow::on_historicalCFDBtn_clicked()
 void MainWindow::on_goBackBtnFromHistCFDBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
-}
 
+    foreach(QLabel* le, ui->closedCFDScrollAera->findChildren<QLabel*>())
+    {
+        delete le;
+    }
+}
 
 
 

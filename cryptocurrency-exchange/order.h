@@ -1,7 +1,7 @@
 #ifndef ORDER_H
 #define ORDER_H
 #include<cryptoType.h>
-
+#include<memory>
 class Order
 {
 protected:
@@ -11,10 +11,11 @@ protected:
     tm creationDate;
     tm executionDate;
 
+
 public:
     Order(const cryptoType& ct, const double& am, const bool& pR, const tm& date);
 
-    virtual void realizeOrder()=0;
+    virtual void print(std::ostream& os) const =0;
 
     cryptoType getCryptoCype();
 
@@ -24,7 +25,15 @@ public:
 
     tm getExecutionDate();
 
+    bool isPartialRealised();
+
     void setExecutionDate(const tm & date);
+
+    friend std::ostream& operator<<(std::ostream& os, std::shared_ptr<Order> order)
+    {
+     order->print(os);
+     return os;
+    }
 
 
 };

@@ -7,7 +7,7 @@ class MarketOrderSell: public Order
 public:
     MarketOrderSell(const cryptoType& ct, const double& am, const bool& pR, const tm& date);
 
-    void realizeOrder();
+    void print(std::ostream& os) const;
 };
 
 #endif // MARKETORDERSELL_H

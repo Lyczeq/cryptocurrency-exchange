@@ -10,7 +10,7 @@ private:
 public:
     StopLimitOrder(const cryptoType& ct, const double& am,const double &wa, const bool& pR, const tm& date,const bool& s);
 
-    void realizeOrder();
+    void print(std::ostream& os) const;
 };
 
 #endif // STOPLIMITORDER_H

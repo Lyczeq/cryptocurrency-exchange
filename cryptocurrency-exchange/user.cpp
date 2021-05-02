@@ -50,13 +50,6 @@ void User::saveSentTransfersToFile()
     else
     {
         for(auto& transfer: myWallet.getSentTransfers())
-        {
-        std::string day = std::to_string(transfer.getDate().tm_mday);
-        std::string month = std::to_string(transfer.getDate().tm_mon+1);
-        std::string year = std::to_string(transfer.getDate().tm_year);
-        }
-
-        for(auto& transfer: myWallet.getSentTransfers())
         {   std::shared_ptr<tm> datePtr = std::make_shared<tm> (transfer.getDate());
             std::string day = std::to_string(datePtr->tm_mday);
             std::string month = std::to_string(datePtr->tm_mon+1);
@@ -65,6 +58,48 @@ void User::saveSentTransfersToFile()
         }
     }
     sentTransfersDirectory.close();
+}
+
+void User::saveOpenedCFDsToFile()
+{
+    std::ofstream CFDDirectory("users/"+email+"/OpenedCFDs.csv");
+
+    if(!CFDDirectory.is_open())
+    {
+        //error handler
+    }
+    else
+    {
+        for(auto& cfd: myWallet.getOpenedCFDs())
+        {
+            std::string sellBufor;
+            cfd.isSelling()==true? sellBufor="sell": sellBufor="buy";
+            std::string dateToSave = std::to_string(cfd.getCreationDate().tm_mday)+"."+ std::to_string(cfd.getCreationDate().tm_mon)+"."+ std::to_string(cfd.getCreationDate().tm_year);
+            CFDDirectory<<dateToSave<<","<<cfd.getUnitsAmount()<<","<<cfd.getCurrentCryptoValue()<<","<<cfd.getChosenCrypto()<<","<<sellBufor<<std::endl;
+        }
+    }
+    CFDDirectory.close();
+}
+
+void User::saveClosedCFDsToFile()
+{
+    std::ofstream CFDDirectory("users/"+email+"/ClosedCFDs.csv");
+
+    if(!CFDDirectory.is_open())
+    {
+        //error handler
+    }
+    else
+    {
+        for(auto& cfd: myWallet.getClosedCFDs())
+        {
+            std::string sellBufor;
+            cfd.isSelling()==true? sellBufor="sell": sellBufor="buy";
+            std::string dateToSave = std::to_string(cfd.getCreationDate().tm_mday)+"."+ std::to_string(cfd.getCreationDate().tm_mon)+"."+ std::to_string(cfd.getCreationDate().tm_year);
+            CFDDirectory<<dateToSave<<","<<cfd.getUnitsAmount()<<","<<cfd.getCurrentCryptoValue()<<","<<cfd.getChosenCrypto()<<","<<sellBufor<<std::endl;
+        }
+    }
+    CFDDirectory.close();
 }
 
 void User::saveCryptoFile()
@@ -85,6 +120,41 @@ void User::saveCryptoFile()
     cryptoFileDirectory.close();
 }
 
+void User::saveCurrentOrders()
+{
+    std::ofstream currentOrdersDirectory("users/"+email+"/historicalOrders.csv");
+
+    if(!currentOrdersDirectory.is_open())
+    {
+        //error handler
+    }
+    else
+    {
+     for(auto &historicalOrder : myWallet.getHistoricalOrders())
+     {
+         currentOrdersDirectory<<historicalOrder<<std::endl;
+     }
+    }
+    currentOrdersDirectory.close();
+}
+
+void User::saveHistoricalOrders()
+{
+    std::ofstream historicalOrdersDirectory("users/"+email+"/historicalOrders.csv");
+
+    if(!historicalOrdersDirectory.is_open())
+    {
+        //error handler
+    }
+    else
+    {
+     for(auto &historicalOrder : myWallet.getHistoricalOrders())
+     {
+         historicalOrdersDirectory<<historicalOrder<<","<<historicalOrder->getExecutionDate().tm_mday<<"."<<historicalOrder->getExecutionDate().tm_mday<<"."<<historicalOrder->getExecutionDate().tm_mday<<std::endl;
+     }
+    }
+    historicalOrdersDirectory.close();
+}
 
 
 

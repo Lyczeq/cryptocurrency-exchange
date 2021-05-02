@@ -8,12 +8,13 @@
 #include<marketordersell.h>
 #include<vector>
 #include<memory>
+#include<userslist.h>
 class Orderbook
 {
 private:
     std::vector<std::shared_ptr<Order>> orders;
 public:
-    Orderbook();
+    Orderbook(UsersList& ul);
 
     std::vector<std::shared_ptr<Order>>& getOrders();
 };

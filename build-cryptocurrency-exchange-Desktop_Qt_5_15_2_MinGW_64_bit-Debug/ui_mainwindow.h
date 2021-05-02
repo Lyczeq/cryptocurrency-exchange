@@ -26,6 +26,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
@@ -214,11 +215,34 @@ public:
     QWidget *scrollAreaWidgetContents_2;
     QGridLayout *gridLayout_4;
     QWidget *CFDPanel;
-    QLabel *label_10;
+    QLabel *CFDLabel;
     QPushButton *goBackBtnFromCFDBtn;
+    QGroupBox *groupBox_6;
+    QGridLayout *gridLayout_8;
+    QComboBox *cryptoCFD;
+    QDoubleSpinBox *chooseUnitsAmount;
+    QComboBox *chooseTypeCFD;
+    QLabel *typeCFD;
+    QLabel *unitsAmount;
+    QLabel *chooseCryptoCFD;
+    QLabel *makeContractLabel;
+    QPushButton *submitCFDBtn;
+    QScrollArea *myCFDScrollArea;
+    QWidget *scrollAreaWidgetContents_8;
+    QGridLayout *gridLayout_9;
+    QGroupBox *groupBox_8;
+    QGridLayout *gridLayout_10;
+    QSpacerItem *verticalSpacer;
+    QComboBox *chooseCFDToDelete;
+    QPushButton *deleteCFDBtn;
+    QLabel *label;
+    QSpacerItem *verticalSpacer_2;
     QWidget *historicalCFDPanel;
-    QLabel *label_11;
     QPushButton *goBackBtnFromHistCFDBtn;
+    QLabel *historyCFDLabel;
+    QScrollArea *closedCFDScrollAera;
+    QWidget *scrollAreaWidgetContents_9;
+    QGridLayout *gridLayout_11;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -951,15 +975,14 @@ public:
         goBackBtnFromHistOrdersBtn->setFont(font1);
         orderbookTitle_2 = new QLabel(historicalOrdersPanel);
         orderbookTitle_2->setObjectName(QString::fromUtf8("orderbookTitle_2"));
-        orderbookTitle_2->setGeometry(QRect(300, 20, 220, 45));
-        QFont font9;
-        font9.setFamily(QString::fromUtf8("Arial"));
-        font9.setPointSize(18);
-        orderbookTitle_2->setFont(font9);
+        orderbookTitle_2->setGeometry(QRect(250, 10, 290, 45));
+        orderbookTitle_2->setFont(font6);
+        orderbookTitle_2->setAlignment(Qt::AlignCenter);
         orderbookArea_2 = new QScrollArea(historicalOrdersPanel);
         orderbookArea_2->setObjectName(QString::fromUtf8("orderbookArea_2"));
         orderbookArea_2->setGeometry(QRect(170, 80, 450, 230));
         orderbookArea_2->setWidgetResizable(true);
+        orderbookArea_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
         scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 448, 228));
@@ -969,8 +992,9 @@ public:
         seeOrderbookPanel->setObjectName(QString::fromUtf8("seeOrderbookPanel"));
         orderbookTitle = new QLabel(seeOrderbookPanel);
         orderbookTitle->setObjectName(QString::fromUtf8("orderbookTitle"));
-        orderbookTitle->setGeometry(QRect(320, 10, 150, 45));
-        orderbookTitle->setFont(font9);
+        orderbookTitle->setGeometry(QRect(300, 10, 190, 45));
+        orderbookTitle->setFont(font6);
+        orderbookTitle->setAlignment(Qt::AlignCenter);
         goBackBtnFromOrderbookBtn = new QPushButton(seeOrderbookPanel);
         goBackBtnFromOrderbookBtn->setObjectName(QString::fromUtf8("goBackBtnFromOrderbookBtn"));
         goBackBtnFromOrderbookBtn->setGeometry(QRect(20, 325, 93, 28));
@@ -988,18 +1012,18 @@ public:
         sendTransferPanel->setObjectName(QString::fromUtf8("sendTransferPanel"));
         sendTransferTitle = new QLabel(sendTransferPanel);
         sendTransferTitle->setObjectName(QString::fromUtf8("sendTransferTitle"));
-        sendTransferTitle->setGeometry(QRect(250, 20, 290, 35));
+        sendTransferTitle->setGeometry(QRect(250, 10, 290, 35));
         sendTransferTitle->setFont(font6);
         sendTransferTitle->setAlignment(Qt::AlignCenter);
         sendTransferConfirmBtn = new QPushButton(sendTransferPanel);
         sendTransferConfirmBtn->setObjectName(QString::fromUtf8("sendTransferConfirmBtn"));
         sendTransferConfirmBtn->setGeometry(QRect(345, 240, 100, 35));
-        QFont font10;
-        font10.setFamily(QString::fromUtf8("Arial"));
-        font10.setPointSize(11);
-        font10.setBold(true);
-        font10.setWeight(75);
-        sendTransferConfirmBtn->setFont(font10);
+        QFont font9;
+        font9.setFamily(QString::fromUtf8("Arial"));
+        font9.setPointSize(11);
+        font9.setBold(true);
+        font9.setWeight(75);
+        sendTransferConfirmBtn->setFont(font9);
         groupBox_3 = new QGroupBox(sendTransferPanel);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         groupBox_3->setGeometry(QRect(250, 90, 290, 131));
@@ -1063,7 +1087,7 @@ public:
         goBackFromTransfersHistBtn->setFont(font1);
         transfersHistoryTitle = new QLabel(historicalTransfersPanel);
         transfersHistoryTitle->setObjectName(QString::fromUtf8("transfersHistoryTitle"));
-        transfersHistoryTitle->setGeometry(QRect(200, 20, 400, 31));
+        transfersHistoryTitle->setGeometry(QRect(200, 10, 400, 31));
         transfersHistoryTitle->setFont(font6);
         transfersHistoryTitle->setAlignment(Qt::AlignCenter);
         sentTransfersLabel = new QLabel(historicalTransfersPanel);
@@ -1095,23 +1119,137 @@ public:
         stackedWidget->addWidget(historicalTransfersPanel);
         CFDPanel = new QWidget();
         CFDPanel->setObjectName(QString::fromUtf8("CFDPanel"));
-        label_10 = new QLabel(CFDPanel);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setGeometry(QRect(310, 220, 241, 16));
+        CFDLabel = new QLabel(CFDPanel);
+        CFDLabel->setObjectName(QString::fromUtf8("CFDLabel"));
+        CFDLabel->setGeometry(QRect(195, 10, 400, 50));
+        CFDLabel->setFont(font6);
         goBackBtnFromCFDBtn = new QPushButton(CFDPanel);
         goBackBtnFromCFDBtn->setObjectName(QString::fromUtf8("goBackBtnFromCFDBtn"));
         goBackBtnFromCFDBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromCFDBtn->setFont(font1);
+        groupBox_6 = new QGroupBox(CFDPanel);
+        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
+        groupBox_6->setGeometry(QRect(520, 130, 271, 131));
+        gridLayout_8 = new QGridLayout(groupBox_6);
+        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        cryptoCFD = new QComboBox(groupBox_6);
+        cryptoCFD->addItem(QString());
+        cryptoCFD->addItem(QString());
+        cryptoCFD->addItem(QString());
+        cryptoCFD->addItem(QString());
+        cryptoCFD->addItem(QString());
+        cryptoCFD->setObjectName(QString::fromUtf8("cryptoCFD"));
+        cryptoCFD->setFont(font8);
+        cryptoCFD->setLayoutDirection(Qt::RightToLeft);
+        cryptoCFD->setModelColumn(0);
+
+        gridLayout_8->addWidget(cryptoCFD, 1, 1, 1, 1);
+
+        chooseUnitsAmount = new QDoubleSpinBox(groupBox_6);
+        chooseUnitsAmount->setObjectName(QString::fromUtf8("chooseUnitsAmount"));
+
+        gridLayout_8->addWidget(chooseUnitsAmount, 0, 1, 1, 1);
+
+        chooseTypeCFD = new QComboBox(groupBox_6);
+        chooseTypeCFD->addItem(QString());
+        chooseTypeCFD->addItem(QString());
+        chooseTypeCFD->setObjectName(QString::fromUtf8("chooseTypeCFD"));
+        chooseTypeCFD->setFont(font8);
+        chooseTypeCFD->setLayoutDirection(Qt::RightToLeft);
+        chooseTypeCFD->setModelColumn(0);
+
+        gridLayout_8->addWidget(chooseTypeCFD, 2, 1, 1, 1);
+
+        typeCFD = new QLabel(groupBox_6);
+        typeCFD->setObjectName(QString::fromUtf8("typeCFD"));
+        typeCFD->setAlignment(Qt::AlignCenter);
+
+        gridLayout_8->addWidget(typeCFD, 2, 0, 1, 1);
+
+        unitsAmount = new QLabel(groupBox_6);
+        unitsAmount->setObjectName(QString::fromUtf8("unitsAmount"));
+        unitsAmount->setAlignment(Qt::AlignCenter);
+
+        gridLayout_8->addWidget(unitsAmount, 0, 0, 1, 1);
+
+        chooseCryptoCFD = new QLabel(groupBox_6);
+        chooseCryptoCFD->setObjectName(QString::fromUtf8("chooseCryptoCFD"));
+        chooseCryptoCFD->setAlignment(Qt::AlignCenter);
+
+        gridLayout_8->addWidget(chooseCryptoCFD, 1, 0, 1, 1);
+
+        makeContractLabel = new QLabel(CFDPanel);
+        makeContractLabel->setObjectName(QString::fromUtf8("makeContractLabel"));
+        makeContractLabel->setGeometry(QRect(560, 100, 201, 21));
+        makeContractLabel->setFont(font7);
+        submitCFDBtn = new QPushButton(CFDPanel);
+        submitCFDBtn->setObjectName(QString::fromUtf8("submitCFDBtn"));
+        submitCFDBtn->setGeometry(QRect(600, 270, 80, 25));
+        myCFDScrollArea = new QScrollArea(CFDPanel);
+        myCFDScrollArea->setObjectName(QString::fromUtf8("myCFDScrollArea"));
+        myCFDScrollArea->setGeometry(QRect(20, 90, 350, 200));
+        myCFDScrollArea->setWidgetResizable(true);
+        myCFDScrollArea->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        scrollAreaWidgetContents_8 = new QWidget();
+        scrollAreaWidgetContents_8->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_8"));
+        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 348, 198));
+        gridLayout_9 = new QGridLayout(scrollAreaWidgetContents_8);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        myCFDScrollArea->setWidget(scrollAreaWidgetContents_8);
+        groupBox_8 = new QGroupBox(CFDPanel);
+        groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
+        groupBox_8->setGeometry(QRect(380, 87, 131, 203));
+        gridLayout_10 = new QGridLayout(groupBox_8);
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        verticalSpacer = new QSpacerItem(20, 60, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_10->addItem(verticalSpacer, 2, 0, 1, 1);
+
+        chooseCFDToDelete = new QComboBox(groupBox_8);
+        chooseCFDToDelete->setObjectName(QString::fromUtf8("chooseCFDToDelete"));
+        chooseCFDToDelete->setFont(font8);
+        chooseCFDToDelete->setLayoutDirection(Qt::RightToLeft);
+        chooseCFDToDelete->setModelColumn(0);
+
+        gridLayout_10->addWidget(chooseCFDToDelete, 1, 0, 1, 1);
+
+        deleteCFDBtn = new QPushButton(groupBox_8);
+        deleteCFDBtn->setObjectName(QString::fromUtf8("deleteCFDBtn"));
+
+        gridLayout_10->addWidget(deleteCFDBtn, 3, 0, 1, 1);
+
+        label = new QLabel(groupBox_8);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setAlignment(Qt::AlignCenter);
+
+        gridLayout_10->addWidget(label, 0, 0, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 28, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_10->addItem(verticalSpacer_2, 4, 0, 1, 1);
+
         stackedWidget->addWidget(CFDPanel);
         historicalCFDPanel = new QWidget();
         historicalCFDPanel->setObjectName(QString::fromUtf8("historicalCFDPanel"));
-        label_11 = new QLabel(historicalCFDPanel);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
-        label_11->setGeometry(QRect(360, 140, 161, 16));
         goBackBtnFromHistCFDBtn = new QPushButton(historicalCFDPanel);
         goBackBtnFromHistCFDBtn->setObjectName(QString::fromUtf8("goBackBtnFromHistCFDBtn"));
         goBackBtnFromHistCFDBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromHistCFDBtn->setFont(font1);
+        historyCFDLabel = new QLabel(historicalCFDPanel);
+        historyCFDLabel->setObjectName(QString::fromUtf8("historyCFDLabel"));
+        historyCFDLabel->setGeometry(QRect(275, 10, 240, 50));
+        historyCFDLabel->setFont(font6);
+        closedCFDScrollAera = new QScrollArea(historicalCFDPanel);
+        closedCFDScrollAera->setObjectName(QString::fromUtf8("closedCFDScrollAera"));
+        closedCFDScrollAera->setGeometry(QRect(170, 70, 450, 240));
+        closedCFDScrollAera->setWidgetResizable(true);
+        closedCFDScrollAera->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        scrollAreaWidgetContents_9 = new QWidget();
+        scrollAreaWidgetContents_9->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_9"));
+        scrollAreaWidgetContents_9->setGeometry(QRect(0, 0, 448, 238));
+        gridLayout_11 = new QGridLayout(scrollAreaWidgetContents_9);
+        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        closedCFDScrollAera->setWidget(scrollAreaWidgetContents_9);
         stackedWidget->addWidget(historicalCFDPanel);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -1260,10 +1398,29 @@ public:
         transfersHistoryTitle->setText(QCoreApplication::translate("MainWindow", "TRANSFERS HISTORY", nullptr));
         sentTransfersLabel->setText(QCoreApplication::translate("MainWindow", "History of sent transfers", nullptr));
         receivedTransfersLabel->setText(QCoreApplication::translate("MainWindow", "History of received transfers", nullptr));
-        label_10->setText(QCoreApplication::translate("MainWindow", "CFDPanel", nullptr));
+        CFDLabel->setText(QCoreApplication::translate("MainWindow", "Contracts for differences", nullptr));
         goBackBtnFromCFDBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
-        label_11->setText(QCoreApplication::translate("MainWindow", "historicalCFDPanel", nullptr));
+        groupBox_6->setTitle(QString());
+        cryptoCFD->setItemText(0, QCoreApplication::translate("MainWindow", "Bitcoin", nullptr));
+        cryptoCFD->setItemText(1, QCoreApplication::translate("MainWindow", "Ethereum", nullptr));
+        cryptoCFD->setItemText(2, QCoreApplication::translate("MainWindow", "Binance Coin", nullptr));
+        cryptoCFD->setItemText(3, QCoreApplication::translate("MainWindow", "Tether", nullptr));
+        cryptoCFD->setItemText(4, QCoreApplication::translate("MainWindow", "Ripple", nullptr));
+
+        chooseTypeCFD->setItemText(0, QCoreApplication::translate("MainWindow", "Sell(Short)", nullptr));
+        chooseTypeCFD->setItemText(1, QCoreApplication::translate("MainWindow", "Buy(Long)", nullptr));
+
+        typeCFD->setText(QCoreApplication::translate("MainWindow", "Type: ", nullptr));
+        unitsAmount->setText(QCoreApplication::translate("MainWindow", "Units amount", nullptr));
+        chooseCryptoCFD->setText(QCoreApplication::translate("MainWindow", "Cryptocurrency: ", nullptr));
+        makeContractLabel->setText(QCoreApplication::translate("MainWindow", "Make a contract", nullptr));
+        submitCFDBtn->setText(QCoreApplication::translate("MainWindow", "Submit", nullptr));
+        groupBox_8->setTitle(QString());
+        deleteCFDBtn->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Choose CFD\n"
+"to delete", nullptr));
         goBackBtnFromHistCFDBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
+        historyCFDLabel->setText(QCoreApplication::translate("MainWindow", "History of CFD", nullptr));
     } // retranslateUi
 
 };

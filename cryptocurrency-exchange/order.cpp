@@ -8,3 +8,28 @@ void Order::setExecutionDate(const tm & date)
 {
     executionDate = date;
 }
+
+cryptoType Order::getCryptoCype()
+{
+    return cType;
+}
+
+double Order::getAmount()
+{
+    return offeringAmount;
+}
+
+tm Order::getCreationDate()
+{
+    return creationDate;
+}
+
+bool Order::isPartialRealised()
+{
+    return partialRealised;
+}
+
+tm Order::getExecutionDate()
+{
+    return executionDate;
+}

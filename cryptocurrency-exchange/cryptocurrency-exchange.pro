@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cfd.cpp \
     cryptoType.cpp \
     cryptocurrency.cpp \
     currentrates.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
     wallet.cpp
 
 HEADERS += \
+    cfd.h \
     cryptoType.h \
     cryptocurrency.h \
     currentrates.h \

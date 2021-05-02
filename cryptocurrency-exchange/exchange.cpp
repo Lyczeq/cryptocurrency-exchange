@@ -1,7 +1,6 @@
 #include "exchange.h"
 
-Exchange::Exchange(){
-}
+Exchange::Exchange(): orderbook(usersList) {}
 
 UsersList& Exchange::getUsersList()
 {
