@@ -122,7 +122,7 @@ void User::saveCryptoFile()
 
 void User::saveCurrentOrders()
 {
-    std::ofstream currentOrdersDirectory("users/"+email+"/historicalOrders.csv");
+    std::ofstream currentOrdersDirectory("users/"+email+"/CurrentOrders.csv");
 
     if(!currentOrdersDirectory.is_open())
     {
@@ -130,9 +130,9 @@ void User::saveCurrentOrders()
     }
     else
     {
-     for(auto &historicalOrder : myWallet.getHistoricalOrders())
+     for(auto &currentOrder : myWallet.getCurrentOrders())
      {
-         currentOrdersDirectory<<historicalOrder<<std::endl;
+         currentOrdersDirectory<<currentOrder<<std::endl;
      }
     }
     currentOrdersDirectory.close();
@@ -140,7 +140,7 @@ void User::saveCurrentOrders()
 
 void User::saveHistoricalOrders()
 {
-    std::ofstream historicalOrdersDirectory("users/"+email+"/historicalOrders.csv");
+    std::ofstream historicalOrdersDirectory("users/"+email+"/HistoricalOrders.csv");
 
     if(!historicalOrdersDirectory.is_open())
     {

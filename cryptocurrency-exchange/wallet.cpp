@@ -94,6 +94,9 @@ void Wallet::pushReceivedTransfer(std::shared_ptr<Transfer> recTransfer)
      loadSentTransfersFromFile(email);
      loadOpenedCFDs(email);
      loadCLosedCFDs(email);
+     loadHistoricalOrders(email);
+     loadCurrentOrders(email);
+
  }
 
  void Wallet::loadCLosedCFDs(const std::string& email)
@@ -325,6 +328,341 @@ std::vector<CFD>& Wallet::getClosedCFDs()
 {
     return closedCFDs;
 }
+
+void Wallet::loadCurrentOrders(const std::string &email)
+{
+    const std::string currentOrdersFileName = "users/"+email+"/CurrentOrders.csv";
+
+    std::ifstream currentOrdersFile(currentOrdersFileName);
+
+    if(!currentOrdersFile.is_open())
+    {
+        //error_handler
+    }
+    else
+    {
+     std::string line;
+
+     while(std::getline(currentOrdersFile,line))
+     {
+         if(line == "")
+             continue;
+
+        std::stringstream ss(line);
+
+        std::string orderName="";
+        cryptoType cType;
+        double offeringAmount;
+        bool partialRealised;
+        tm creationDate;
+        getline(ss,line,',');
+
+        orderName = line;
+
+        if(orderName == "MOB")
+        {
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            creationDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<MarketOrderBuy> marketBuy = std::make_shared<MarketOrderBuy>(cType, offeringAmount, partialRealised, creationDate);
+
+            currentOrders.push_back(marketBuy);
+        }
+        else if( orderName == "MOS")
+        {
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            creationDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<MarketOrderSell> marketSell = std::make_shared<MarketOrderSell>(cType, offeringAmount, partialRealised, creationDate);
+            currentOrders.push_back(marketSell);
+        }
+        else if(orderName == "SLO")
+        {
+
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            double wantingAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            bool sell;
+            getline(ss,line,',');
+            line == "sell" ? sell = true: sell=false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            creationDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<StopLimitOrder> stopLimitOrder = std::make_shared<StopLimitOrder>(cType, offeringAmount,wantingAmount,partialRealised,creationDate,sell);
+            currentOrders.push_back(stopLimitOrder);
+
+        }
+        else if(orderName == "SMO")
+        {
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            double wantingAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            bool sell;
+            getline(ss,line,',');
+            line == "sell" ? sell = true: sell=false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            creationDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<StopMarketOrder> stopMarketOrder = std::make_shared<StopMarketOrder>(cType, offeringAmount,wantingAmount,partialRealised,creationDate,sell);
+            currentOrders.push_back(stopMarketOrder);
+        }
+
+
+    }
+    }
+    currentOrdersFile.close();
+}
+
+void Wallet::loadHistoricalOrders(const std::string &email)
+{
+    const std::string historicalOrdersFileName = "users/"+email+"/HistoricalOrders.csv";
+
+    std::ifstream historicalOrdersFile(historicalOrdersFileName);
+
+    if(!historicalOrdersFile.is_open())
+    {
+        //error_handler
+    }
+    else
+    {
+     std::string line;
+
+     while(std::getline(historicalOrdersFile,line))
+     {
+         if(line == "")
+             continue;
+
+        std::stringstream ss(line);
+
+        std::string orderName="";
+        cryptoType cType;
+        double offeringAmount;
+        bool partialRealised;
+        tm creationDate;
+        tm executionDate;
+        getline(ss,line,',');
+
+        orderName = line;
+
+        if(orderName == "MOB")
+        {
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line,',');
+            creationDate.tm_year = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            executionDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<MarketOrderBuy> marketBuy = std::make_shared<MarketOrderBuy>(cType, offeringAmount, partialRealised, creationDate);
+            marketBuy->setExecutionDate(executionDate);
+
+            historicalOrders.push_back(marketBuy);
+        }
+        else if( orderName == "MOS")
+        {
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line,',');
+            creationDate.tm_year = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            executionDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<MarketOrderSell> marketSell = std::make_shared<MarketOrderSell>(cType, offeringAmount, partialRealised, creationDate);
+            marketSell->setExecutionDate(executionDate);
+
+            historicalOrders.push_back(marketSell);
+        }
+        else if(orderName == "SLO")
+        {
+
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            double wantingAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            bool sell;
+            getline(ss,line,',');
+            line == "sell" ? sell = true: sell=false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line,',');
+            creationDate.tm_year = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            executionDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<StopLimitOrder> stopLimitOrder = std::make_shared<StopLimitOrder>(cType, offeringAmount,wantingAmount,partialRealised,creationDate,sell);
+            stopLimitOrder->setExecutionDate(executionDate);
+
+            historicalOrders.push_back(stopLimitOrder);
+
+        }
+        else if(orderName == "SMO")
+        {
+            getline(ss,line,',');
+            cType = intToCryptoType(std::stoi(line));
+
+            getline(ss,line,',');
+            offeringAmount = std::stod(line);
+
+            getline(ss,line,',');
+            double wantingAmount = std::stod(line);
+
+            getline(ss,line,',');
+            line =="yes" ? partialRealised = true : partialRealised = false;
+
+            bool sell;
+            getline(ss,line,',');
+            line == "sell" ? sell = true: sell=false;
+
+            getline(ss,line,'.');
+            creationDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            creationDate.tm_mon = std::stoi(line);
+
+            getline(ss,line,',');
+            creationDate.tm_year = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mday = std::stoi(line);
+
+            getline(ss,line,'.');
+            executionDate.tm_mon = std::stoi(line);
+
+            getline(ss,line);
+            executionDate.tm_year = std::stoi(line);
+
+            std::shared_ptr<StopMarketOrder> stopMarketOrder = std::make_shared<StopMarketOrder>(cType, offeringAmount,wantingAmount,partialRealised,creationDate,sell);
+            stopMarketOrder->setExecutionDate(executionDate);
+
+            historicalOrders.push_back(stopMarketOrder);
+        }
+        }
+    }
+    historicalOrdersFile.close();
+}
+
 
 
 

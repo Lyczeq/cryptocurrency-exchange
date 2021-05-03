@@ -10,5 +10,10 @@ void MarketOrderSell::print(std::ostream& os) const
     partialRealised == true ? pRealised ="yes": pRealised = "no";
     std::string name = "MOS";
 
-    os<<name<<cType<<","<<offeringAmount<<","<<pRealised<<","<<creationDate.tm_mday<<"."<<creationDate.tm_mon<<"."<<creationDate.tm_year;
+    os<<name<<","<<cType<<","<<offeringAmount<<","<<pRealised<<","<<creationDate.tm_mday<<"."<<creationDate.tm_mon<<"."<<creationDate.tm_year;
+}
+
+std::string MarketOrderSell::getOrderType()
+{
+    return "MOS";
 }

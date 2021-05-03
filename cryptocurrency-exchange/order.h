@@ -17,7 +17,7 @@ public:
 
     virtual void print(std::ostream& os) const =0;
 
-    cryptoType getCryptoCype();
+    cryptoType getCryptoType();
 
     double getAmount();
 
@@ -34,6 +34,12 @@ public:
      order->print(os);
      return os;
     }
+
+    virtual std::string getOrderType()=0;
+
+    virtual bool getIsSelling();
+
+    virtual double getWantingAmount();
 
 
 };

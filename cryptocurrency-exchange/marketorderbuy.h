@@ -9,6 +9,8 @@ public:
 
     void print(std::ostream& os) const;
 
+    std::string getOrderType();
+
 };
 
 #endif // MARKETORDERBUY_H

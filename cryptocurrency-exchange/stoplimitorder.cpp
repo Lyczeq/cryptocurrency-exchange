@@ -13,5 +13,20 @@ void StopLimitOrder::print(std::ostream& os) const
     std::string sellOrBuy;
     isSelling == true ? sellOrBuy ="sell": sellOrBuy = "buy";
 
-    os<<name<<cType<<","<<offeringAmount<<","<<wantingAmount<<","<<pRealised<<","<<sellOrBuy<<","<<creationDate.tm_mday<<"."<<creationDate.tm_mon<<"."<<creationDate.tm_year;
+    os<<name<<","<<cType<<","<<offeringAmount<<","<<wantingAmount<<","<<pRealised<<","<<sellOrBuy<<","<<creationDate.tm_mday<<"."<<creationDate.tm_mon<<"."<<creationDate.tm_year;
+}
+
+std::string StopLimitOrder::getOrderType()
+{
+    return "SLO";
+}
+
+bool StopLimitOrder::getIsSelling()
+{
+    return isSelling;
+}
+
+double StopLimitOrder::getWantingAmount()
+{
+    return wantingAmount;
 }

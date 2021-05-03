@@ -9,7 +9,7 @@ void Order::setExecutionDate(const tm & date)
     executionDate = date;
 }
 
-cryptoType Order::getCryptoCype()
+cryptoType Order::getCryptoType()
 {
     return cType;
 }
@@ -33,3 +33,7 @@ tm Order::getExecutionDate()
 {
     return executionDate;
 }
+
+bool Order::getIsSelling(){}
+
+double Order::getWantingAmount(){}

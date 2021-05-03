@@ -9,6 +9,10 @@
 #include<memory>
 #include<sstream>
 #include<order.h>
+#include<marketorderbuy.h>
+#include<marketordersell.h>
+#include<stoplimitorder.h>
+#include<stopmarketorder.h>
 #include<cfd.h>
 
 class Wallet
@@ -69,6 +73,10 @@ class Wallet
     void loadCLosedCFDs(const std::string& email);
 
     void loadOpenedCFDs(const std::string& email);
+
+    void loadCurrentOrders(const std::string& email);
+
+    void loadHistoricalOrders(const std::string& email);
 
 };
 

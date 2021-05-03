@@ -6,6 +6,7 @@
 #include<QDebug>
 #include<QDate>
 #include<QtCharts>
+#include<regex>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -115,9 +116,9 @@ private slots:
 
     void on_chooseOrderType_activated(const QString &arg1);
 
-    void validateUSD(const double& usd);
+    bool validateUSD(const double& usd);
 
-    void validateCrypto(const cryptoType& type, const double& cryptoAmount);
+    bool validateCrypto(const cryptoType& type, const double& cryptoAmount);
 
     void on_submitCFDBtn_clicked();
 
@@ -126,6 +127,12 @@ private slots:
     void printCFDs();
 
     void on_deleteCFDBtn_clicked();
+
+    void printMyOrders();
+
+    void printHistoricalOrders();
+
+    void on_deleteOrderBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

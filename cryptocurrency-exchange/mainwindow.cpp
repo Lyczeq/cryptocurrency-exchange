@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 
-
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -113,6 +112,8 @@ void MainWindow::on_signUpButtonCreateAcc_clicked()
 {
     //regex dla wszystkich informacji
     std::string email =ui->emailLineEditSignUp->text().toStdString();
+
+    std::regex emailRegex("");
 
     if(exchange.getUsersList().checkIfUserExists(email))
     {
@@ -441,25 +442,29 @@ void MainWindow::on_myCurrentOrdersBtn_clicked()
     ui->howMuchUSD->setEnabled(true);
     ui->chooseOrderType->setCurrentText("Market Buy");
 
-    // printing user's current orders
+    printMyOrders();
 }
 //TODO adding new order
 void MainWindow::on_submitOrderBtn_clicked()
 {
 
-    switch(ui->chooseCurrencyOrder->currentIndex())
+    switch(ui->chooseOrderType->currentIndex())
     {
         case 0: //Market Buy
         {
-            double usdAmount = ui->howMuchOrder->value();
+            double usdAmount = ui->howMuchUSD->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            validateUSD(usdAmount);
+            if( validateUSD(usdAmount) == false)
+                break;
 
             std::shared_ptr<MarketOrderBuy> marketBuy = std::make_shared<MarketOrderBuy>(cryptocurrency, usdAmount, false, exchange.getDate());
 
             exchange.getOrderbook().getOrders().push_back(marketBuy);
+            exchange.getUser().getWallet().getCurrentOrders().push_back(marketBuy);
+            QMessageBox::information(this,"My Orders", "adding a new order was successful." );
+            break;
         }
         case 1: // Market Sell
         {
@@ -467,100 +472,256 @@ void MainWindow::on_submitOrderBtn_clicked()
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            validateCrypto(cryptocurrency, cryptoAmount);
+            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
+                break;
 
             std::shared_ptr<MarketOrderSell> marketSell = std::make_shared<MarketOrderSell>(cryptocurrency, cryptoAmount, false, exchange.getDate());
 
             exchange.getOrderbook().getOrders().push_back(marketSell);
-
+            exchange.getUser().getWallet().getCurrentOrders().push_back(marketSell);
+            QMessageBox::information(this,"My Orders", "adding a new order was successful." );
+            break;
         }
         case 2: //Stop Limit Sell
         {
-            double usdAmount = ui->howMuchOrder->value();
+            double usdAmount = ui->howMuchUSD->value();
             double cryptoAmount = ui->howMuchOrder->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            validateUSD(usdAmount);
-            validateCrypto(cryptocurrency, cryptoAmount);
+            if( validateUSD(usdAmount) == false)
+                break;
+
+            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
+                break;
 
              std::shared_ptr<StopLimitOrder> stopLimitSell = std::make_shared<StopLimitOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), true);
 
               exchange.getOrderbook().getOrders().push_back(stopLimitSell);
+              exchange.getUser().getWallet().getCurrentOrders().push_back(stopLimitSell);
+              QMessageBox::information(this,"My Orders", "adding a new order was successful." );
+              break;
 
         }
         case 3: //Stop Limit Buy
         {
-            double usdAmount = ui->howMuchOrder->value();
+            double usdAmount = ui->howMuchUSD->value();
             double cryptoAmount = ui->howMuchOrder->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            validateUSD(usdAmount);
-            validateCrypto(cryptocurrency, cryptoAmount);
+            if( validateUSD(usdAmount) == false)
+                break;
+
+            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
+                break;
 
              std::shared_ptr<StopLimitOrder> stopLimitBuy = std::make_shared<StopLimitOrder>(cryptocurrency, usdAmount, cryptoAmount,false, exchange.getDate(), false);
+
+             exchange.getOrderbook().getOrders().push_back(stopLimitBuy);
+             exchange.getUser().getWallet().getCurrentOrders().push_back(stopLimitBuy);
+             QMessageBox::information(this,"My Orders", "adding a new order was successful." );
+             break;
         }
         case 4: //Stop Market Sell
         {
-            double usdAmount = ui->howMuchOrder->value();
+            double usdAmount = ui->howMuchUSD->value();
             double cryptoAmount = ui->howMuchOrder->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            validateUSD(usdAmount);
-            validateCrypto(cryptocurrency, cryptoAmount);
+            if( validateUSD(usdAmount) == false)
+                break;
+
+            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
+                break;
 
              std::shared_ptr<StopMarketOrder> stopMarketSell = std::make_shared<StopMarketOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), true);
 
              exchange.getOrderbook().getOrders().push_back(stopMarketSell);
+             exchange.getUser().getWallet().getCurrentOrders().push_back(stopMarketSell);
+             QMessageBox::information(this,"My Orders", "adding a new order was successful." );
+             break;
+
         }
         case 5: //Stop Market Buy
         {
-            double usdAmount = ui->howMuchOrder->value();
+            double usdAmount = ui->howMuchUSD->value();
             double cryptoAmount = ui->howMuchOrder->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            validateUSD(usdAmount);
-            validateCrypto(cryptocurrency, cryptoAmount);
+            if( validateUSD(usdAmount) == false)
+                break;
+
+            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
+                break;
 
              std::shared_ptr<StopMarketOrder> stopMarketBuy = std::make_shared<StopMarketOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), false);
 
              exchange.getOrderbook().getOrders().push_back(stopMarketBuy);
+             exchange.getUser().getWallet().getCurrentOrders().push_back(stopMarketBuy);
+             QMessageBox::information(this,"My Orders", "adding a new order was successful." );
+             break;
         }
     }
 
+    ui->howMuchUSD->clear();
+    ui->howMuchOrder->clear();
+    ui->chooseOrderToDelete->clear();
+    printMyOrders();
+
+    exchange.getUser().saveCurrentOrders();
+    //
+    exchange.getOrderbook().printOrders();
+    //
+
 }
 
-void MainWindow::validateCrypto(const cryptoType& type, const double& cryptoAmount)
+void MainWindow::printMyOrders()
+{
+    int i=1;
+    ui->chooseOrderToDelete->clear();
+    foreach(QLabel* le, ui->myOrdersScrollArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
+
+    for(auto &order: exchange.getUser().getWallet().getCurrentOrders())
+    {
+        QLabel* orderLabel = createQLabel(140, 240);
+
+        QString orderType;
+        QString date = QString::fromStdString( std::to_string(order->getCreationDate().tm_mday) +"."+ std::to_string(order->getCreationDate().tm_mon+1)+ "."+ std::to_string(order->getCreationDate().tm_year));
+        QString crypto = QString::fromStdString(cryptoTypeToString(order->getCryptoType()));
+        QString offer = QString::number(order->getAmount());
+        QString wantingOffer = "";
+        QString partiallyRealised="";
+        order->isPartialRealised() == true ? partiallyRealised = "yes" : partiallyRealised = "no";
+        if(order->getOrderType() == "MOB")
+        {
+            orderType = "Market Buy";
+
+        }
+        else if (order->getOrderType() == "MOS")
+        {
+            orderType = "Market Sell";
+        }
+        else if (order->getOrderType() == "SLO")
+        {
+            order->getIsSelling() == true ? orderType = "Stop Limit Sell" : orderType = "Stop Limit Buy";
+            wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
+        }
+        else
+        {
+            order->getIsSelling() == true ? orderType = "Stop Market Sell" : orderType = "Stop Market Buy";
+            wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
+
+        }
+        orderLabel->setText(orderType+"\nCreation date: "+date+"\n"+"Offer: "+offer+"\n"+"Crypto: "+crypto+"\nPartially realised: "+partiallyRealised+wantingOffer);
+
+        ui->chooseOrderToDelete->addItem(QString::number(i));
+
+        ui->myOrdersScrollArea->widget()->layout()->addWidget(orderLabel);
+        i++;
+    }
+}
+
+void MainWindow::printHistoricalOrders()
+{
+    for(auto &order: exchange.getUser().getWallet().getHistoricalOrders())
+    {
+        QLabel* orderLabel = createQLabel(140, 400);
+
+        QString orderType;
+        QString date = QString::fromStdString( std::to_string(order->getCreationDate().tm_mday) +"."+ std::to_string(order->getCreationDate().tm_mon+1)+ "."+ std::to_string(order->getCreationDate().tm_year));
+        QString exeucutionDate = QString::fromStdString(std::to_string(order->getExecutionDate().tm_mday) +"."+ std::to_string(order->getExecutionDate().tm_mon+1)+ "."+ std::to_string(order->getExecutionDate().tm_year));
+        QString crypto = QString::fromStdString(cryptoTypeToString(order->getCryptoType()));
+        QString offer = QString::number(order->getAmount());
+        QString wantingOffer = "";
+        QString partiallyRealised="";
+        order->isPartialRealised() == true ? partiallyRealised = "yes" : partiallyRealised = "no";
+        if(order->getOrderType() == "MOB")
+        {
+            orderType = "Market Buy";
+
+        }
+        else if (order->getOrderType() == "MOS")
+        {
+            orderType = "Market Sell";
+        }
+        else if (order->getOrderType() == "SLO")
+        {
+            order->getIsSelling() == true ? orderType = "Stop Limit Sell" : orderType = "Stop Limit Buy";
+            wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
+        }
+        else
+        {
+            order->getIsSelling() == true ? orderType = "Stop Market Sell" : orderType = "Stop Market Buy";
+            wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
+        }
+        orderLabel->setText(orderType+"\nCreation date: "+date+"\n"+"Offer: "+offer+"\n"+"Crypto: "+crypto+wantingOffer+"\nPartially realised: "+partiallyRealised+"\nExeuction date: "+exeucutionDate);
+
+        ui->historicalOrdersScrollArea->widget()->layout()->addWidget(orderLabel);
+    }
+}
+
+
+void MainWindow::on_deleteOrderBtn_clicked()
+{
+    int chosenOrder = ui->chooseOrderToDelete->currentText().toInt() -1;
+
+    std::vector<std::shared_ptr<Order>>& currentOrders = exchange.getUser().getWallet().getCurrentOrders();
+
+    currentOrders[chosenOrder]->setExecutionDate(exchange.getDate());
+
+    std::vector<std::shared_ptr<Order>>& historicalOrders = exchange.getUser().getWallet().getHistoricalOrders();
+
+    historicalOrders.push_back(currentOrders[chosenOrder]);
+
+    currentOrders.erase(currentOrders.begin() + chosenOrder);
+
+    exchange.getUser().saveClosedCFDsToFile();
+    exchange.getUser().saveOpenedCFDsToFile();
+
+    ui->chooseOrderToDelete->clear();
+
+    printMyOrders();
+
+    QMessageBox::information(this,"My Orders", "The chosen order was deleted successfully!" );
+}
+
+bool MainWindow::validateCrypto(const cryptoType& type, const double& cryptoAmount)
 {
     if(cryptoAmount == 0)
     {
         QMessageBox::warning(this,"My Orders", "Value of selected cryptocurrency cannot be equal 0." );
-        return;
+        return false;
     }
 
     if(cryptoAmount >= exchange.getUser().getWallet().getAmountOfCryptocurrency(type) )
     {
         QMessageBox::warning(this,"My Orders", "You don't have enough cryptocurrency to realize Order." );
-        return;
+        return false;
     }
+
+    return true;
 }
 
-void MainWindow::validateUSD(const double& usd)
+bool MainWindow::validateUSD(const double& usd)
 {
     if(usd == 0)
     {
-        QMessageBox::warning(this,"My Orders", "Value of USD cannot be equal 0." );
-        return;
+        QMessageBox::warning(this,"My Orders", "Value of USD cannot equal 0." );
+        return false;
     }
 
     if( usd >= exchange.getUser().getWallet().getMyUSD())
     {
         QMessageBox::warning(this,"My Orders", "You don't have enough USD to realize Order." );
-        return;
+        return false;
     }
+    return true;
 }
 
 void MainWindow::on_chooseOrderType_activated(const QString &arg1)
@@ -579,12 +740,17 @@ void MainWindow::on_chooseOrderType_activated(const QString &arg1)
 void MainWindow::on_goBackBtnFromMyOrdersBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
-    //removing them from area
+
+    foreach(QLabel* le, ui->myOrdersScrollArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
 }
 
 //HISTORICAL ORDERS
 void MainWindow::on_myHistoricalOrdersBtn_clicked()
 {
+    printHistoricalOrders();
     ui->stackedWidget->setCurrentIndex(9);
 }
 
@@ -593,17 +759,77 @@ void MainWindow::on_myHistoricalOrdersBtn_clicked()
 void MainWindow::on_goBackBtnFromHistOrdersBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+
+    foreach(QLabel* le, ui->historicalOrdersScrollArea->findChildren<QLabel*>())
+    {
+        delete le;
+    }
 }
 
 //SEE ORDERBOOK
 void MainWindow::on_seeOrderbookBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(10);
+
+    for( auto& order: exchange.getOrderbook().getOrders())
+    {
+        QLabel* orderLabel = createQLabel(140, 400);
+
+        QString orderType;
+        QString date = QString::fromStdString( std::to_string(order->getCreationDate().tm_mday) +"."+ std::to_string(order->getCreationDate().tm_mon+1)+ "."+ std::to_string(order->getCreationDate().tm_year));
+        QString crypto = QString::fromStdString(cryptoTypeToString(order->getCryptoType()));
+        QString offer = QString::number(order->getAmount());
+        QString wantingOffer = "";
+
+        if(order->getOrderType() == "MOB")
+        {
+            orderType = "Market Buy";
+
+        }
+        else if (order->getOrderType() == "MOS")
+        {
+            orderType = "Market Sell";
+        }
+        else if (order->getOrderType() == "SLO")
+        {
+            bool isSelling = order->getIsSelling();
+
+            if(isSelling == true && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) < order->getWantingAmount())
+                break;
+
+            if(isSelling == false && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) > order->getWantingAmount())
+                break;
+
+            isSelling == true ? orderType = "Stop Limit Sell" : orderType = "Stop Limit Buy";
+            wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
+        }
+        else
+        {
+            bool isSelling = order->getIsSelling();
+
+            if(isSelling == true && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) < order->getWantingAmount())
+                break;
+
+            if(isSelling == false && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) > order->getWantingAmount())
+                break;
+
+
+            isSelling == true ? orderType = "Stop Market Sell" : orderType = "Stop Market Buy";
+            wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
+        }
+        orderLabel->setText(orderType+"\nCreation date: "+date+"\n"+"Offer: "+offer+"\n"+"Crypto: "+crypto+wantingOffer);
+
+    }
 }
 
 void MainWindow::on_goBackBtnFromOrderbookBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+
+    foreach(QLabel* le, ui->orderbookScrollArea->findChildren<QLabel*>())
+    {
+       delete le;
+    }
 }
 
 //SEND TRANSFER
@@ -794,11 +1020,8 @@ void MainWindow::printCFDs()
     }
 }
 
-//TODO
 void MainWindow::on_submitCFDBtn_clicked()
 {
-
-
     double unitsAmount = ui->chooseUnitsAmount->value();
 
     if(unitsAmount == 0)
@@ -806,8 +1029,6 @@ void MainWindow::on_submitCFDBtn_clicked()
         QMessageBox::warning(this,"CFD", "Units amount cannot equal 0" );
         return;
     }
-
-
 
     std::string CFDtype = ui->chooseTypeCFD->currentText().toStdString();
     std::string chosenCrypto = ui->cryptoCFD->currentText().toStdString();
@@ -827,6 +1048,7 @@ void MainWindow::on_submitCFDBtn_clicked()
     {
         delete le;
     }
+
     ui->chooseCFDToDelete->clear();
 
    printCFDs();
@@ -850,9 +1072,6 @@ void MainWindow::realizeCFD()
         std::vector<HistoricalRate>::iterator previousDateIter = exchange.getRates().getTodayHistoricalRate(cfd.getChosenCrypto(), cfd.getCreationDate());
         std::vector<HistoricalRate>::iterator todayDateIter = exchange.getRates().getTodayHistoricalRate(cfd.getChosenCrypto(), exchange.getDate());
         std::vector<HistoricalRate>::iterator iter;
-
-        std::cout<<"Previous Date Iter day: "<<previousDateIter->getDate().tm_mday<<std::endl;
-        std::cout<<"todayDateIter day: "<<todayDateIter->getDate().tm_mday<<std::endl;
 
         double CFDUnits = cfd.getUnitsAmount();
         double CFDAmount = cfd.getCurrentCryptoValue();
@@ -901,8 +1120,6 @@ void MainWindow::realizeCFD()
 
     if(bankrupt == true)
     {
-
-
         for(auto &cfd : openedCFDs)
            closedCFDs.push_back(cfd);
 
@@ -962,7 +1179,7 @@ void MainWindow::on_historicalCFDBtn_clicked()
     ui->stackedWidget->setCurrentIndex(14);
 
     for(auto &cfd: exchange.getUser().getWallet().getClosedCFDs())
-    {   std::cout<<std::endl;
+    {
         QLabel* CFDLabel = createQLabel(50, 300);
 
         std::string CFDtype;
@@ -977,8 +1194,6 @@ void MainWindow::on_historicalCFDBtn_clicked()
     }
 }
 
-//TODO
-
 void MainWindow::on_goBackBtnFromHistCFDBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
@@ -988,8 +1203,5 @@ void MainWindow::on_goBackBtnFromHistCFDBtn_clicked()
         delete le;
     }
 }
-
-
-
 
 

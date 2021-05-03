@@ -13,5 +13,20 @@ void StopMarketOrder::print(std::ostream& os) const
     std::string sellOrBuy;
     isSelling == true ? sellOrBuy ="sell": sellOrBuy = "buy";
 
-    os<<name<<cType<<","<<offeringAmount<<","<<wantingAmount<<","<<pRealised<<","<<sellOrBuy<<","<<creationDate.tm_mday<<"."<<creationDate.tm_mon<<"."<<creationDate.tm_year;
+    os<<name<<","<<cType<<","<<offeringAmount<<","<<wantingAmount<<","<<pRealised<<","<<sellOrBuy<<","<<creationDate.tm_mday<<"."<<creationDate.tm_mon<<"."<<creationDate.tm_year;
+}
+
+std::string StopMarketOrder::getOrderType()
+{
+    return "SMO";
+}
+
+bool StopMarketOrder::getIsSelling()
+{
+    return isSelling;
+}
+
+double StopMarketOrder::getWantingAmount()
+{
+    return wantingAmount;
 }

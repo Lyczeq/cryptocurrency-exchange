@@ -164,9 +164,6 @@ public:
     QWidget *myOrdersPanel;
     QLabel *myOrdersLabel;
     QPushButton *goBackBtnFromMyOrdersBtn;
-    QScrollArea *myOrdersArea;
-    QWidget *scrollAreaWidgetContents_3;
-    QGridLayout *gridLayout_7;
     QLabel *myOrdersLabel_2;
     QGroupBox *groupBox_5;
     QVBoxLayout *verticalLayout_19;
@@ -180,16 +177,28 @@ public:
     QLabel *usdAmountLabel;
     QDoubleSpinBox *howMuchUSD;
     QPushButton *submitOrderBtn;
+    QGroupBox *groupBox_9;
+    QGridLayout *gridLayout_12;
+    QSpacerItem *verticalSpacer_3;
+    QComboBox *chooseOrderToDelete;
+    QPushButton *deleteOrderBtn;
+    QLabel *chooseOrderToDeleteLabel;
+    QSpacerItem *verticalSpacer_4;
+    QScrollArea *myOrdersScrollArea;
+    QWidget *scrollAreaWidgetContents_3;
+    QGridLayout *gridLayout_7;
     QWidget *historicalOrdersPanel;
     QPushButton *goBackBtnFromHistOrdersBtn;
     QLabel *orderbookTitle_2;
-    QScrollArea *orderbookArea_2;
-    QWidget *scrollAreaWidgetContents_5;
+    QScrollArea *historicalOrdersScrollArea;
+    QWidget *scrollAreaWidgetContents_6;
+    QGridLayout *gridLayout_13;
     QWidget *seeOrderbookPanel;
     QLabel *orderbookTitle;
     QPushButton *goBackBtnFromOrderbookBtn;
-    QScrollArea *orderbookArea;
-    QWidget *scrollAreaWidgetContents_4;
+    QScrollArea *orderbookScrollArea;
+    QWidget *scrollAreaWidgetContents_10;
+    QGridLayout *gridLayout_15;
     QWidget *sendTransferPanel;
     QLabel *sendTransferTitle;
     QPushButton *sendTransferConfirmBtn;
@@ -874,23 +883,13 @@ public:
         goBackBtnFromMyOrdersBtn->setObjectName(QString::fromUtf8("goBackBtnFromMyOrdersBtn"));
         goBackBtnFromMyOrdersBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromMyOrdersBtn->setFont(font1);
-        myOrdersArea = new QScrollArea(myOrdersPanel);
-        myOrdersArea->setObjectName(QString::fromUtf8("myOrdersArea"));
-        myOrdersArea->setGeometry(QRect(20, 100, 330, 200));
-        myOrdersArea->setWidgetResizable(true);
-        scrollAreaWidgetContents_3 = new QWidget();
-        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 328, 198));
-        gridLayout_7 = new QGridLayout(scrollAreaWidgetContents_3);
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        myOrdersArea->setWidget(scrollAreaWidgetContents_3);
         myOrdersLabel_2 = new QLabel(myOrdersPanel);
         myOrdersLabel_2->setObjectName(QString::fromUtf8("myOrdersLabel_2"));
-        myOrdersLabel_2->setGeometry(QRect(510, 40, 210, 45));
+        myOrdersLabel_2->setGeometry(QRect(530, 50, 210, 45));
         myOrdersLabel_2->setFont(font7);
         groupBox_5 = new QGroupBox(myOrdersPanel);
         groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
-        groupBox_5->setGeometry(QRect(440, 100, 300, 161));
+        groupBox_5->setGeometry(QRect(509, 100, 281, 161));
         verticalLayout_19 = new QVBoxLayout(groupBox_5);
         verticalLayout_19->setObjectName(QString::fromUtf8("verticalLayout_19"));
         formLayout_4 = new QFormLayout();
@@ -965,7 +964,49 @@ public:
 
         submitOrderBtn = new QPushButton(myOrdersPanel);
         submitOrderBtn->setObjectName(QString::fromUtf8("submitOrderBtn"));
-        submitOrderBtn->setGeometry(QRect(550, 270, 80, 25));
+        submitOrderBtn->setGeometry(QRect(610, 270, 80, 25));
+        groupBox_9 = new QGroupBox(myOrdersPanel);
+        groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
+        groupBox_9->setGeometry(QRect(360, 90, 131, 203));
+        gridLayout_12 = new QGridLayout(groupBox_9);
+        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
+        verticalSpacer_3 = new QSpacerItem(20, 60, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_12->addItem(verticalSpacer_3, 2, 0, 1, 1);
+
+        chooseOrderToDelete = new QComboBox(groupBox_9);
+        chooseOrderToDelete->setObjectName(QString::fromUtf8("chooseOrderToDelete"));
+        chooseOrderToDelete->setFont(font8);
+        chooseOrderToDelete->setLayoutDirection(Qt::RightToLeft);
+        chooseOrderToDelete->setModelColumn(0);
+
+        gridLayout_12->addWidget(chooseOrderToDelete, 1, 0, 1, 1);
+
+        deleteOrderBtn = new QPushButton(groupBox_9);
+        deleteOrderBtn->setObjectName(QString::fromUtf8("deleteOrderBtn"));
+
+        gridLayout_12->addWidget(deleteOrderBtn, 3, 0, 1, 1);
+
+        chooseOrderToDeleteLabel = new QLabel(groupBox_9);
+        chooseOrderToDeleteLabel->setObjectName(QString::fromUtf8("chooseOrderToDeleteLabel"));
+        chooseOrderToDeleteLabel->setAlignment(Qt::AlignCenter);
+
+        gridLayout_12->addWidget(chooseOrderToDeleteLabel, 0, 0, 1, 1);
+
+        verticalSpacer_4 = new QSpacerItem(20, 28, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_12->addItem(verticalSpacer_4, 4, 0, 1, 1);
+
+        myOrdersScrollArea = new QScrollArea(myOrdersPanel);
+        myOrdersScrollArea->setObjectName(QString::fromUtf8("myOrdersScrollArea"));
+        myOrdersScrollArea->setGeometry(QRect(20, 90, 330, 200));
+        myOrdersScrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_3 = new QWidget();
+        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 328, 198));
+        gridLayout_7 = new QGridLayout(scrollAreaWidgetContents_3);
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        myOrdersScrollArea->setWidget(scrollAreaWidgetContents_3);
         stackedWidget->addWidget(myOrdersPanel);
         historicalOrdersPanel = new QWidget();
         historicalOrdersPanel->setObjectName(QString::fromUtf8("historicalOrdersPanel"));
@@ -978,15 +1019,16 @@ public:
         orderbookTitle_2->setGeometry(QRect(250, 10, 290, 45));
         orderbookTitle_2->setFont(font6);
         orderbookTitle_2->setAlignment(Qt::AlignCenter);
-        orderbookArea_2 = new QScrollArea(historicalOrdersPanel);
-        orderbookArea_2->setObjectName(QString::fromUtf8("orderbookArea_2"));
-        orderbookArea_2->setGeometry(QRect(170, 80, 450, 230));
-        orderbookArea_2->setWidgetResizable(true);
-        orderbookArea_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        scrollAreaWidgetContents_5 = new QWidget();
-        scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 448, 228));
-        orderbookArea_2->setWidget(scrollAreaWidgetContents_5);
+        historicalOrdersScrollArea = new QScrollArea(historicalOrdersPanel);
+        historicalOrdersScrollArea->setObjectName(QString::fromUtf8("historicalOrdersScrollArea"));
+        historicalOrdersScrollArea->setGeometry(QRect(170, 80, 450, 230));
+        historicalOrdersScrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_6 = new QWidget();
+        scrollAreaWidgetContents_6->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_6"));
+        scrollAreaWidgetContents_6->setGeometry(QRect(0, 0, 448, 228));
+        gridLayout_13 = new QGridLayout(scrollAreaWidgetContents_6);
+        gridLayout_13->setObjectName(QString::fromUtf8("gridLayout_13"));
+        historicalOrdersScrollArea->setWidget(scrollAreaWidgetContents_6);
         stackedWidget->addWidget(historicalOrdersPanel);
         seeOrderbookPanel = new QWidget();
         seeOrderbookPanel->setObjectName(QString::fromUtf8("seeOrderbookPanel"));
@@ -999,14 +1041,16 @@ public:
         goBackBtnFromOrderbookBtn->setObjectName(QString::fromUtf8("goBackBtnFromOrderbookBtn"));
         goBackBtnFromOrderbookBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromOrderbookBtn->setFont(font1);
-        orderbookArea = new QScrollArea(seeOrderbookPanel);
-        orderbookArea->setObjectName(QString::fromUtf8("orderbookArea"));
-        orderbookArea->setGeometry(QRect(170, 80, 450, 230));
-        orderbookArea->setWidgetResizable(true);
-        scrollAreaWidgetContents_4 = new QWidget();
-        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 448, 228));
-        orderbookArea->setWidget(scrollAreaWidgetContents_4);
+        orderbookScrollArea = new QScrollArea(seeOrderbookPanel);
+        orderbookScrollArea->setObjectName(QString::fromUtf8("orderbookScrollArea"));
+        orderbookScrollArea->setGeometry(QRect(170, 80, 450, 230));
+        orderbookScrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_10 = new QWidget();
+        scrollAreaWidgetContents_10->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_10"));
+        scrollAreaWidgetContents_10->setGeometry(QRect(0, 0, 448, 228));
+        gridLayout_15 = new QGridLayout(scrollAreaWidgetContents_10);
+        gridLayout_15->setObjectName(QString::fromUtf8("gridLayout_15"));
+        orderbookScrollArea->setWidget(scrollAreaWidgetContents_10);
         stackedWidget->addWidget(seeOrderbookPanel);
         sendTransferPanel = new QWidget();
         sendTransferPanel->setObjectName(QString::fromUtf8("sendTransferPanel"));
@@ -1376,6 +1420,10 @@ public:
         howMuchCryptoOrderLabel->setText(QCoreApplication::translate("MainWindow", "Amount in crypto: ", nullptr));
         usdAmountLabel->setText(QCoreApplication::translate("MainWindow", "Amount in USD: ", nullptr));
         submitOrderBtn->setText(QCoreApplication::translate("MainWindow", "Submit", nullptr));
+        groupBox_9->setTitle(QString());
+        deleteOrderBtn->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
+        chooseOrderToDeleteLabel->setText(QCoreApplication::translate("MainWindow", "Choose order\n"
+"to delete", nullptr));
         goBackBtnFromHistOrdersBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
         orderbookTitle_2->setText(QCoreApplication::translate("MainWindow", "History of orders", nullptr));
         orderbookTitle->setText(QCoreApplication::translate("MainWindow", "Orderbook", nullptr));
