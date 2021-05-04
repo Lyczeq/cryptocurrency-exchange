@@ -91,11 +91,15 @@ void MainWindow::on_signInButtonLog_clicked()
         QString welcomeMessage = QString::fromStdString("Welcome "+loggedUser.getFirstName()+" "+loggedUser.getLastName()+"!");
         ui->welcomeUser->setText(welcomeMessage);
 
+        realizeOrders();
+
         fillRatesTable();
         fillMyBankBalance();
 
         ui->emailLineEditSignIn->clear();
         ui->passwordLineEditSignIn->clear();
+
+
 
         QMessageBox::information(this,"Sign In", "Logged successfully!" );
         ui->stackedWidget->setCurrentIndex(3);
@@ -113,17 +117,47 @@ void MainWindow::on_signUpButtonCreateAcc_clicked()
     //regex dla wszystkich informacji
     std::string email =ui->emailLineEditSignUp->text().toStdString();
 
-    std::regex emailRegex("");
 
     if(exchange.getUsersList().checkIfUserExists(email))
     {
-        QMessageBox::warning(this,"Sign Up", "The provided email is already taken!" );
+        QMessageBox::warning(this,"Sign Up", "The provided email is already taken." );
         return;
     }
 
+    std::regex regEmail("^([a-zA-Z0-9_\\.]{3,})@([a-zA-Z0-9]+)\\.([a-z]+)");
+
+    if(!std::regex_search(email, regEmail))
+    {
+        QMessageBox::warning(this,"Sign Up", "The provided email is not an email type." );
+        return;
+    }
+
+    std::regex regNames("[a-zA-Z]+");
+
     std::string firstName = ui->firstNameLineEdit->text().toStdString();
     std::string lastName = ui->lastNameLineEdit->text().toStdString();
+
+    if(!std::regex_match(firstName, regNames))
+    {
+        QMessageBox::warning(this,"Sign Up", "The provided first name cannot contain any numbers and special characters!" );
+        return;
+    }
+
+    if(!std::regex_match(lastName, regNames))
+    {
+        QMessageBox::warning(this,"Sign Up", "The provided last name cannot contain any numbers and special characters!" );
+        return;
+    }
+
+    std::regex regPassword("^\\,");
+
     std::string password = ui->passwordLineSignUp->text().toStdString();
+
+    if(password.length() <10 || std::regex_search(password,regPassword))
+    {
+        QMessageBox::warning(this,"Sign Up", "The provided password must contain at least 10 characters and cannot contain a comma." );
+        return;
+    }
 
     Wallet newWalllet;
     User newUser(firstName, lastName, email, newWalllet);
@@ -148,6 +182,8 @@ void MainWindow::on_signUpButtonCreateAcc_clicked()
     std::string welcomeMessageStr = "Welcome "+newUser.getFirstName()+" "+newUser.getLastName()+"!";
     QString welcomeMessage = QString::fromStdString(welcomeMessageStr);
     ui->welcomeUser->setText(welcomeMessage);
+
+    realizeOrders();
 
     fillRatesTable();
     fillMyBankBalance();
@@ -215,6 +251,8 @@ void MainWindow::on_changeDateButton_clicked()
         fillRatesTable();//tm_mon has range 0-11
         saveNewDate();
         realizeCFD();
+
+        realizeOrders();
         fillMyBankBalance();
         exchange.getUser().saveUSDToFile();
         QMessageBox::information(this,"Date edit", "Date was changed successfully!" );
@@ -438,8 +476,8 @@ void MainWindow::on_myCurrentOrdersBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(8);
 
-    ui->howMuchOrder->setEnabled(false);
-    ui->howMuchUSD->setEnabled(true);
+    ui->myOffer->setEnabled(true);
+    ui->expectedOffer->setEnabled(false);
     ui->chooseOrderType->setCurrentText("Market Buy");
 
     printMyOrders();
@@ -452,14 +490,18 @@ void MainWindow::on_submitOrderBtn_clicked()
     {
         case 0: //Market Buy
         {
-            double usdAmount = ui->howMuchUSD->value();
+            double myOfferAmount = ui->myOffer->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            if( validateUSD(usdAmount) == false)
-                break;
 
-            std::shared_ptr<MarketOrderBuy> marketBuy = std::make_shared<MarketOrderBuy>(cryptocurrency, usdAmount, false, exchange.getDate());
+            if(myOfferAmount == 0 || myOfferAmount >= exchange.getUser().getWallet().getMyUSD())
+            {
+                QMessageBox::warning(this,"My Orders", "Value of USD cannot equal 0 or greater than yours." );
+                return;
+            }
+
+            std::shared_ptr<MarketOrderBuy> marketBuy = std::make_shared<MarketOrderBuy>(cryptocurrency, myOfferAmount, false, exchange.getDate());
 
             exchange.getOrderbook().getOrders().push_back(marketBuy);
             exchange.getUser().getWallet().getCurrentOrders().push_back(marketBuy);
@@ -468,14 +510,18 @@ void MainWindow::on_submitOrderBtn_clicked()
         }
         case 1: // Market Sell
         {
-            double cryptoAmount = ui->howMuchOrder->value();
+            double myOfferAmount = ui->myOffer->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
-                break;
 
-            std::shared_ptr<MarketOrderSell> marketSell = std::make_shared<MarketOrderSell>(cryptocurrency, cryptoAmount, false, exchange.getDate());
+            if(myOfferAmount == 0 || myOfferAmount >= exchange.getUser().getWallet().getAmountOfCryptocurrency(cryptocurrency))
+            {
+                QMessageBox::warning(this,"My Orders", "Value of selected cryptocurrency cannot equal 0 or greater than yours." );
+                return;
+            }
+
+            std::shared_ptr<MarketOrderSell> marketSell = std::make_shared<MarketOrderSell>(cryptocurrency, myOfferAmount, false, exchange.getDate());
 
             exchange.getOrderbook().getOrders().push_back(marketSell);
             exchange.getUser().getWallet().getCurrentOrders().push_back(marketSell);
@@ -484,18 +530,25 @@ void MainWindow::on_submitOrderBtn_clicked()
         }
         case 2: //Stop Limit Sell
         {
-            double usdAmount = ui->howMuchUSD->value();
-            double cryptoAmount = ui->howMuchOrder->value();
+            double myOfferAmount = ui->myOffer->value();
+            double expectedOffer = ui->expectedOffer->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            if( validateUSD(usdAmount) == false)
-                break;
+            if(myOfferAmount <=0 || myOfferAmount >= exchange.getUser().getWallet().getAmountOfCryptocurrency(cryptocurrency))
+            {
+                QMessageBox::warning(this,"My Orders", "Value of selected cryptocurrency cannot equal 0 or greater than yours." );
+                return;
+            }
 
-            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
-                break;
+            if(expectedOffer <=0)
+            {
+                QMessageBox::warning(this,"My Orders", "Expected value cannot be equal 0." );
+                return;
+            }
 
-             std::shared_ptr<StopLimitOrder> stopLimitSell = std::make_shared<StopLimitOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), true);
+
+             std::shared_ptr<StopLimitOrder> stopLimitSell = std::make_shared<StopLimitOrder>(cryptocurrency, myOfferAmount, expectedOffer, false, exchange.getDate(), true);
 
               exchange.getOrderbook().getOrders().push_back(stopLimitSell);
               exchange.getUser().getWallet().getCurrentOrders().push_back(stopLimitSell);
@@ -505,18 +558,25 @@ void MainWindow::on_submitOrderBtn_clicked()
         }
         case 3: //Stop Limit Buy
         {
-            double usdAmount = ui->howMuchUSD->value();
-            double cryptoAmount = ui->howMuchOrder->value();
+            double myOfferAmount = ui->myOffer->value();
+            double expectedOffer = ui->expectedOffer->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            if( validateUSD(usdAmount) == false)
-                break;
 
-            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
-                break;
+            if(myOfferAmount == 0 || myOfferAmount >= exchange.getUser().getWallet().getMyUSD())
+            {
+                QMessageBox::warning(this,"My Orders", "Value of USD cannot equal 0 or greater than yours." );
+                return;
+            }
 
-             std::shared_ptr<StopLimitOrder> stopLimitBuy = std::make_shared<StopLimitOrder>(cryptocurrency, usdAmount, cryptoAmount,false, exchange.getDate(), false);
+            if(expectedOffer <=0)
+            {
+                QMessageBox::warning(this,"My Orders", "Expected value cannot be equal 0." );
+                return;
+            }
+
+             std::shared_ptr<StopLimitOrder> stopLimitBuy = std::make_shared<StopLimitOrder>(cryptocurrency, myOfferAmount, expectedOffer,false, exchange.getDate(), false);
 
              exchange.getOrderbook().getOrders().push_back(stopLimitBuy);
              exchange.getUser().getWallet().getCurrentOrders().push_back(stopLimitBuy);
@@ -525,18 +585,24 @@ void MainWindow::on_submitOrderBtn_clicked()
         }
         case 4: //Stop Market Sell
         {
-            double usdAmount = ui->howMuchUSD->value();
-            double cryptoAmount = ui->howMuchOrder->value();
+            double myOfferAmount = ui->myOffer->value();
+            double expectedOffer = ui->expectedOffer->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            if( validateUSD(usdAmount) == false)
-                break;
+            if(myOfferAmount <=0 || myOfferAmount >= exchange.getUser().getWallet().getAmountOfCryptocurrency(cryptocurrency))
+            {
+                QMessageBox::warning(this,"My Orders", "Value of selected cryptocurrency cannot equal 0 or greater than yours." );
+                return;
+            }
 
-            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
-                break;
+            if(expectedOffer <=0)
+            {
+                QMessageBox::warning(this,"My Orders", "Expected value cannot be equal 0." );
+                return;
+            }
 
-             std::shared_ptr<StopMarketOrder> stopMarketSell = std::make_shared<StopMarketOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), true);
+             std::shared_ptr<StopMarketOrder> stopMarketSell = std::make_shared<StopMarketOrder>(cryptocurrency, myOfferAmount, expectedOffer, false, exchange.getDate(), true);
 
              exchange.getOrderbook().getOrders().push_back(stopMarketSell);
              exchange.getUser().getWallet().getCurrentOrders().push_back(stopMarketSell);
@@ -546,18 +612,25 @@ void MainWindow::on_submitOrderBtn_clicked()
         }
         case 5: //Stop Market Buy
         {
-            double usdAmount = ui->howMuchUSD->value();
-            double cryptoAmount = ui->howMuchOrder->value();
+            double myOfferAmount = ui->myOffer->value();
+            double expectedOffer = ui->expectedOffer->value();
             const std::string selectedCrypto = ui->chooseCurrencyOrder->currentText().toStdString();
             cryptoType cryptocurrency = stringToCryptoType(selectedCrypto);
 
-            if( validateUSD(usdAmount) == false)
-                break;
 
-            if( validateCrypto(cryptocurrency, cryptoAmount) == false)
-                break;
+            if(myOfferAmount == 0 || myOfferAmount >= exchange.getUser().getWallet().getMyUSD())
+            {
+                QMessageBox::warning(this,"My Orders", "Value of USD cannot equal 0 or greater than yours." );
+                return;
+            }
 
-             std::shared_ptr<StopMarketOrder> stopMarketBuy = std::make_shared<StopMarketOrder>(cryptocurrency, cryptoAmount, usdAmount, false, exchange.getDate(), false);
+            if(expectedOffer <=0)
+            {
+                QMessageBox::warning(this,"My Orders", "Expected value cannot be equal 0." );
+                return;
+            }
+
+             std::shared_ptr<StopMarketOrder> stopMarketBuy = std::make_shared<StopMarketOrder>(cryptocurrency, myOfferAmount, expectedOffer, false, exchange.getDate(), false);
 
              exchange.getOrderbook().getOrders().push_back(stopMarketBuy);
              exchange.getUser().getWallet().getCurrentOrders().push_back(stopMarketBuy);
@@ -566,17 +639,218 @@ void MainWindow::on_submitOrderBtn_clicked()
         }
     }
 
-    ui->howMuchUSD->clear();
-    ui->howMuchOrder->clear();
+    ui->myOffer->clear();
+    ui->expectedOffer->clear();
     ui->chooseOrderToDelete->clear();
     printMyOrders();
 
     exchange.getUser().saveCurrentOrders();
-    //
-    exchange.getOrderbook().printOrders();
-    //
-
 }
+
+void MainWindow::realizeOrders()
+{
+        User& user = exchange.getUser();
+
+        auto& currentOrders =  user.getWallet().getCurrentOrders();
+
+        for(auto &order : currentOrders)
+        {
+
+
+            if(order->getOrderType() == "MOB")
+            {
+                cryptoType cType = order->getCryptoType();
+
+                if(user.getWallet().getMyUSD() >= order->getAmount())
+                {
+                    user.getWallet().subtractUSD(order->getAmount());
+                    double earnedVaulue = order->getAmount()/exchange.getRates().getCurrentRates().getCurrentRate(cType) ;
+                    user.getWallet().changeValueOfSelectedCrypto( earnedVaulue, true,cType);
+
+                    auto newOrder = order;
+                    newOrder->setExecutionDate(exchange.getDate());
+
+                    auto& historicalOrders = user.getWallet().getHistoricalOrders();
+
+                    historicalOrders.push_back(newOrder);
+
+                    auto & currentOrders =  user.getWallet().getCurrentOrders();
+                    currentOrders.erase(std::remove(currentOrders.begin(), currentOrders.end(), order), currentOrders.end());
+                    user.saveCurrentOrders();
+
+                    exchange.getOrderbook().getOrders().erase(std::remove( exchange.getOrderbook().getOrders().begin(), exchange.getOrderbook().getOrders().end(), order), exchange.getOrderbook().getOrders().end());
+
+                    user.saveHistoricalOrders();
+                    user.saveUSDToFile();
+                    user.saveCryptoFile();
+                }
+            }
+
+
+            else if(order->getOrderType() == "MOS")
+            {
+                cryptoType cType = order->getCryptoType();
+
+                if(user.getWallet().getAmountOfCryptocurrency(cType) >= order->getAmount() )
+                {
+                    user.getWallet().changeValueOfSelectedCrypto(order->getAmount(),false,cType);
+
+                    double earnedUSD = order->getAmount() * exchange.getRates().getCurrentRates().getCurrentRate(cType);
+
+                    user.getWallet().addUSD(earnedUSD);
+
+                    auto newOrder = order;
+                    newOrder->setExecutionDate(exchange.getDate());
+
+                    auto& historicalOrders = user.getWallet().getHistoricalOrders();
+
+                    historicalOrders.push_back(newOrder);
+
+                    auto & currentOrders =  user.getWallet().getCurrentOrders();
+                    currentOrders.erase(std::remove(currentOrders.begin(), currentOrders.end(), order), currentOrders.end());
+                    user.saveCurrentOrders();
+
+                    exchange.getOrderbook().getOrders().erase(std::remove( exchange.getOrderbook().getOrders().begin(), exchange.getOrderbook().getOrders().end(), order), exchange.getOrderbook().getOrders().end());
+
+                    user.saveHistoricalOrders();
+                    user.saveUSDToFile();
+                    user.saveCryptoFile();
+               }
+            }
+
+            else if(order->getOrderType() == "SMO")
+            {
+                cryptoType cType = order->getCryptoType();
+                if(order->getIsSelling() == true)
+                {
+                    if( exchange.getRates().getCurrentRates().getCurrentRate(cType) >= order->getWantingAmount())
+                    {
+                        if(user.getWallet().getAmountOfCryptocurrency(cType) >= order->getAmount() )
+                        {
+                            user.getWallet().changeValueOfSelectedCrypto(order->getAmount(),false,cType);
+
+                            double earnedUSD = order->getAmount() * exchange.getRates().getCurrentRates().getCurrentRate(cType);
+
+                            user.getWallet().addUSD(earnedUSD);
+
+                            auto newOrder = order;
+                            newOrder->setExecutionDate(exchange.getDate());
+
+                            auto& historicalOrders = user.getWallet().getHistoricalOrders();
+
+                            historicalOrders.push_back(newOrder);
+
+                            auto & currentOrders =  user.getWallet().getCurrentOrders();
+                            currentOrders.erase(std::remove(currentOrders.begin(), currentOrders.end(), order), currentOrders.end());
+                            user.saveCurrentOrders();
+
+                            exchange.getOrderbook().getOrders().erase(std::remove( exchange.getOrderbook().getOrders().begin(), exchange.getOrderbook().getOrders().end(), order), exchange.getOrderbook().getOrders().end());
+
+                            user.saveHistoricalOrders();
+                            user.saveUSDToFile();
+                            user.saveCryptoFile();
+                       }
+                    }
+                }
+                else if( order->getIsSelling() == false )
+                {
+                    if( exchange.getRates().getCurrentRates().getCurrentRate(cType) <= order->getWantingAmount())
+                    {
+                        if(user.getWallet().getMyUSD() >= order->getAmount())
+                        {
+                            user.getWallet().subtractUSD(order->getAmount());
+                            double earnedVaulue = order->getAmount()/exchange.getRates().getCurrentRates().getCurrentRate(cType) ;
+                            user.getWallet().changeValueOfSelectedCrypto( earnedVaulue, true,cType);
+
+                            auto newOrder = order;
+                            newOrder->setExecutionDate(exchange.getDate());
+
+                            auto& historicalOrders = user.getWallet().getHistoricalOrders();
+
+                            historicalOrders.push_back(newOrder);
+
+                            auto & currentOrders =  user.getWallet().getCurrentOrders();
+                            currentOrders.erase(std::remove(currentOrders.begin(), currentOrders.end(), order), currentOrders.end());
+                            user.saveCurrentOrders();
+
+                            exchange.getOrderbook().getOrders().erase(std::remove( exchange.getOrderbook().getOrders().begin(), exchange.getOrderbook().getOrders().end(), order), exchange.getOrderbook().getOrders().end());
+
+                            user.saveHistoricalOrders();
+                            user.saveUSDToFile();
+                            user.saveCryptoFile();
+                        }
+                    }
+                }
+            }
+
+            else if(order->getOrderType() == "SLO")
+            {
+                cryptoType cType = order->getCryptoType();
+
+                if(order->getIsSelling() == true)
+                {
+                    if( exchange.getRates().getCurrentRates().getCurrentRate(cType) >= order->getWantingAmount())
+                    {
+                        if(user.getWallet().getAmountOfCryptocurrency(cType) >= order->getAmount() )
+                        {
+                            user.getWallet().changeValueOfSelectedCrypto(order->getAmount(),false,cType);
+
+                            double earnedUSD = order->getAmount() * exchange.getRates().getCurrentRates().getCurrentRate(cType);
+
+                            user.getWallet().addUSD(earnedUSD);
+
+                            auto newOrder = order;
+                            newOrder->setExecutionDate(exchange.getDate());
+
+                            auto& historicalOrders = user.getWallet().getHistoricalOrders();
+
+                            historicalOrders.push_back(newOrder);
+
+                            auto & currentOrders =  user.getWallet().getCurrentOrders();
+                            currentOrders.erase(std::remove(currentOrders.begin(), currentOrders.end(), order), currentOrders.end());
+                            user.saveCurrentOrders();
+
+                            exchange.getOrderbook().getOrders().erase(std::remove( exchange.getOrderbook().getOrders().begin(), exchange.getOrderbook().getOrders().end(), order), exchange.getOrderbook().getOrders().end());
+
+                            user.saveHistoricalOrders();
+                            user.saveUSDToFile();
+                            user.saveCryptoFile();
+                       }
+                    }
+                }
+                else if( order->getIsSelling() == false )
+                {
+                    if( exchange.getRates().getCurrentRates().getCurrentRate(cType) <= order->getWantingAmount())
+                    {
+                        if(user.getWallet().getMyUSD() >= order->getAmount())
+                        {
+                            user.getWallet().subtractUSD(order->getAmount());
+                            double earnedVaulue = order->getAmount()/exchange.getRates().getCurrentRates().getCurrentRate(cType) ;
+                            user.getWallet().changeValueOfSelectedCrypto( earnedVaulue, true,cType);
+
+                            auto newOrder = order;
+                            newOrder->setExecutionDate(exchange.getDate());
+
+                            auto& historicalOrders = user.getWallet().getHistoricalOrders();
+
+                            historicalOrders.push_back(newOrder);
+
+                            auto & currentOrders =  user.getWallet().getCurrentOrders();
+                            currentOrders.erase(std::remove(currentOrders.begin(), currentOrders.end(), order), currentOrders.end());
+                            user.saveCurrentOrders();
+
+                            exchange.getOrderbook().getOrders().erase(std::remove( exchange.getOrderbook().getOrders().begin(), exchange.getOrderbook().getOrders().end(), order), exchange.getOrderbook().getOrders().end());
+
+                            user.saveHistoricalOrders();
+                            user.saveUSDToFile();
+                            user.saveCryptoFile();
+                        }
+                    }
+                }
+            }
+        }
+}
+
 
 void MainWindow::printMyOrders()
 {
@@ -681,8 +955,8 @@ void MainWindow::on_deleteOrderBtn_clicked()
 
     currentOrders.erase(currentOrders.begin() + chosenOrder);
 
-    exchange.getUser().saveClosedCFDsToFile();
-    exchange.getUser().saveOpenedCFDsToFile();
+    exchange.getUser().saveCurrentOrders();
+    exchange.getUser().saveHistoricalOrders();
 
     ui->chooseOrderToDelete->clear();
 
@@ -691,50 +965,17 @@ void MainWindow::on_deleteOrderBtn_clicked()
     QMessageBox::information(this,"My Orders", "The chosen order was deleted successfully!" );
 }
 
-bool MainWindow::validateCrypto(const cryptoType& type, const double& cryptoAmount)
-{
-    if(cryptoAmount == 0)
-    {
-        QMessageBox::warning(this,"My Orders", "Value of selected cryptocurrency cannot be equal 0." );
-        return false;
-    }
 
-    if(cryptoAmount >= exchange.getUser().getWallet().getAmountOfCryptocurrency(type) )
-    {
-        QMessageBox::warning(this,"My Orders", "You don't have enough cryptocurrency to realize Order." );
-        return false;
-    }
-
-    return true;
-}
-
-bool MainWindow::validateUSD(const double& usd)
-{
-    if(usd == 0)
-    {
-        QMessageBox::warning(this,"My Orders", "Value of USD cannot equal 0." );
-        return false;
-    }
-
-    if( usd >= exchange.getUser().getWallet().getMyUSD())
-    {
-        QMessageBox::warning(this,"My Orders", "You don't have enough USD to realize Order." );
-        return false;
-    }
-    return true;
-}
 
 void MainWindow::on_chooseOrderType_activated(const QString &arg1)
 {
-    if(arg1 == "Market Buy")
-        ui->howMuchOrder->setEnabled(false);
+    if(arg1 == "Market Buy" || arg1 == "Market Sell")
+        ui->expectedOffer->setEnabled(false);
     else
-        ui->howMuchOrder->setEnabled(true);
-
-    if(arg1 == "Market Sell")
-        ui->howMuchUSD->setEnabled(false);
-    else
-        ui->howMuchUSD->setEnabled(true);
+    {
+        ui->myOffer->setEnabled(true);
+        ui->expectedOffer->setEnabled(true);
+    }
 }
 
 void MainWindow::on_goBackBtnFromMyOrdersBtn_clicked()
@@ -795,10 +1036,10 @@ void MainWindow::on_seeOrderbookBtn_clicked()
             bool isSelling = order->getIsSelling();
 
             if(isSelling == true && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) < order->getWantingAmount())
-                break;
+                continue;
 
             if(isSelling == false && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) > order->getWantingAmount())
-                break;
+                continue;
 
             isSelling == true ? orderType = "Stop Limit Sell" : orderType = "Stop Limit Buy";
             wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
@@ -808,16 +1049,18 @@ void MainWindow::on_seeOrderbookBtn_clicked()
             bool isSelling = order->getIsSelling();
 
             if(isSelling == true && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) < order->getWantingAmount())
-                break;
+                continue;
 
             if(isSelling == false && exchange.getRates().getCurrentRates().getCurrentRate(order->getCryptoType()) > order->getWantingAmount())
-                break;
+                continue;
 
 
             isSelling == true ? orderType = "Stop Market Sell" : orderType = "Stop Market Buy";
             wantingOffer = "\nExpected offer: "+ QString::number(order->getWantingAmount());
         }
+
         orderLabel->setText(orderType+"\nCreation date: "+date+"\n"+"Offer: "+offer+"\n"+"Crypto: "+crypto+wantingOffer);
+        ui->orderbookScrollArea->widget()->layout()->addWidget(orderLabel);
 
     }
 }

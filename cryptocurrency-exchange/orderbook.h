@@ -18,7 +18,6 @@ public:
 
     std::vector<std::shared_ptr<Order>>& getOrders();
 
-    void printOrders();
 };
 
 #endif // ORDERBOOK_H

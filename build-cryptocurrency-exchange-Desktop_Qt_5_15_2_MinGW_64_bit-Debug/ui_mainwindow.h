@@ -170,12 +170,12 @@ public:
     QFormLayout *formLayout_4;
     QLabel *cryptoAmountLabel;
     QComboBox *chooseCurrencyOrder;
-    QDoubleSpinBox *howMuchOrder;
+    QDoubleSpinBox *expectedOffer;
     QLabel *orderTypeLabel;
     QComboBox *chooseOrderType;
-    QLabel *howMuchCryptoOrderLabel;
-    QLabel *usdAmountLabel;
-    QDoubleSpinBox *howMuchUSD;
+    QLabel *expectedOfferLabel;
+    QLabel *myOfferLabel;
+    QDoubleSpinBox *myOffer;
     QPushButton *submitOrderBtn;
     QGroupBox *groupBox_9;
     QGridLayout *gridLayout_12;
@@ -916,11 +916,12 @@ public:
 
         formLayout_4->setWidget(1, QFormLayout::FieldRole, chooseCurrencyOrder);
 
-        howMuchOrder = new QDoubleSpinBox(groupBox_5);
-        howMuchOrder->setObjectName(QString::fromUtf8("howMuchOrder"));
-        howMuchOrder->setEnabled(true);
+        expectedOffer = new QDoubleSpinBox(groupBox_5);
+        expectedOffer->setObjectName(QString::fromUtf8("expectedOffer"));
+        expectedOffer->setEnabled(true);
+        expectedOffer->setMaximum(9999999999999.000000000000000);
 
-        formLayout_4->setWidget(2, QFormLayout::FieldRole, howMuchOrder);
+        formLayout_4->setWidget(2, QFormLayout::FieldRole, expectedOffer);
 
         orderTypeLabel = new QLabel(groupBox_5);
         orderTypeLabel->setObjectName(QString::fromUtf8("orderTypeLabel"));
@@ -942,22 +943,23 @@ public:
 
         formLayout_4->setWidget(3, QFormLayout::FieldRole, chooseOrderType);
 
-        howMuchCryptoOrderLabel = new QLabel(groupBox_5);
-        howMuchCryptoOrderLabel->setObjectName(QString::fromUtf8("howMuchCryptoOrderLabel"));
-        howMuchCryptoOrderLabel->setAlignment(Qt::AlignCenter);
+        expectedOfferLabel = new QLabel(groupBox_5);
+        expectedOfferLabel->setObjectName(QString::fromUtf8("expectedOfferLabel"));
+        expectedOfferLabel->setAlignment(Qt::AlignCenter);
 
-        formLayout_4->setWidget(2, QFormLayout::LabelRole, howMuchCryptoOrderLabel);
+        formLayout_4->setWidget(2, QFormLayout::LabelRole, expectedOfferLabel);
 
-        usdAmountLabel = new QLabel(groupBox_5);
-        usdAmountLabel->setObjectName(QString::fromUtf8("usdAmountLabel"));
-        usdAmountLabel->setAlignment(Qt::AlignCenter);
+        myOfferLabel = new QLabel(groupBox_5);
+        myOfferLabel->setObjectName(QString::fromUtf8("myOfferLabel"));
+        myOfferLabel->setAlignment(Qt::AlignCenter);
 
-        formLayout_4->setWidget(0, QFormLayout::LabelRole, usdAmountLabel);
+        formLayout_4->setWidget(0, QFormLayout::LabelRole, myOfferLabel);
 
-        howMuchUSD = new QDoubleSpinBox(groupBox_5);
-        howMuchUSD->setObjectName(QString::fromUtf8("howMuchUSD"));
+        myOffer = new QDoubleSpinBox(groupBox_5);
+        myOffer->setObjectName(QString::fromUtf8("myOffer"));
+        myOffer->setMaximum(9999999.990000000223517);
 
-        formLayout_4->setWidget(0, QFormLayout::FieldRole, howMuchUSD);
+        formLayout_4->setWidget(0, QFormLayout::FieldRole, myOffer);
 
 
         verticalLayout_19->addLayout(formLayout_4);
@@ -1417,8 +1419,8 @@ public:
         chooseOrderType->setItemText(4, QCoreApplication::translate("MainWindow", "Stop Market Sell", nullptr));
         chooseOrderType->setItemText(5, QCoreApplication::translate("MainWindow", "Stop Market Buy", nullptr));
 
-        howMuchCryptoOrderLabel->setText(QCoreApplication::translate("MainWindow", "Amount in crypto: ", nullptr));
-        usdAmountLabel->setText(QCoreApplication::translate("MainWindow", "Amount in USD: ", nullptr));
+        expectedOfferLabel->setText(QCoreApplication::translate("MainWindow", "Expected Offer:", nullptr));
+        myOfferLabel->setText(QCoreApplication::translate("MainWindow", "My Offer:", nullptr));
         submitOrderBtn->setText(QCoreApplication::translate("MainWindow", "Submit", nullptr));
         groupBox_9->setTitle(QString());
         deleteOrderBtn->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));

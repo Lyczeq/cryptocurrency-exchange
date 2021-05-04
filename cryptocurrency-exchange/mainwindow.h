@@ -116,10 +116,6 @@ private slots:
 
     void on_chooseOrderType_activated(const QString &arg1);
 
-    bool validateUSD(const double& usd);
-
-    bool validateCrypto(const cryptoType& type, const double& cryptoAmount);
-
     void on_submitCFDBtn_clicked();
 
     void realizeCFD();
@@ -133,6 +129,8 @@ private slots:
     void printHistoricalOrders();
 
     void on_deleteOrderBtn_clicked();
+
+    void realizeOrders();
 
 private:
     Ui::MainWindow *ui;

@@ -27,6 +27,8 @@ public:
 
     std::vector<User> getUsersVector();
 
+    std::vector<User>&  getUsersVectorOriginal();
+
     bool signIn(const std::string& emailToFind, const std::string& passwordToFind);
 
     void signUp (User& newUser, const std::string & password );

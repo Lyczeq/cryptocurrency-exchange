@@ -20,6 +20,35 @@ void Wallet::addUSD(const double& additionalUSD)
     myUSD += additionalUSD;
 }
 
+void Wallet::subtractUSD(const double& usdToSubstract)
+{
+    myUSD -= usdToSubstract;
+}
+
+
+
+void Wallet::changeValueOfSelectedCrypto(double value, bool increase, cryptoType cType)
+{
+    bool valueChanged = false;
+
+    for(auto &crypto: myCryptocurrency)
+    {
+        if(crypto.getCryptoType() == cType)
+        {
+            crypto.changeAmount(value, increase);
+            valueChanged = true;
+        }
+
+    }
+
+    if(!valueChanged)
+    {
+       Cryptocurrency newCrypto(cType, value);
+       myCryptocurrency.push_back(newCrypto);
+    }
+
+}
+
 bool Wallet::realizeTransfer(const cryptoType& type, const double& value)
 {
     for(auto &crypto: myCryptocurrency)

@@ -150,7 +150,7 @@ void User::saveHistoricalOrders()
     {
      for(auto &historicalOrder : myWallet.getHistoricalOrders())
      {
-         historicalOrdersDirectory<<historicalOrder<<","<<historicalOrder->getExecutionDate().tm_mday<<"."<<historicalOrder->getExecutionDate().tm_mday<<"."<<historicalOrder->getExecutionDate().tm_mday<<std::endl;
+         historicalOrdersDirectory<<historicalOrder<<","<<historicalOrder->getExecutionDate().tm_mday<<"."<<historicalOrder->getExecutionDate().tm_mon<<"."<<historicalOrder->getExecutionDate().tm_year<<std::endl;
      }
     }
     historicalOrdersDirectory.close();

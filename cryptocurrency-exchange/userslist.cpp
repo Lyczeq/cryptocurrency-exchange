@@ -165,6 +165,12 @@ std::vector<User> UsersList:: getUsersVector()
    return usersVector;
 }
 
+std::vector<User>& UsersList:: getUsersVectorOriginal()
+{
+   return usersVector;
+}
+
+
 std::vector<std::string> UsersList:: getEmailVector()
 {
     return emailVector;

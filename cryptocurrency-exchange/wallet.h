@@ -78,6 +78,11 @@ class Wallet
 
     void loadHistoricalOrders(const std::string& email);
 
+    void subtractUSD(const double& usdToSubstract);
+
+
+    void changeValueOfSelectedCrypto(double value, bool increase, cryptoType cType);
+
 };
 
 #endif // WALLET_H

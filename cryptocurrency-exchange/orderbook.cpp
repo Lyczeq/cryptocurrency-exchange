@@ -14,10 +14,3 @@ std::vector<std::shared_ptr<Order>>& Orderbook::getOrders()
     return orders;
 }
 
-void Orderbook::printOrders()
-{
-    for(auto &order: orders)
-    {
-        std::cout<<order<<std::endl;
-    }
-}

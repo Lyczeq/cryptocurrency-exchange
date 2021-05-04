@@ -1636,9 +1636,12 @@ color: black;
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QDoubleSpinBox" name="howMuchOrder">
+          <widget class="QDoubleSpinBox" name="expectedOffer">
            <property name="enabled">
             <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <double>9999999999999.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -1699,9 +1702,9 @@ color: black;
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="howMuchCryptoOrderLabel">
+          <widget class="QLabel" name="expectedOfferLabel">
            <property name="text">
-            <string>Amount in crypto: </string>
+            <string>Expected Offer:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1709,9 +1712,9 @@ color: black;
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QLabel" name="usdAmountLabel">
+          <widget class="QLabel" name="myOfferLabel">
            <property name="text">
-            <string>Amount in USD: </string>
+            <string>My Offer:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1719,7 +1722,11 @@ color: black;
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QDoubleSpinBox" name="howMuchUSD"/>
+          <widget class="QDoubleSpinBox" name="myOffer">
+           <property name="maximum">
+            <double>9999999.990000000223517</double>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
