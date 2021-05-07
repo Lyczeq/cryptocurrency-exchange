@@ -16,7 +16,7 @@ UsersList::UsersList()
      std::ifstream userInfoFile(userInfoDirectory);
      if(!userInfoFile.is_open())
      {
-         //error handler
+         return;
      }
      else
      {   std::string line;
@@ -61,7 +61,7 @@ void UsersList::loadUsersEmails()
 
     if(!emailsFile.is_open())
     {
-        //error handler
+        return;
     }
     else{
         std::string mail;
@@ -88,7 +88,6 @@ bool UsersList ::signIn(const std::string& emailToFind, const std::string& passw
    std::string foundPasword;
    if(!passwordFile.is_open())
    {
-       //error handler
        return false;
    }
    else
@@ -104,7 +103,6 @@ bool UsersList ::signIn(const std::string& emailToFind, const std::string& passw
 
 void UsersList:: signUp( User& newUser, const std::string & password)
 {
-
     const std::string newUserDirectory = "users/"+newUser.getEmail();
     const char* path = newUserDirectory.c_str();
     _mkdir(path);
@@ -113,7 +111,7 @@ void UsersList:: signUp( User& newUser, const std::string & password)
 
     if(!newUserInfoFile.is_open())
     {
-        //error handlr
+        return;
     }
     else
     {
@@ -125,7 +123,7 @@ void UsersList:: signUp( User& newUser, const std::string & password)
 
     if(!newUserPasswordFile.is_open())
     {
-        //error handler
+        return;
     }
     else
     {
@@ -136,21 +134,32 @@ void UsersList:: signUp( User& newUser, const std::string & password)
 
     std::ofstream newUserCryptoFile(newUserDirectory+"/cryptocurrency.csv");
     newUserCryptoFile.close();
-    std::ofstream newUserOrdersFile(newUserDirectory+"/orders.csv");
-    newUserOrdersFile.close();
-    std::ofstream newUserCFDFile(newUserDirectory+"/CFD.csv");
-    newUserCFDFile.close();
-    std::ofstream dateFile (newUserDirectory+"/date.txt");
 
-    dateFile<<"01.05.2018";
+    std::ofstream currentOrdersFile(newUserDirectory+"/CurrentOrders.csv");
+    currentOrdersFile.close();
+
+    std::ofstream historicalOrdersFile(newUserDirectory+"/HistoricalOrders.csv");
+    historicalOrdersFile.close();
+
+    std::ofstream openedCFDsFile(newUserDirectory+"/OpenedCFDs.csv");
+    openedCFDsFile.close();
+
+    std::ofstream closedCFDsFile(newUserDirectory+"/ClosedCFDs.csv");
+    closedCFDsFile.close();
+
+    std::ofstream sentTransfers(newUserDirectory+"/sentTransfers.csv");
+    sentTransfers.close();
+
+    std::ofstream dateFile (newUserDirectory+"/date.txt");
     dateFile.close();
+    dateFile<<"01.05.2018";
 
     this->emailVector.push_back(newUser.getEmail());
 
     std::ofstream emailsFile("emails.txt");
     if(!emailsFile.is_open())
     {
-        //error handler
+        return;
     }
     else
     {

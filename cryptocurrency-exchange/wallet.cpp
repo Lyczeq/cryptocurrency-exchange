@@ -25,8 +25,6 @@ void Wallet::subtractUSD(const double& usdToSubstract)
     myUSD -= usdToSubstract;
 }
 
-
-
 void Wallet::changeValueOfSelectedCrypto(double value, bool increase, cryptoType cType)
 {
     bool valueChanged = false;
@@ -136,7 +134,7 @@ void Wallet::pushReceivedTransfer(std::shared_ptr<Transfer> recTransfer)
 
      if(!closedCFDsFile.is_open())
      {
-         //error_handler
+         return;
      }
      else
      {
@@ -191,7 +189,7 @@ void Wallet::pushReceivedTransfer(std::shared_ptr<Transfer> recTransfer)
 
      if(!openedCFDsFile.is_open())
      {
-         //error_handler
+         return;
      }
      else
      {
@@ -247,7 +245,7 @@ void Wallet::loadCryptoFromFile(const std::string& email)
 
      if(!userCryptoFile.is_open())
      {
-         //error handler
+         return;
      }
      else
      {  std::string line;
@@ -280,7 +278,7 @@ void Wallet::loadSentTransfersFromFile(const std::string& email)
 
      if(!transfersFile.is_open())
      {
-         //error handler
+         return;
      }
      else
      {
@@ -366,7 +364,7 @@ void Wallet::loadCurrentOrders(const std::string &email)
 
     if(!currentOrdersFile.is_open())
     {
-        //error_handler
+        return;
     }
     else
     {
@@ -497,8 +495,6 @@ void Wallet::loadCurrentOrders(const std::string &email)
             std::shared_ptr<StopMarketOrder> stopMarketOrder = std::make_shared<StopMarketOrder>(cType, offeringAmount,wantingAmount,partialRealised,creationDate,sell);
             currentOrders.push_back(stopMarketOrder);
         }
-
-
     }
     }
     currentOrdersFile.close();
@@ -512,7 +508,7 @@ void Wallet::loadHistoricalOrders(const std::string &email)
 
     if(!historicalOrdersFile.is_open())
     {
-        //error_handler
+        return;
     }
     else
     {

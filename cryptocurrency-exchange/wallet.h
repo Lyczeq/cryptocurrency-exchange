@@ -80,7 +80,6 @@ class Wallet
 
     void subtractUSD(const double& usdToSubstract);
 
-
     void changeValueOfSelectedCrypto(double value, bool increase, cryptoType cType);
 
 };

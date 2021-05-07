@@ -28,7 +28,7 @@ void User::saveUSDToFile()
 
     if(!userDirectory.is_open())
     {
-        //error handler
+        return;
     }
     else
     {
@@ -45,7 +45,7 @@ void User::saveSentTransfersToFile()
 
     if(!sentTransfersDirectory.is_open())
     {
-        //error handler
+        return;
     }
     else
     {
@@ -66,7 +66,7 @@ void User::saveOpenedCFDsToFile()
 
     if(!CFDDirectory.is_open())
     {
-        //error handler
+       return;
     }
     else
     {
@@ -87,7 +87,7 @@ void User::saveClosedCFDsToFile()
 
     if(!CFDDirectory.is_open())
     {
-        //error handler
+        return;
     }
     else
     {
@@ -108,7 +108,7 @@ void User::saveCryptoFile()
 
     if(!cryptoFileDirectory.is_open())
     {
-        //error handler
+        return;
     }
     else
     {
@@ -126,7 +126,7 @@ void User::saveCurrentOrders()
 
     if(!currentOrdersDirectory.is_open())
     {
-        //error handler
+        return;
     }
     else
     {
@@ -144,7 +144,7 @@ void User::saveHistoricalOrders()
 
     if(!historicalOrdersDirectory.is_open())
     {
-        //error handler
+        return;
     }
     else
     {

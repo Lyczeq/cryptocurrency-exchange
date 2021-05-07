@@ -21,7 +21,7 @@ void Rates::readRatesFromFile(const std::string& cryptoFileName, std::vector<His
 
     if(!cryptoFile.is_open())
     {
-        //error handler
+        return;
     }
     else
     {   std::string line;
@@ -122,7 +122,7 @@ double Rates::getRateValueByDate(tm date, const cryptoType& whatCrypto)
     }
     default:
     {
-        //error handler
+        return 0;
     }
     }
 }

@@ -54,7 +54,7 @@ void MainWindow::on_signInButtonLog_clicked()
 
         if(!dateFile.is_open())
         {
-            //error handler
+            return;
         }
         else
         {
@@ -99,8 +99,6 @@ void MainWindow::on_signInButtonLog_clicked()
         ui->emailLineEditSignIn->clear();
         ui->passwordLineEditSignIn->clear();
 
-
-
         QMessageBox::information(this,"Sign In", "Logged successfully!" );
         ui->stackedWidget->setCurrentIndex(3);
     }
@@ -114,9 +112,8 @@ void MainWindow::on_goBackButtonFromSignUpPanel_clicked()
 
 void MainWindow::on_signUpButtonCreateAcc_clicked()
 {
-    //regex dla wszystkich informacji
-    std::string email =ui->emailLineEditSignUp->text().toStdString();
 
+    std::string email =ui->emailLineEditSignUp->text().toStdString();
 
     if(exchange.getUsersList().checkIfUserExists(email))
     {
@@ -292,7 +289,7 @@ void MainWindow::saveNewDate()
 
     if(!dateFile.is_open())
     {
-        //error_handler
+        return;
     }
     else
     {
@@ -655,8 +652,6 @@ void MainWindow::realizeOrders()
 
         for(auto &order : currentOrders)
         {
-
-
             if(order->getOrderType() == "MOB")
             {
                 cryptoType cType = order->getCryptoType();
