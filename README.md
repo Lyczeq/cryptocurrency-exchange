@@ -28,7 +28,7 @@ Sign in panel enables the user to log in to the exchange. If the user doesn't ex
 
 <img src="images/signUp.png" width=450px>
 
-Sign up panel enables the user to create an account. I used regular expression to check if the provided data is correct. First and last name can contain only lowercase and uppercase. Email must includes at least 3 letters, then '@' character and the name of the domain. Password must be at least 10 characters long and includes special characters or numbers.
+Sign up panel enables the user to create an account. I used regular expression to check if the provided data is correct. First and last name can contain only lowercase and capital characters. Email must includes at least 3 letters, then '@' character and the name of the domain. Password must be at least 10 characters long and includes special characters or numbers.
 
 3. ### Main Panel
 
