@@ -16,6 +16,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="title">
     <property name="geometry">
@@ -31,6 +34,9 @@
       <family>Arial</family>
       <pointsize>20</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Cryptocurrency Exchange</string>
@@ -60,6 +66,9 @@
       <pointsize>10</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
@@ -82,6 +91,9 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Sign in</string>
          </property>
@@ -95,6 +107,9 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Sign up</string>
          </property>
@@ -107,6 +122,9 @@
            <family>Arial</family>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Quit</string>
@@ -131,6 +149,9 @@
         <family>Arial</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Go Back</string>
@@ -220,6 +241,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
         <string>Sign in</string>
        </property>
@@ -264,6 +288,9 @@
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Go Back</string>
       </property>
@@ -296,6 +323,9 @@
          <weight>75</weight>
          <bold>true</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Sign up</string>
@@ -448,6 +478,9 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Cryptocurrency Graphs</string>
          </property>
@@ -460,6 +493,9 @@
            <family>Arial</family>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>My Wallet</string>
@@ -485,6 +521,9 @@
         <bold>false</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Quit</string>
       </property>
@@ -497,6 +536,9 @@
         <width>281</width>
         <height>201</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="title">
        <string/>
@@ -671,6 +713,9 @@
         <bold>false</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Log out</string>
       </property>
@@ -766,6 +811,9 @@
                <family>Arial</family>
                <pointsize>10</pointsize>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
              </property>
              <property name="text">
               <string>Change date</string>
@@ -882,6 +930,9 @@
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Go back</string>
       </property>
@@ -894,6 +945,9 @@
         <width>601</width>
         <height>271</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox_4">
@@ -931,6 +985,9 @@
        </item>
        <item row="0" column="0">
         <widget class="QPushButton" name="bitcoinGraphBtn">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Bitcoin</string>
          </property>
@@ -966,10 +1023,10 @@
      <widget class="QWidget" name="verticalLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>90</y>
+        <x>30</x>
+        <y>80</y>
         <width>161</width>
-        <height>191</height>
+        <height>211</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -980,6 +1037,9 @@
            <family>Arial</family>
            <pointsize>10</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>My Cryptocurrency</string>
@@ -994,6 +1054,9 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Add USD</string>
          </property>
@@ -1006,6 +1069,9 @@
            <family>Arial</family>
            <pointsize>10</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>My Orders</string>
@@ -1020,6 +1086,9 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Historical orders</string>
          </property>
@@ -1032,6 +1101,9 @@
            <family>Arial</family>
            <pointsize>10</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>See orderbook</string>
@@ -1054,6 +1126,9 @@
         <family>Arial</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Go back</string>
@@ -1263,6 +1338,9 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Send Transfer</string>
          </property>
@@ -1275,6 +1353,9 @@
            <family>Arial</family>
            <pointsize>10</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Historical Transfers</string>
@@ -1289,6 +1370,9 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>CFD</string>
          </property>
@@ -1301,6 +1385,9 @@
            <family>Arial</family>
            <pointsize>10</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Historical CFD</string>
@@ -1368,6 +1455,9 @@
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Go back</string>
       </property>
@@ -1429,6 +1519,9 @@ color: black;
         <family>Arial</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Go back</string>
@@ -1506,6 +1599,9 @@ color: black;
         <height>30</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>ADD USD</string>
       </property>
@@ -1545,6 +1641,9 @@ color: black;
         <family>Arial</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Go back</string>
@@ -1604,6 +1703,9 @@ color: black;
            </property>
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
            <property name="modelColumn">
             <number>0</number>
@@ -1665,6 +1767,9 @@ color: black;
            </property>
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
            <property name="modelColumn">
             <number>0</number>
@@ -1741,6 +1846,9 @@ color: black;
         <height>25</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Submit</string>
       </property>
@@ -1782,6 +1890,9 @@ color: black;
          <property name="layoutDirection">
           <enum>Qt::RightToLeft</enum>
          </property>
+         <property name="styleSheet">
+          <string/>
+         </property>
          <property name="modelColumn">
           <number>0</number>
          </property>
@@ -1789,6 +1900,9 @@ color: black;
        </item>
        <item row="3" column="0">
         <widget class="QPushButton" name="deleteOrderBtn">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Delete</string>
          </property>
@@ -1860,6 +1974,9 @@ to delete</string>
         <family>Arial</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Go back</string>
@@ -1954,6 +2071,9 @@ to delete</string>
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Go back</string>
       </property>
@@ -2025,6 +2145,9 @@ to delete</string>
         <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Send</string>
       </property>
@@ -2077,6 +2200,9 @@ to delete</string>
            </property>
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="styleSheet">
+            <string/>
            </property>
            <property name="modelColumn">
             <number>0</number>
@@ -2147,6 +2273,9 @@ to delete</string>
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Go back</string>
       </property>
@@ -2167,6 +2296,9 @@ to delete</string>
         <family>Arial</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Go back</string>
@@ -2308,6 +2440,9 @@ to delete</string>
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Go back</string>
       </property>
@@ -2335,6 +2470,9 @@ to delete</string>
          </property>
          <property name="layoutDirection">
           <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="modelColumn">
           <number>0</number>
@@ -2379,6 +2517,9 @@ to delete</string>
          </property>
          <property name="layoutDirection">
           <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="modelColumn">
           <number>0</number>
@@ -2455,6 +2596,9 @@ to delete</string>
         <height>25</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Submit</string>
       </property>
@@ -2530,6 +2674,9 @@ to delete</string>
        </item>
        <item row="3" column="0">
         <widget class="QPushButton" name="deleteCFDBtn">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>Delete</string>
          </property>
@@ -2577,6 +2724,9 @@ to delete</string>
         <family>Arial</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Go back</string>

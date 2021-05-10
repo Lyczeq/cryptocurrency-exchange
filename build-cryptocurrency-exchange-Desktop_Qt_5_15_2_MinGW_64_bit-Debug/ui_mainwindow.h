@@ -261,6 +261,7 @@ public:
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(800, 500);
         MainWindow->setAcceptDrops(false);
+        MainWindow->setStyleSheet(QString::fromUtf8(""));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         title = new QLineEdit(centralwidget);
@@ -270,6 +271,7 @@ public:
         font.setFamily(QString::fromUtf8("Arial"));
         font.setPointSize(20);
         title->setFont(font);
+        title->setStyleSheet(QString::fromUtf8(""));
         title->setFrame(false);
         title->setAlignment(Qt::AlignCenter);
         title->setReadOnly(true);
@@ -280,6 +282,7 @@ public:
         font1.setFamily(QString::fromUtf8("Arial"));
         font1.setPointSize(10);
         stackedWidget->setFont(font1);
+        stackedWidget->setStyleSheet(QString::fromUtf8(""));
         home = new QWidget();
         home->setObjectName(QString::fromUtf8("home"));
         verticalLayoutWidget = new QWidget(home);
@@ -294,18 +297,21 @@ public:
         font2.setFamily(QString::fromUtf8("Arial"));
         font2.setPointSize(12);
         signInButton->setFont(font2);
+        signInButton->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout->addWidget(signInButton);
 
         signUpButton = new QPushButton(verticalLayoutWidget);
         signUpButton->setObjectName(QString::fromUtf8("signUpButton"));
         signUpButton->setFont(font2);
+        signUpButton->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout->addWidget(signUpButton);
 
         quitButton = new QPushButton(verticalLayoutWidget);
         quitButton->setObjectName(QString::fromUtf8("quitButton"));
         quitButton->setFont(font2);
+        quitButton->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout->addWidget(quitButton);
 
@@ -316,6 +322,7 @@ public:
         goBackButtonFromSignInPanel->setObjectName(QString::fromUtf8("goBackButtonFromSignInPanel"));
         goBackButtonFromSignInPanel->setGeometry(QRect(20, 325, 93, 28));
         goBackButtonFromSignInPanel->setFont(font1);
+        goBackButtonFromSignInPanel->setStyleSheet(QString::fromUtf8(""));
         groupBox = new QGroupBox(signInPanel);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setGeometry(QRect(250, 80, 280, 215));
@@ -362,6 +369,7 @@ public:
         font4.setBold(true);
         font4.setWeight(75);
         signInButtonLog->setFont(font4);
+        signInButtonLog->setStyleSheet(QString::fromUtf8(""));
         layoutWidget_2 = new QWidget(groupBox);
         layoutWidget_2->setObjectName(QString::fromUtf8("layoutWidget_2"));
         layoutWidget_2->setGeometry(QRect(20, 10, 241, 101));
@@ -381,6 +389,7 @@ public:
         goBackButtonFromSignUpPanel->setObjectName(QString::fromUtf8("goBackButtonFromSignUpPanel"));
         goBackButtonFromSignUpPanel->setGeometry(QRect(20, 325, 93, 28));
         goBackButtonFromSignUpPanel->setFont(font1);
+        goBackButtonFromSignUpPanel->setStyleSheet(QString::fromUtf8(""));
         groupBox_2 = new QGroupBox(signUpPanel);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setGeometry(QRect(260, 20, 281, 291));
@@ -388,6 +397,7 @@ public:
         signUpButtonCreateAcc->setObjectName(QString::fromUtf8("signUpButtonCreateAcc"));
         signUpButtonCreateAcc->setGeometry(QRect(90, 250, 95, 30));
         signUpButtonCreateAcc->setFont(font4);
+        signUpButtonCreateAcc->setStyleSheet(QString::fromUtf8(""));
         layoutWidget_3 = new QWidget(groupBox_2);
         layoutWidget_3->setObjectName(QString::fromUtf8("layoutWidget_3"));
         layoutWidget_3->setGeometry(QRect(20, 10, 250, 228));
@@ -465,12 +475,14 @@ public:
         cryptoGraphsButton = new QPushButton(verticalLayoutWidget_2);
         cryptoGraphsButton->setObjectName(QString::fromUtf8("cryptoGraphsButton"));
         cryptoGraphsButton->setFont(font2);
+        cryptoGraphsButton->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_4->addWidget(cryptoGraphsButton);
 
         myWalletButton = new QPushButton(verticalLayoutWidget_2);
         myWalletButton->setObjectName(QString::fromUtf8("myWalletButton"));
         myWalletButton->setFont(font2);
+        myWalletButton->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_4->addWidget(myWalletButton);
 
@@ -483,9 +495,11 @@ public:
         font5.setBold(false);
         font5.setWeight(50);
         quitButtonFromMainPage->setFont(font5);
+        quitButtonFromMainPage->setStyleSheet(QString::fromUtf8(""));
         cryptocurrencyTable = new QGroupBox(mainPanel);
         cryptocurrencyTable->setObjectName(QString::fromUtf8("cryptocurrencyTable"));
         cryptocurrencyTable->setGeometry(QRect(320, 110, 281, 201));
+        cryptocurrencyTable->setStyleSheet(QString::fromUtf8(""));
         layoutWidget1 = new QWidget(cryptocurrencyTable);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
         layoutWidget1->setGeometry(QRect(20, 10, 241, 171));
@@ -556,6 +570,7 @@ public:
         LogOutButton->setObjectName(QString::fromUtf8("LogOutButton"));
         LogOutButton->setGeometry(QRect(130, 325, 93, 28));
         LogOutButton->setFont(font5);
+        LogOutButton->setStyleSheet(QString::fromUtf8(""));
         verticalLayoutWidget_5 = new QWidget(mainPanel);
         verticalLayoutWidget_5->setObjectName(QString::fromUtf8("verticalLayoutWidget_5"));
         verticalLayoutWidget_5->setGeometry(QRect(620, 110, 151, 151));
@@ -593,6 +608,7 @@ public:
         changeDateButton = new QPushButton(verticalLayoutWidget_5);
         changeDateButton->setObjectName(QString::fromUtf8("changeDateButton"));
         changeDateButton->setFont(font1);
+        changeDateButton->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_5->addWidget(changeDateButton);
 
@@ -626,9 +642,11 @@ public:
         goBackBtnFromGraphs->setObjectName(QString::fromUtf8("goBackBtnFromGraphs"));
         goBackBtnFromGraphs->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromGraphs->setFont(font1);
+        goBackBtnFromGraphs->setStyleSheet(QString::fromUtf8(""));
         customPlot = new QCustomPlot(graphsPanel);
         customPlot->setObjectName(QString::fromUtf8("customPlot"));
         customPlot->setGeometry(QRect(170, 30, 601, 271));
+        customPlot->setStyleSheet(QString::fromUtf8(""));
         groupBox_4 = new QGroupBox(graphsPanel);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
         groupBox_4->setGeometry(QRect(10, 30, 141, 271));
@@ -648,6 +666,7 @@ public:
 
         bitcoinGraphBtn = new QPushButton(groupBox_4);
         bitcoinGraphBtn->setObjectName(QString::fromUtf8("bitcoinGraphBtn"));
+        bitcoinGraphBtn->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_6->addWidget(bitcoinGraphBtn, 0, 0, 1, 1);
 
@@ -669,37 +688,42 @@ public:
         walletPanel->setObjectName(QString::fromUtf8("walletPanel"));
         verticalLayoutWidget_3 = new QWidget(walletPanel);
         verticalLayoutWidget_3->setObjectName(QString::fromUtf8("verticalLayoutWidget_3"));
-        verticalLayoutWidget_3->setGeometry(QRect(20, 90, 161, 191));
+        verticalLayoutWidget_3->setGeometry(QRect(30, 80, 161, 211));
         verticalLayout_8 = new QVBoxLayout(verticalLayoutWidget_3);
         verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
         verticalLayout_8->setContentsMargins(0, 0, 0, 0);
         myCryptocurrencyBtn = new QPushButton(verticalLayoutWidget_3);
         myCryptocurrencyBtn->setObjectName(QString::fromUtf8("myCryptocurrencyBtn"));
         myCryptocurrencyBtn->setFont(font1);
+        myCryptocurrencyBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_8->addWidget(myCryptocurrencyBtn);
 
         addUSDBtn = new QPushButton(verticalLayoutWidget_3);
         addUSDBtn->setObjectName(QString::fromUtf8("addUSDBtn"));
         addUSDBtn->setFont(font1);
+        addUSDBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_8->addWidget(addUSDBtn);
 
         myCurrentOrdersBtn = new QPushButton(verticalLayoutWidget_3);
         myCurrentOrdersBtn->setObjectName(QString::fromUtf8("myCurrentOrdersBtn"));
         myCurrentOrdersBtn->setFont(font1);
+        myCurrentOrdersBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_8->addWidget(myCurrentOrdersBtn);
 
         myHistoricalOrdersBtn = new QPushButton(verticalLayoutWidget_3);
         myHistoricalOrdersBtn->setObjectName(QString::fromUtf8("myHistoricalOrdersBtn"));
         myHistoricalOrdersBtn->setFont(font1);
+        myHistoricalOrdersBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_8->addWidget(myHistoricalOrdersBtn);
 
         seeOrderbookBtn = new QPushButton(verticalLayoutWidget_3);
         seeOrderbookBtn->setObjectName(QString::fromUtf8("seeOrderbookBtn"));
         seeOrderbookBtn->setFont(font1);
+        seeOrderbookBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_8->addWidget(seeOrderbookBtn);
 
@@ -707,6 +731,7 @@ public:
         goBackBtnFromWalletBtn->setObjectName(QString::fromUtf8("goBackBtnFromWalletBtn"));
         goBackBtnFromWalletBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromWalletBtn->setFont(font1);
+        goBackBtnFromWalletBtn->setStyleSheet(QString::fromUtf8(""));
         cryptocurrencyTable_2 = new QGroupBox(walletPanel);
         cryptocurrencyTable_2->setObjectName(QString::fromUtf8("cryptocurrencyTable_2"));
         cryptocurrencyTable_2->setGeometry(QRect(410, 90, 281, 201));
@@ -789,24 +814,28 @@ public:
         sendTransferBtn = new QPushButton(verticalLayoutWidget_9);
         sendTransferBtn->setObjectName(QString::fromUtf8("sendTransferBtn"));
         sendTransferBtn->setFont(font1);
+        sendTransferBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_17->addWidget(sendTransferBtn);
 
         historicalTransfersBtn = new QPushButton(verticalLayoutWidget_9);
         historicalTransfersBtn->setObjectName(QString::fromUtf8("historicalTransfersBtn"));
         historicalTransfersBtn->setFont(font1);
+        historicalTransfersBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_17->addWidget(historicalTransfersBtn);
 
         myCFDBtn = new QPushButton(verticalLayoutWidget_9);
         myCFDBtn->setObjectName(QString::fromUtf8("myCFDBtn"));
         myCFDBtn->setFont(font1);
+        myCFDBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_17->addWidget(myCFDBtn);
 
         historicalCFDBtn = new QPushButton(verticalLayoutWidget_9);
         historicalCFDBtn->setObjectName(QString::fromUtf8("historicalCFDBtn"));
         historicalCFDBtn->setFont(font1);
+        historicalCFDBtn->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_17->addWidget(historicalCFDBtn);
 
@@ -825,6 +854,7 @@ public:
         goBackBtnFromMyCryptoBtn->setObjectName(QString::fromUtf8("goBackBtnFromMyCryptoBtn"));
         goBackBtnFromMyCryptoBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromMyCryptoBtn->setFont(font1);
+        goBackBtnFromMyCryptoBtn->setStyleSheet(QString::fromUtf8(""));
         pieChartPlace = new QFrame(myCryptocurrencyPanel);
         pieChartPlace->setObjectName(QString::fromUtf8("pieChartPlace"));
         pieChartPlace->setGeometry(QRect(20, 17, 530, 300));
@@ -846,6 +876,7 @@ public:
         goBackBtnFromDepositFundsBtn->setObjectName(QString::fromUtf8("goBackBtnFromDepositFundsBtn"));
         goBackBtnFromDepositFundsBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromDepositFundsBtn->setFont(font1);
+        goBackBtnFromDepositFundsBtn->setStyleSheet(QString::fromUtf8(""));
         sendTransferTitle_2 = new QLabel(addUSDPanel);
         sendTransferTitle_2->setObjectName(QString::fromUtf8("sendTransferTitle_2"));
         sendTransferTitle_2->setGeometry(QRect(250, 20, 290, 35));
@@ -869,6 +900,7 @@ public:
         addUSDConfirmBtn = new QPushButton(addUSDPanel);
         addUSDConfirmBtn->setObjectName(QString::fromUtf8("addUSDConfirmBtn"));
         addUSDConfirmBtn->setGeometry(QRect(345, 130, 100, 30));
+        addUSDConfirmBtn->setStyleSheet(QString::fromUtf8(""));
         stackedWidget->addWidget(addUSDPanel);
         myOrdersPanel = new QWidget();
         myOrdersPanel->setObjectName(QString::fromUtf8("myOrdersPanel"));
@@ -883,6 +915,7 @@ public:
         goBackBtnFromMyOrdersBtn->setObjectName(QString::fromUtf8("goBackBtnFromMyOrdersBtn"));
         goBackBtnFromMyOrdersBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromMyOrdersBtn->setFont(font1);
+        goBackBtnFromMyOrdersBtn->setStyleSheet(QString::fromUtf8(""));
         myOrdersLabel_2 = new QLabel(myOrdersPanel);
         myOrdersLabel_2->setObjectName(QString::fromUtf8("myOrdersLabel_2"));
         myOrdersLabel_2->setGeometry(QRect(530, 50, 210, 45));
@@ -912,6 +945,7 @@ public:
         font8.setPointSize(8);
         chooseCurrencyOrder->setFont(font8);
         chooseCurrencyOrder->setLayoutDirection(Qt::RightToLeft);
+        chooseCurrencyOrder->setStyleSheet(QString::fromUtf8(""));
         chooseCurrencyOrder->setModelColumn(0);
 
         formLayout_4->setWidget(1, QFormLayout::FieldRole, chooseCurrencyOrder);
@@ -939,6 +973,7 @@ public:
         chooseOrderType->setEnabled(true);
         chooseOrderType->setFont(font8);
         chooseOrderType->setLayoutDirection(Qt::RightToLeft);
+        chooseOrderType->setStyleSheet(QString::fromUtf8(""));
         chooseOrderType->setModelColumn(0);
 
         formLayout_4->setWidget(3, QFormLayout::FieldRole, chooseOrderType);
@@ -967,6 +1002,7 @@ public:
         submitOrderBtn = new QPushButton(myOrdersPanel);
         submitOrderBtn->setObjectName(QString::fromUtf8("submitOrderBtn"));
         submitOrderBtn->setGeometry(QRect(610, 270, 80, 25));
+        submitOrderBtn->setStyleSheet(QString::fromUtf8(""));
         groupBox_9 = new QGroupBox(myOrdersPanel);
         groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
         groupBox_9->setGeometry(QRect(360, 90, 131, 203));
@@ -986,6 +1022,7 @@ public:
 
         deleteOrderBtn = new QPushButton(groupBox_9);
         deleteOrderBtn->setObjectName(QString::fromUtf8("deleteOrderBtn"));
+        deleteOrderBtn->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_12->addWidget(deleteOrderBtn, 3, 0, 1, 1);
 
@@ -1016,6 +1053,7 @@ public:
         goBackBtnFromHistOrdersBtn->setObjectName(QString::fromUtf8("goBackBtnFromHistOrdersBtn"));
         goBackBtnFromHistOrdersBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromHistOrdersBtn->setFont(font1);
+        goBackBtnFromHistOrdersBtn->setStyleSheet(QString::fromUtf8(""));
         orderbookTitle_2 = new QLabel(historicalOrdersPanel);
         orderbookTitle_2->setObjectName(QString::fromUtf8("orderbookTitle_2"));
         orderbookTitle_2->setGeometry(QRect(250, 10, 290, 45));
@@ -1043,6 +1081,7 @@ public:
         goBackBtnFromOrderbookBtn->setObjectName(QString::fromUtf8("goBackBtnFromOrderbookBtn"));
         goBackBtnFromOrderbookBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromOrderbookBtn->setFont(font1);
+        goBackBtnFromOrderbookBtn->setStyleSheet(QString::fromUtf8(""));
         orderbookScrollArea = new QScrollArea(seeOrderbookPanel);
         orderbookScrollArea->setObjectName(QString::fromUtf8("orderbookScrollArea"));
         orderbookScrollArea->setGeometry(QRect(170, 80, 450, 230));
@@ -1070,6 +1109,7 @@ public:
         font9.setBold(true);
         font9.setWeight(75);
         sendTransferConfirmBtn->setFont(font9);
+        sendTransferConfirmBtn->setStyleSheet(QString::fromUtf8(""));
         groupBox_3 = new QGroupBox(sendTransferPanel);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         groupBox_3->setGeometry(QRect(250, 90, 290, 131));
@@ -1124,6 +1164,7 @@ public:
         goBackBtnFromSendTransferBtn->setObjectName(QString::fromUtf8("goBackBtnFromSendTransferBtn"));
         goBackBtnFromSendTransferBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromSendTransferBtn->setFont(font1);
+        goBackBtnFromSendTransferBtn->setStyleSheet(QString::fromUtf8(""));
         stackedWidget->addWidget(sendTransferPanel);
         historicalTransfersPanel = new QWidget();
         historicalTransfersPanel->setObjectName(QString::fromUtf8("historicalTransfersPanel"));
@@ -1131,6 +1172,7 @@ public:
         goBackFromTransfersHistBtn->setObjectName(QString::fromUtf8("goBackFromTransfersHistBtn"));
         goBackFromTransfersHistBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackFromTransfersHistBtn->setFont(font1);
+        goBackFromTransfersHistBtn->setStyleSheet(QString::fromUtf8(""));
         transfersHistoryTitle = new QLabel(historicalTransfersPanel);
         transfersHistoryTitle->setObjectName(QString::fromUtf8("transfersHistoryTitle"));
         transfersHistoryTitle->setGeometry(QRect(200, 10, 400, 31));
@@ -1173,6 +1215,7 @@ public:
         goBackBtnFromCFDBtn->setObjectName(QString::fromUtf8("goBackBtnFromCFDBtn"));
         goBackBtnFromCFDBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromCFDBtn->setFont(font1);
+        goBackBtnFromCFDBtn->setStyleSheet(QString::fromUtf8(""));
         groupBox_6 = new QGroupBox(CFDPanel);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
         groupBox_6->setGeometry(QRect(520, 130, 271, 131));
@@ -1187,6 +1230,7 @@ public:
         cryptoCFD->setObjectName(QString::fromUtf8("cryptoCFD"));
         cryptoCFD->setFont(font8);
         cryptoCFD->setLayoutDirection(Qt::RightToLeft);
+        cryptoCFD->setStyleSheet(QString::fromUtf8(""));
         cryptoCFD->setModelColumn(0);
 
         gridLayout_8->addWidget(cryptoCFD, 1, 1, 1, 1);
@@ -1202,6 +1246,7 @@ public:
         chooseTypeCFD->setObjectName(QString::fromUtf8("chooseTypeCFD"));
         chooseTypeCFD->setFont(font8);
         chooseTypeCFD->setLayoutDirection(Qt::RightToLeft);
+        chooseTypeCFD->setStyleSheet(QString::fromUtf8(""));
         chooseTypeCFD->setModelColumn(0);
 
         gridLayout_8->addWidget(chooseTypeCFD, 2, 1, 1, 1);
@@ -1231,6 +1276,7 @@ public:
         submitCFDBtn = new QPushButton(CFDPanel);
         submitCFDBtn->setObjectName(QString::fromUtf8("submitCFDBtn"));
         submitCFDBtn->setGeometry(QRect(600, 270, 80, 25));
+        submitCFDBtn->setStyleSheet(QString::fromUtf8(""));
         myCFDScrollArea = new QScrollArea(CFDPanel);
         myCFDScrollArea->setObjectName(QString::fromUtf8("myCFDScrollArea"));
         myCFDScrollArea->setGeometry(QRect(20, 90, 350, 200));
@@ -1261,6 +1307,7 @@ public:
 
         deleteCFDBtn = new QPushButton(groupBox_8);
         deleteCFDBtn->setObjectName(QString::fromUtf8("deleteCFDBtn"));
+        deleteCFDBtn->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_10->addWidget(deleteCFDBtn, 3, 0, 1, 1);
 
@@ -1281,6 +1328,7 @@ public:
         goBackBtnFromHistCFDBtn->setObjectName(QString::fromUtf8("goBackBtnFromHistCFDBtn"));
         goBackBtnFromHistCFDBtn->setGeometry(QRect(20, 325, 93, 28));
         goBackBtnFromHistCFDBtn->setFont(font1);
+        goBackBtnFromHistCFDBtn->setStyleSheet(QString::fromUtf8(""));
         historyCFDLabel = new QLabel(historicalCFDPanel);
         historyCFDLabel->setObjectName(QString::fromUtf8("historyCFDLabel"));
         historyCFDLabel->setGeometry(QRect(275, 10, 240, 50));
@@ -1423,6 +1471,7 @@ public:
         myOfferLabel->setText(QCoreApplication::translate("MainWindow", "My Offer:", nullptr));
         submitOrderBtn->setText(QCoreApplication::translate("MainWindow", "Submit", nullptr));
         groupBox_9->setTitle(QString());
+        chooseOrderToDelete->setStyleSheet(QString());
         deleteOrderBtn->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
         chooseOrderToDeleteLabel->setText(QCoreApplication::translate("MainWindow", "Choose order\n"
 "to delete", nullptr));
@@ -1441,6 +1490,7 @@ public:
         chooseCurrency->setItemText(3, QCoreApplication::translate("MainWindow", "Tether", nullptr));
         chooseCurrency->setItemText(4, QCoreApplication::translate("MainWindow", "Ripple", nullptr));
 
+        chooseCurrency->setStyleSheet(QString());
         transferTitle->setPlaceholderText(QCoreApplication::translate("MainWindow", "The title", nullptr));
         transferTitleLabel->setText(QCoreApplication::translate("MainWindow", "Title: ", nullptr));
         goBackBtnFromSendTransferBtn->setText(QCoreApplication::translate("MainWindow", "Go back", nullptr));
