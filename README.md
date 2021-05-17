@@ -10,7 +10,7 @@
 ## About the project
 Final project of Programming classes in fourth semester of Computer Science studies that simulates the behavior of the cryptocurrency exchange. 
 
-The Project is written in the C++ language and uses Qt Creator Environment. It's not finished yet. I decided to download rates' data from last 3 years of the following cryptocurrencies:
+The Project is written in the C++ language and uses Qt Creator Environment. I decided to download rates' data from last 3 years of the following cryptocurrencies:
 * Bitcoin 
 * Ethereum
 * Binance Coin
