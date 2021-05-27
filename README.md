@@ -5,7 +5,6 @@
 ## Table of contents
 * [About the project](#about-the-project)
 * [Features](#features)
-* [Plans for the future](#plans-for-the-future)
 
 ## About the project
 Final project of Programming classes in fourth semester of Computer Science studies that simulates the behavior of the cryptocurrency exchange. 
